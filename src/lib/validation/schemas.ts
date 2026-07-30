@@ -17,6 +17,8 @@ export const renderJobSchema = z.object({
   effectSystemId: z.string().min(1, 'Vui lòng chọn hệ sơn'),
   colorId: z.string().min(1, 'Vui lòng chọn màu sơn'),
   maskBase64: z.string().min(1, 'Vui lòng vẽ vùng mask trước khi render'),
+  employeeCode: z.string().min(2).optional(),
+  promptAddon: z.string().max(500).optional(),
 });
 
 export const computeEstimateSchema = z.object({

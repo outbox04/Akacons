@@ -25,6 +25,8 @@ export async function compositeRenderOutput(
       .resize(width, height, { fit: 'fill' })
       .ensureAlpha()
       .toBuffer();
+    const alphaStats = await sharp(resizedMask).extractChannel('alpha').stats();
+    const maskedPixelRatio = Number((alphaStats.channels[0].mean / 255).toFixed(4));
 
     // Composite using mask as alpha mask
     const maskedAiLayer = await sharp(resizedAi)
@@ -49,7 +51,7 @@ export async function compositeRenderOutput(
 
     return {
       finalBuffer,
-      maskedPixelRatio: 0.15, // Calculated ratio of mask area
+      maskedPixelRatio,
     };
   } catch (error) {
     console.error('Composite Sharp Error:', error);
