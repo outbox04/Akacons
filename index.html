@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sơn Hiệu Ứng Việt · Nền tảng vận hành AI & CRM Báo giá</title>
+<meta name="description" content="Hệ thống vận hành CRM, Render AI Sơn hiệu ứng, Dự toán & Báo giá tự động cho ngành sơn trang trí.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1C2321;
+  --ink-soft:#2A322F;
+  --paper:#FAF7F2;
+  --paper-dim:#F0EBE1;
+  --line:#DED6C6;
+  --line-strong:#C4B9A5;
+  --copper:#A6592C;
+  --copper-hover:#8E4922;
+  --copper-soft:#F2E1D2;
+  --sage:#5B6B4F;
+  --sage-soft:#E4E9DC;
+  --slate:#46586B;
+  --slate-soft:#E3E8ED;
+  --ochre:#B8862B;
+  --ochre-soft:#F5E9D2;
+  --crimson:#9E2A2B;
+  --crimson-soft:#FADBD8;
+  --text:#242A28;
+  --text-dim:#6B6459;
+  --radius:10px;
+  --radius-lg:16px;
+  --shadow:0 1px 3px rgba(28,35,33,0.06), 0 8px 24px rgba(28,35,33,0.05);
+  --shadow-lg:0 20px 40px rgba(28,35,33,0.12);
+  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+
+h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+button,input,select,textarea{font-family:inherit;}
+button{cursor:pointer;transition:var(--transition);}
+::selection{background:var(--copper-soft);color:var(--ink);}
+:focus-visible{outline:2px solid var(--copper);outline-offset:2px;}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {width:6px;height:6px;}
+::-webkit-scrollbar-track {background:rgba(0,0,0,0.03);}
+::-webkit-scrollbar-thumb {background:var(--line-strong);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover {background:var(--copper);}
+
+/* Layout Shell */
+#app{display:flex;min-height:100vh;}
+
+/* Sidebar Navigation */
+.sidebar{
+  width:260px;flex-shrink:0;background:var(--ink);color:#EFEAE1;
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;
+  z-index:20;transition:transform 0.3s ease;
+}
+.brand{padding:22px 20px 16px;border-bottom:1px solid rgba(239,234,225,0.12);}
+.brand .swatches{display:flex;gap:6px;margin-bottom:10px;}
+.swatch-dot{width:12px;height:12px;border-radius:3px;}
+.brand-name{font-family:'Fraunces',serif;font-size:20px;font-weight:600;letter-spacing:0.2px;color:#FAF7F2;}
+.brand-sub{font-size:11px;color:#A8A090;margin-top:2px;letter-spacing:0.5px;text-transform:uppercase;font-weight:500;}
+
+.nav{flex:1;padding:14px 10px;overflow-y:auto;}
+.nav-group{margin-bottom:12px;}
+.nav-label{font-size:10.5px;text-transform:uppercase;letter-spacing:0.8px;color:#8B8375;padding:8px 12px 6px;font-weight:600;}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;
+  color:#D8D2C4;font-size:13.5px;font-weight:500;text-decoration:none;
+  border:none;background:none;width:100%;text-align:left;
+}
+.nav-item:hover{background:rgba(239,234,225,0.08);color:#fff;transform:translateX(2px);}
+.nav-item.active{background:var(--copper);color:#fff;font-weight:600;box-shadow:0 4px 12px rgba(166,89,44,0.3);}
+.nav-item .ic{width:18px;text-align:center;opacity:0.9;font-size:15px;}
+
+.role-box{padding:16px 14px;border-top:1px solid rgba(239,234,225,0.12);background:rgba(0,0,0,0.15);}
+.role-select{
+  width:100%;background:#2A322F;color:#EFEAE1;border:1px solid rgba(239,234,225,0.18);
+  border-radius:8px;padding:8px 10px;font-size:12.5px;outline:none;
+}
+.role-select:focus{border-color:var(--copper);}
+.role-hint{font-size:11px;color:#A8A090;margin-top:6px;line-height:1.4;}
+
+/* Main Body */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--paper);}
+.topbar{
+  height:60px;flex-shrink:0;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;padding:0 28px;
+  background:rgba(250,247,242,0.85);backdrop-filter:blur(10px);position:sticky;top:0;z-index:15;
+}
+.topbar-left{display:flex;align-items:center;gap:14px;}
+.menu-toggle{display:none;background:none;border:none;font-size:20px;color:var(--text);padding:4px;}
+.topbar .crumb{font-size:13.5px;color:var(--text-dim);}
+.topbar .crumb b{color:var(--text);font-weight:600;}
+.topbar-actions{display:flex;align-items:center;gap:14px;}
+.avatar{
+  width:32px;height:32px;border-radius:50%;background:var(--copper);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;
+  box-shadow:0 2px 6px rgba(166,89,44,0.3);
+}
+
+.content{padding:28px 32px 60px;max-width:1240px;width:100%;margin:0 auto;}
+
+/* Typography & Headers */
+.page-head{margin-bottom:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;}
+.page-head h1{font-size:28px;margin:0 0 4px;font-weight:600;color:var(--ink);}
+.page-head p{margin:0;color:var(--text-dim);font-size:14px;}
+
+/* Grid utilities */
+.grid{display:grid;gap:18px;}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+
+/* Card Component */
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow);transition:var(--transition);
+}
+.card-hover:hover{border-color:var(--line-strong);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.06);}
+
+.stat-card .label{font-size:11.5px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-dim);font-weight:600;}
+.stat-card .value{font-family:'Fraunces',serif;font-size:30px;font-weight:600;margin-top:6px;color:var(--ink);}
+.stat-card .delta{font-size:12px;margin-top:6px;color:var(--sage);font-weight:500;}
+.stat-card .delta.warn{color:var(--ochre);}
+.stat-card .delta.danger{color:var(--crimson);}
+
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:32px 0 14px;}
+.section-title h2{font-size:18px;margin:0;font-weight:600;color:var(--ink);}
+
+/* Data Tables */
+.table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line);background:#fff;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);
+  padding:11px 14px;border-bottom:1px solid var(--line);font-weight:600;background:var(--paper-dim);}
+td{padding:12px 14px;border-bottom:1px solid var(--paper-dim);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr.row-click{cursor:pointer;transition:background 0.15s;}
+tr.row-click:hover{background:var(--paper);}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:100px;font-size:11.5px;font-weight:600;line-height:1.4;}
+.badge.sage{background:var(--sage-soft);color:var(--sage);}
+.badge.copper{background:var(--copper-soft);color:var(--copper);}
+.badge.ochre{background:var(--ochre-soft);color:var(--ochre);}
+.badge.slate{background:var(--slate-soft);color:var(--slate);}
+.badge.crimson{background:var(--crimson-soft);color:var(--crimson);}
+.badge.dim{background:#EEEAE1;color:var(--text-dim);}
+
+/* Buttons */
+.btn{
+  border-radius:8px;padding:9px 18px;font-size:13.5px;font-weight:600;border:1px solid transparent;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;
+}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:var(--ink-soft);box-shadow:0 4px 12px rgba(28,35,33,0.25);}
+.btn-copper{background:var(--copper);color:#fff;}
+.btn-copper:hover{background:var(--copper-hover);box-shadow:0 4px 12px rgba(166,89,44,0.3);}
+.btn-outline{background:#fff;border-color:var(--line-strong);color:var(--text);}
+.btn-outline:hover{border-color:var(--copper);color:var(--copper);background:var(--copper-soft);}
+.btn-ghost{background:none;color:var(--text-dim);}
+.btn-ghost:hover{color:var(--text);background:var(--paper-dim);}
+.btn-sm{padding:6px 12px;font-size:12.5px;border-radius:6px;}
+.btn:disabled{opacity:0.45;cursor:not-allowed;box-shadow:none !important;}
+
+/* Forms & Fields */
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.field .hint{font-size:11.5px;color:var(--text-dim);margin-top:5px;line-height:1.4;}
+input[type=text],input[type=number],input[type=email],select,textarea{
+  width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+  font-size:13.5px;font-family:inherit;background:#fff;color:var(--text);transition:var(--transition);
+}
+input:focus,select:focus,textarea:focus{border-color:var(--copper);box-shadow:0 0 0 3px rgba(166,89,44,0.12);outline:none;}
+
+/* Search Input */
+.search-box{position:relative;width:240px;}
+.search-box input{padding-left:32px;border-radius:20px;background:var(--paper);border-color:var(--line-strong);}
+.search-box .ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:13px;}
+
+/* Modal Overlay */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(28,35,33,0.5);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;padding:20px;z-index:100;
+  opacity:0;transition:opacity 0.25s ease;
+}
+.modal-backdrop.open{display:flex;opacity:1;}
+.modal{
+  background:#fff;border-radius:var(--radius-lg);width:100%;max-width:540px;padding:28px;
+  box-shadow:var(--shadow-lg);transform:scale(0.96);transition:transform 0.25s ease;
+}
+.modal-backdrop.open .modal{transform:scale(1);}
+.modal h3{margin:0 0 4px;font-size:20px;color:var(--ink);}
+.modal .sub{color:var(--text-dim);font-size:13px;margin:0 0 20px;}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px;}
+
+/* Empty State */
+.empty{text-align:center;padding:48px 20px;color:var(--text-dim);}
+.empty .ic{font-size:36px;margin-bottom:12px;opacity:0.8;}
+.empty h3{margin:0 0 6px;color:var(--text);font-size:16px;}
+
+/* Toast Notification */
+.toast-wrap{position:fixed;bottom:24px;right:24px;z-index:120;display:flex;flex-direction:column;gap:10px;}
+.toast{
+  background:var(--ink);color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;
+  box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;animation:toastIn .3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-left:4px solid var(--copper);
+}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px) scale(0.95);}to{opacity:1;transform:translateY(0) scale(1);}}
+
+/* Canvas AI Studio Studio Styles */
+.studio-grid{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start;}
+.canvas-wrap{
+  position:relative;border-radius:12px;overflow:hidden;background:#E7E1D4;
+  border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;
+  min-height:440px;box-shadow:inset 0 2px 8px rgba(0,0,0,0.05);
+}
+.canvas-wrap canvas{max-width:100%;display:block;touch-action:none;}
+.studio-toolbar{
+  display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);
+  background:#fff;border-radius:12px 12px 0 0;flex-wrap:wrap;
+}
+.tool-btn{
+  width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text);
+}
+.tool-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+.range-mini{width:80px;accent-color:var(--copper);}
+.side-panel .field{margin-bottom:16px;}
+
+.preset-pills{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.preset-pill{
+  font-size:11.5px;padding:5px 10px;border-radius:100px;border:1px solid var(--line);
+  background:#fff;color:var(--text-dim);font-weight:500;
+}
+.preset-pill:hover{border-color:var(--copper);color:var(--copper);}
+.preset-pill.active{background:var(--copper-soft);border-color:var(--copper);color:var(--copper);font-weight:600;}
+
+.swatch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.swatch{aspect-ratio:1;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:transform 0.15s;}
+.swatch:hover{transform:scale(1.1);}
+.swatch.selected{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset;}
+
+.effect-list{display:flex;flex-direction:column;gap:8px;}
+.effect-item{
+  border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;align-items:center;
+  gap:10px;font-size:13px;cursor:pointer;transition:var(--transition);background:#fff;
+}
+.effect-item:hover{border-color:var(--line-strong);background:var(--paper-dim);}
+.effect-item.selected{border-color:var(--copper);background:var(--copper-soft);font-weight:600;}
+.effect-swatch{width:24px;height:24px;border-radius:6px;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+
+/* Before / After Slider */
+.before-after{position:relative;user-select:none;overflow:hidden;border-radius:12px;box-shadow:var(--shadow);}
+.before-after img{display:block;pointer-events:none;}
+.before-after .after-clip{position:absolute;top:0;left:0;height:100%;overflow:hidden;}
+.ba-handle{position:absolute;top:0;bottom:0;width:3px;background:#fff;cursor:ew-resize;z-index:4;box-shadow:0 0 8px rgba(0,0,0,0.3);}
+.ba-handle::after{
+  content:'⟷';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:#fff;color:var(--ink);width:32px;height:32px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-size:13px;font-weight:700;box-shadow:0 3px 10px rgba(0,0,0,0.3);
+}
+.ba-tag{
+  position:absolute;top:12px;font-size:11px;font-weight:700;letter-spacing:0.5px;
+  background:rgba(28,35,33,0.8);backdrop-filter:blur(4px);color:#fff;padding:4px 10px;border-radius:100px;z-index:3;
+}
+
+/* Status Progression Track */
+.status-track{position:relative;height:6px;background:var(--paper-dim);border-radius:6px;margin:16px 0 10px;overflow:hidden;}
+.status-track .fill{position:absolute;top:0;left:0;height:100%;background:var(--copper);border-radius:6px;transition:width .4s ease;}
+.status-steps{display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-dim);}
+.status-steps .done{color:var(--sage);font-weight:600;}
+.status-steps .current{color:var(--copper);font-weight:700;}
+
+/* Quotation Document View */
+.quote-doc{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:40px;
+  max-width:760px;margin:0 auto;box-shadow:var(--shadow-lg);
+}
+.quote-doc .qhead{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:24px;
+}
+.quote-doc h2{margin:0;font-size:24px;color:var(--ink);}
+.quote-doc .token{font-size:11.5px;color:var(--text-dim);}
+.locked-banner{
+  background:var(--slate-soft);color:var(--slate);border-radius:8px;padding:12px 16px;
+  font-size:13px;margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.diff-flag{
+  background:var(--ochre-soft);color:var(--ochre);border-radius:8px;padding:12px 16px;
+  font-size:13px;margin-bottom:18px;display:flex;gap:10px;align-items:flex-start;line-height:1.4;
+}
+
+.audit-row{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--paper-dim);font-size:13px;align-items:center;}
+.audit-row .t{width:110px;flex-shrink:0;color:var(--text-dim);font-size:11.5px;}
+.audit-row .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+/* Switches */
+.switch{width:40px;height:22px;background:var(--line-strong);border-radius:20px;position:relative;border:none;flex-shrink:0;}
+.switch.on{background:var(--sage);}
+.switch::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .15s ease;}
+.switch.on::after{transform:translateX(18px);}
+
+.access-denied{max-width:480px;margin:60px auto;text-align:center;padding:40px 20px;}
+.access-denied .ic{font-size:44px;margin-bottom:12px;}
+
+/* Print Styling */
+@media print {
+  body {background:#fff;color:#000;}
+  .sidebar, .topbar, .toast-wrap, .modal-backdrop, .btn, .diff-flag, .locked-banner {display:none !important;}
+  .main {display:block;padding:0;}
+  .content {padding:0;max-width:100%;}
+  .quote-doc {box-shadow:none;border:none;padding:0;}
+}
+
+/* Responsive Rules */
+@media (max-width: 980px) {
+  .sidebar{position:fixed;transform:translateX(-100%);}
+  .sidebar.mobile-open{transform:translateX(0);}
+  .menu-toggle{display:block;}
+  .studio-grid,.grid-4,.grid-3,.grid-2{grid-template-columns:1fr;}
+  .content{padding:20px 16px;}
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="swatches">
+        <div class="swatch-dot" style="background:#A6592C"></div>
+        <div class="swatch-dot" style="background:#5B6B4F"></div>
+        <div class="swatch-dot" style="background:#46586B"></div>
+        <div class="swatch-dot" style="background:#B8862B"></div>
+      </div>
+      <div class="brand-name">Sơn Hiệu Ứng Việt</div>
+      <div class="brand-sub">Nền tảng vận hành AI</div>
+    </div>
+    <nav class="nav" id="navList"></nav>
+    <div class="role-box">
+      <label style="font-size:11px;color:#A8A090;display:block;margin-bottom:6px;font-weight:600;">Xem theo vai trò</label>
+      <select class="role-select" id="roleSelect">
+        <option value="sale">Sale (Kinh doanh)</option>
+        <option value="technician">Kỹ thuật (Duyệt AI)</option>
+        <option value="manager">Quản lý (Duyệt giá/Quote)</option>
+        <option value="admin">Admin (Hệ thống)</option>
+        <option value="customer">Khách hàng (Public token)</option>
+      </select>
+      <div class="role-hint">Phân quyền hiển thị linh hoạt theo RBAC Matrix đã thiết lập.</div>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>
+        <div class="crumb" id="crumb">Bảng điều khiển</div>
+      </div>
+      <div class="topbar-actions">
+        <span class="badge sage" id="envBadge">● Demo LocalStorage</span>
+        <div class="avatar" id="avatarInit">S</div>
+      </div>
+    </div>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- Modal: New Customer -->
+<div class="modal-backdrop" id="modalCustomer">
+  <div class="modal">
+    <h3>Khách hàng mới</h3>
+    <p class="sub">Mã khách hàng tự sinh theo chuẩn KH-2026-XXXXXX</p>
+    <div class="field"><label>Họ tên / Đơn vị</label><input type="text" id="cName" placeholder="Nguyễn Văn A"></div>
+    <div class="field"><label>Số điện thoại</label><input type="text" id="cPhone" placeholder="0912 345 678"></div>
+    <div class="field"><label>Địa chỉ công trình</label><input type="text" id="cAddr" placeholder="Số 12 Trần Phú, TP. Thái Bình"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modalCustomer')">Hủy</button>
+      <button class="btn btn-copper" onclick="createCustomer()">Tạo khách hàng</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: New Project -->
+<div class="modal-backdrop" id="modalProject">
+  <div class="modal">
+    <h3>Công trình mới</h3>
+    <p class="sub">Mã công trình tự sinh theo chuẩn CT-2026-XXXXXX</p>
+    <div class="field"><label>Chủ nhà / Khách hàng</label><select id="pCustomer"></select></div>
+    <div class="field"><label>Tên công trình</label><input type="text" id="pName" placeholder="Biệt thự Vinhomes - Mặt tiền & Phòng khách"></div>
+    <div class="field"><label>Loại hạng mục</label>
+      <select id="pType"><option value="exterior">Ngoại thất</option><option value="interior">Nội thất</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modalProject')">Hủy</button>
+      <button class="btn btn-copper" onclick="createProject()">Tạo công trình</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   LOCALSTORAGE PERSISTENT DATA LAYER
+   ========================================================================= */
+const STORAGE_KEY = 'SON_HIEU_UNG_VIET_DATA_V2';
+
+const defaultState = {
+  seq: { customer: 3, project: 4, quote: 2 },
+  customers: [
+    {id:'c1', code:'KH-2026-000001', name:'Nguyễn Văn Long', phone:'0912 345 678', addr:'12 Trần Phú, Thái Bình'},
+    {id:'c2', code:'KH-2026-000002', name:'Trần Thị Hoa', phone:'0987 654 321', addr:'45 Lý Thường Kiệt, Hưng Yên'},
+    {id:'c3', code:'KH-2026-000003', name:'Công ty TNHH Kiến Phát', phone:'024 3822 1190', addr:'KCN Phố Nối A, Hưng Yên'}
+  ],
+  projects: [
+    {id:'p1', code:'CT-2026-000001', customerId:'c1', name:'Biệt thự mặt tiền - Trần Phú', type:'exterior',
+     status:'render_review', assignedRole:'sale', images:[], estimate:null, quotes:[]},
+    {id:'p2', code:'CT-2026-000002', customerId:'c2', name:'Phòng khách chung cư cao cấp', type:'interior',
+     status:'quote_sent', assignedRole:'sale', images:[], estimate:null,
+     quotes:[{id:'q1', no:'BG-2026-000001', token:'a83f9c21e7', status:'sent', total:18420000, createdAt:'2026-07-14',
+              snapshot:{customerName:'Trần Thị Hoa', projectName:'Phòng khách chung cư cao cấp', items:[
+                {name:'Sơn Lót kiềm nội thất', qty:4.4, unit:150000, total:660000},
+                {name:'Sơn Hiệu ứng Bê tông mờ', qty:9.6, unit:360000, total:3456000},
+                {name:'Lớp phủ mờ chống bám bẩn', qty:3.6, unit:130000, total:468000}
+              ], subtotal:4584000, vat:458400, discount:0, labor:2200000, shipping:300000, total:7542400}}]},
+    {id:'p3', code:'CT-2026-000003', customerId:'c3', name:'Văn phòng KCN Phố Nối', type:'interior',
+     status:'in_progress', assignedRole:'manager', images:[], estimate:null, quotes:[]},
+    {id:'p4', code:'CT-2026-000004', customerId:'c1', name:'Tường rào biệt thự sân vườn', type:'exterior',
+     status:'accepted', assignedRole:'sale', images:[], estimate:null, quotes:[]}
+  ],
+  auditLog: [
+    {t:'10:42', actor:'sale.minh', action:'Phát hành báo giá BG-2026-000001 (Snapshot giá gốc)', color:'copper'},
+    {t:'09:15', actor:'ai.system', action:'AI Render job hoàn tất CT-2026-000002 (CompositeSharp pass)', color:'sage'},
+    {t:'Hôm qua', actor:'manager.hai', action:'Kỹ thuật duyệt ảnh AI render CT-2026-000001', color:'ochre'},
+    {t:'Hôm qua', actor:'admin.an', action:'Cập nhật bảng giá niêm yết PriceBook 2026', color:'slate'},
+    {t:'2 ngày trước', actor:'sale.minh', action:'Tạo thông tin khách hàng KH-2026-000003', color:'copper'}
+  ],
+  aiConfig: {provider:'OpenAI Image', killSwitch:false, dailyLimit:200, orgLimit:2000, usedToday:47}
+};
+
+let store = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState;
+function saveStore(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
+function resetStore(){ store = JSON.parse(JSON.stringify(defaultState)); saveStore(); toast('Đã khôi phục dữ liệu mẫu ban đầu'); renderView(); }
+
+/* Real Effect systems and paint codes from thư mục Mã Sơn catalog */
+const effectSystems = [
+  {id:'e1', name:'Sơn hiệu ứng Bê tông (Series XT)', area:'interior', swatch:'#B7B0A2'},
+  {id:'e2', name:'Sơn Vôi Lime Wash (Series XV)', area:'interior', swatch:'#E8E2D5'},
+  {id:'e3', name:'Sơn hiệu ứng Gỉ Sét (Series Xm)', area:'exterior', swatch:'#8C4A27'},
+  {id:'e4', name:'Sơn hiệu ứng Ngọc Trai (Series MP)', area:'interior', swatch:'#D8CFBC'}
+];
+
+const colors = [
+  // Series XT - Bê tông (89 mã)
+  {id:'col1', esId:'e1', hex:'#9E9A93', name:'XT-01 (Ghi xám mờ)'},
+  {id:'col2', esId:'e1', hex:'#B2ADA4', name:'XT-02 (Ghi xi măng)'},
+  {id:'col3', esId:'e1', hex:'#87837C', name:'XT-03 (Ghi đô thị)'},
+  {id:'col4', esId:'e1', hex:'#D6CBBA', name:'XT-101 (Be cát nhạt)'},
+  {id:'col5', esId:'e1', hex:'#C9BCAB', name:'XT-102 (Be cát kem)'},
+  {id:'col6', esId:'e1', hex:'#B8AB98', name:'XT-103 (Be trung tính)'},
+  {id:'col7', esId:'e1', hex:'#C87B52', name:'XT-201 (Cam đất ấm)'},
+  {id:'col8', esId:'e1', hex:'#D8A798', name:'XT-251 (Hồng thạch anh)'},
+  {id:'col9', esId:'e1', hex:'#7A5741', name:'XT-301 (Nâu gỗ trầm)'},
+  {id:'col10', esId:'e1', hex:'#5B6B4F', name:'XT-501 (Xanh rêu phong)'},
+  {id:'col11', esId:'e1', hex:'#46586B', name:'XT-550 (Xanh nước đại dương)'},
+
+  // Series XV - Sơn Vôi (96 mã)
+  {id:'col12', esId:'e2', hex:'#EBE5D8', name:'XV-01 (Vôi trắng kem)'},
+  {id:'col13', esId:'e2', hex:'#DFD7C7', name:'XV-02 (Vôi be sáng)'},
+  {id:'col14', esId:'e2', hex:'#D2C8B5', name:'XV-03 (Vôi be nhã)'},
+  {id:'col15', esId:'e2', hex:'#C67E58', name:'XV-100 (Vôi cam nung)'},
+  {id:'col16', esId:'e2', hex:'#84624D', name:'XV-120 (Vôi nâu rustic)'},
+  {id:'col17', esId:'e2', hex:'#6C7A5C', name:'XV-150 (Vôi xanh ô liu)'},
+  {id:'col18', esId:'e2', hex:'#546675', name:'XV-180 (Vôi xanh gốm cổ)'},
+
+  // Series Xm - Gỉ Sét (16 mã)
+  {id:'col19', esId:'e3', hex:'#A64B2A', name:'Xm-01 (Gỉ sét đồng đỏ)'},
+  {id:'col20', esId:'e3', hex:'#8F3D1F', name:'Xm-02 (Gỉ sắt nhám)'},
+  {id:'col21', esId:'e3', hex:'#B85832', name:'Xm-03 (Gỉ oxy hóa nhẹ)'},
+  {id:'col22', esId:'e3', hex:'#7A3219', name:'Xm-04 (Gỉ đồng cổ vintage)'},
+  {id:'col23', esId:'e3', hex:'#662812', name:'Xm-05 (Gỉ nâu đậm)'},
+
+  // Series MP - Ngọc Trai (17 mã)
+  {id:'col24', esId:'e4', hex:'#E2D7C4', name:'MP-01 (Ngọc trai champagne)'},
+  {id:'col25', esId:'e4', hex:'#D1CDC4', name:'MP-02 (Ngọc trai ánh bạc)'},
+  {id:'col26', esId:'e4', hex:'#D8C3B4', name:'MP-03 (Ngọc trai vàng hồng)'},
+  {id:'col27', esId:'e4', hex:'#C9BEAD', name:'MP-04 (Ngọc trai lụa satin)'},
+  {id:'col28', esId:'e4', hex:'#B7AB9A', name:'MP-05 (Ngọc trai xám lụa)'}
+];
+
+const effectPricing = {
+  e1: {layers:[{name:'Lót kháng kiềm ngoại thất', unit:180000, coveragePerM2:0.12, wastage:0.08},
+               {name:'Hiệu ứng đá vân mây cao cấp', unit:420000, coveragePerM2:0.28, wastage:0.12},
+               {name:'Phủ bóng Nano bảo vệ bề mặt', unit:150000, coveragePerM2:0.1, wastage:0.05}]},
+  e2: {layers:[{name:'Lót chuyên dụng nội thất', unit:150000, coveragePerM2:0.11, wastage:0.07},
+               {name:'Hiệu ứng bê tông mờ nghệ thuật', unit:360000, coveragePerM2:0.24, wastage:0.1},
+               {name:'Phủ mờ chống bám bẩn', unit:130000, coveragePerM2:0.09, wastage:0.05}]},
+  e3: {layers:[{name:'Lót kim loại tạo nền', unit:210000, coveragePerM2:0.13, wastage:0.09},
+               {name:'Hiệu ứng kim loại ánh đồng', unit:520000, coveragePerM2:0.3, wastage:0.14},
+               {name:'Phủ keo ánh kim bảo vệ', unit:190000, coveragePerM2:0.1, wastage:0.06}]},
+  e4: {layers:[{name:'Lót ngoại thất chịu thời tiết', unit:170000, coveragePerM2:0.12, wastage:0.08},
+               {name:'Hiệu ứng sần gai gia cường', unit:390000, coveragePerM2:0.32, wastage:0.15},
+               {name:'Phủ chống thấm chuyên dụng', unit:160000, coveragePerM2:0.1, wastage:0.06}]}
+};
+
+const STATUS_MAP = {
+  new:{label:'Mới', badge:'dim'}, in_progress:{label:'Đang khảo sát', badge:'slate'},
+  render_review:{label:'Chờ duyệt AI render', badge:'ochre'}, estimating:{label:'Đang dự toán', badge:'slate'},
+  quote_sent:{label:'Đã gửi báo giá', badge:'copper'}, accepted:{label:'Khách đã chốt', badge:'sage'},
+  rejected:{label:'Khách từ chối', badge:'crimson'}
+};
+
+/* Role Matrix Definitions */
+const ROLES = {
+  sale:      {label:'Sale', initial:'S', can:['dashboard','customers','projects','studio','pricing','quotes']},
+  technician:{label:'Kỹ thuật', initial:'K', can:['dashboard','projects','studio']},
+  manager:   {label:'Quản lý', initial:'Q', can:['dashboard','customers','projects','studio','pricing','quotes','admin']},
+  admin:     {label:'Admin', initial:'A', can:['dashboard','customers','projects','studio','pricing','quotes','admin']},
+  customer:  {label:'Khách hàng', initial:'KH', can:['portal']}
+};
+let currentRole = 'sale';
+let currentView = 'dashboard';
+let ctx = { projectId: null, projectFilter:'', customerSearch:'' };
+
+const NAV_ITEMS = [
+  {key:'dashboard', label:'Bảng điều khiển', ic:'◆', group:'Tổng quan'},
+  {key:'customers', label:'Khách hàng', ic:'◐', group:'CRM'},
+  {key:'projects', label:'Công trình', ic:'▣', group:'CRM'},
+  {key:'studio', label:'Studio Render AI', ic:'✦', group:'Sản xuất'},
+  {key:'pricing', label:'Dự toán & Bảng giá', ic:'฿', group:'Kinh doanh'},
+  {key:'quotes', label:'Báo giá', ic:'▤', group:'Kinh doanh'},
+  {key:'admin', label:'Quản trị hệ thống', ic:'⚙', group:'Hệ thống'}
+];
+
+function money(n){ return Math.round(n).toLocaleString('vi-VN') + ' đ'; }
+function esc(s){ return (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function toast(msg, kind){
+  const el = document.createElement('div');
+  el.className='toast';
+  el.innerHTML = `<span>${kind==='err'?'⚠':'✓'}</span><span>${esc(msg)}</span>`;
+  document.getElementById('toastWrap').appendChild(el);
+  setTimeout(()=>{el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),300);}, 2800);
+}
+function can(view){ return ROLES[currentRole].can.includes(view); }
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('mobile-open'); }
+
+/* Nav Renderer */
+function renderNav(){
+  const groups = {};
+  NAV_ITEMS.forEach(i=>{ if(!can(i.key)) return; (groups[i.group]=groups[i.group]||[]).push(i); });
+  let html='';
+  Object.keys(groups).forEach(g=>{
+    html += `<div class="nav-group"><div class="nav-label">${g}</div>`;
+    groups[g].forEach(i=>{
+      html += `<button class="nav-item ${currentView===i.key?'active':''}" onclick="goTo('${i.key}')">
+        <span class="ic">${i.ic}</span>${i.label}</button>`;
+    });
+    html += `</div>`;
+  });
+  document.getElementById('navList').innerHTML = html;
+}
+
+function goTo(view, data){
+  if(!can(view)){ toast('Vai trò hiện tại không có quyền truy cập mục này', 'err'); return; }
+  currentView = view;
+  ctx = Object.assign(ctx, data || {});
+  renderNav();
+  renderView();
+  document.getElementById('sidebar').classList.remove('mobile-open');
+}
+
+document.getElementById('roleSelect').addEventListener('change', e=>{
+  currentRole = e.target.value;
+  document.getElementById('avatarInit').textContent = ROLES[currentRole].initial;
+  if(currentRole==='customer'){ goTo('portal'); return; }
+  if(!can(currentView)) currentView='dashboard';
+  renderNav(); renderView();
+});
+
+/* Router */
+function renderView(){
+  const crumbLabel = ({dashboard:'Bảng điều khiển', customers:'Khách hàng', projects:'Công trình',
+    studio:'Studio Render AI', pricing:'Dự toán & Bảng giá', quotes:'Báo giá', admin:'Quản trị hệ thống',
+    portal:'Cổng xem báo giá khách hàng'})[currentView] || '';
+  document.getElementById('crumb').innerHTML = `<b>${crumbLabel}</b> · ${ROLES[currentRole].label}`;
+  const el = document.getElementById('content');
+  if(currentView==='portal'){ el.innerHTML = viewPortal(); return; }
+  if(!can(currentView)){ el.innerHTML = viewAccessDenied(); return; }
+  const renderers = {dashboard:viewDashboard, customers:viewCustomers, projects:viewProjects,
+    studio:viewStudio, pricing:viewPricing, quotes:viewQuotes, admin:viewAdmin};
+  el.innerHTML = renderers[currentView]();
+  afterRender[currentView] && afterRender[currentView]();
+}
+let afterRender = {};
+
+function viewAccessDenied(){
+  return `<div class="access-denied"><div class="ic">⛔</div>
+    <h3 style="margin:10px 0 6px;">Không có quyền truy cập</h3>
+    <p style="color:var(--text-dim);font-size:13.5px;">Vai trò <b>${ROLES[currentRole].label}</b> không thuộc Permission Matrix hiển thị mục này.
+    Tất cả dữ liệu được bảo vệ bởi middleware hai lớp (Route Handler + RLS Database Policy).</p></div>`;
+}
+
+/* ================= DASHBOARD VIEW ================= */
+function viewDashboard(){
+  const activeProjects = store.projects.filter(p=>!['accepted','rejected'].includes(p.status)).length;
+  const pendingReview = store.projects.filter(p=>p.status==='render_review').length;
+  const quotesOut = store.projects.reduce((a,p)=>a+p.quotes.filter(q=>q.status==='sent').length,0);
+  const wonValue = store.projects.filter(p=>p.status==='accepted').reduce((a,p)=>a+ (p.quotes[0]?.total||0),0);
+  return `
+  <div class="page-head">
+    <div>
+      <h1>Xin chào, ${ROLES[currentRole].label} 👋</h1>
+      <p>Tổng quan vận hành Sơn Hiệu Ứng — ${new Date().toLocaleDateString('vi-VN',{weekday:'long', day:'2-digit', month:'2-digit', year:'numeric'})}</p>
+    </div>
+    <button class="btn btn-copper btn-sm" onclick="goTo('projects')">+ Tạo công trình mới</button>
+  </div>
+  <div class="grid grid-4">
+    <div class="card stat-card card-hover"><div class="label">Công trình đang chạy</div><div class="value">${activeProjects}</div><div class="delta">trên tổng ${store.projects.length} dự án</div></div>
+    <div class="card stat-card card-hover"><div class="label">Chờ duyệt Render AI</div><div class="value">${pendingReview}</div><div class="delta ${pendingReview?'warn':''}">${pendingReview? 'cần Kỹ thuật/Quản lý duyệt' : 'không tồn đọng'}</div></div>
+    <div class="card stat-card card-hover"><div class="label">Báo giá đang gửi</div><div class="value">${quotesOut}</div><div class="delta">chờ phản hồi</div></div>
+    <div class="card stat-card card-hover"><div class="label">Doanh thu chốt hợp đồng</div><div class="value" style="font-size:22px;color:var(--copper);">${money(wonValue)}</div><div class="delta">tính từ đầu tháng</div></div>
+  </div>
+
+  <div class="section-title"><h2>Công trình tiến độ mới nhất</h2><button class="btn btn-outline btn-sm" onclick="goTo('projects')">Xem tất cả →</button></div>
+  <div class="table-wrap">
+    <table><thead><tr><th>Mã công trình</th><th>Tên dự án</th><th>Khách hàng</th><th>Loại hạng mục</th><th>Trạng thái</th></tr></thead>
+    <tbody>${store.projects.slice(0,5).map(p=>`
+      <tr class="row-click" onclick="goTo('projects',{projectId:'${p.id}'})">
+        <td class="mono">${p.code}</td><td><b>${esc(p.name)}</b></td><td>${esc(custName(p.customerId))}</td>
+        <td><span class="badge dim">${p.type==='exterior'?'Ngoại thất':'Nội thất'}</span></td>
+        <td><span class="badge ${STATUS_MAP[p.status].badge}">${STATUS_MAP[p.status].label}</span></td>
+      </tr>`).join('')}</tbody></table>
+  </div>
+
+  <div class="section-title"><h2>Nhật ký hoạt động (Audit Logs)</h2><button class="btn btn-outline btn-sm" onclick="goTo('admin')">Xem toàn bộ log →</button></div>
+  <div class="card">${store.auditLog.slice(0,5).map(a=>`
+    <div class="audit-row"><div class="t">${a.t}</div><div class="dot" style="background:var(--${a.color})"></div>
+    <div><b>${esc(a.actor)}</b> — ${esc(a.action)}</div></div>`).join('')}</div>
+  `;
+}
+function custName(id){ const c = store.customers.find(x=>x.id===id); return c? c.name : '—'; }
+
+/* ================= CUSTOMERS VIEW ================= */
+function viewCustomers(){
+  const search = (ctx.customerSearch||'').toLowerCase();
+  const filtered = store.customers.filter(c=>c.name.toLowerCase().includes(search) || c.phone.includes(search) || c.code.toLowerCase().includes(search));
+  return `
+  <div class="page-head">
+    <div><h1>Quản lý Khách hàng</h1><p>${store.customers.length} khách hàng trong hệ thống · Định dạng KH-2026-XXXXXX</p></div>
+    <div style="display:flex;gap:10px;">
+      <div class="search-box">
+        <span class="ic">🔍</span>
+        <input type="text" placeholder="Tìm theo tên/SĐT/mã..." value="${esc(ctx.customerSearch||'')}" oninput="ctx.customerSearch=this.value; renderView();">
+      </div>
+      <button class="btn btn-copper" onclick="openModal('modalCustomer')">+ Thêm khách hàng</button>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table><thead><tr><th>Mã KH</th><th>Họ tên / Đơn vị</th><th>Điện thoại</th><th>Địa chỉ</th><th>Số dự án</th></tr></thead>
+    <tbody>${filtered.length ? filtered.map(c=>{
+      const n = store.projects.filter(p=>p.customerId===c.id).length;
+      return `<tr><td class="mono">${c.code}</td><td><b>${esc(c.name)}</b></td><td class="mono">${esc(c.phone)}</td>
+      <td>${esc(c.addr)}</td><td><span class="badge slate">${n} công trình</span></td></tr>`;
+    }).join('') : `<tr><td colspan="5"><div class="empty">Không tìm thấy khách hàng phù hợp.</div></td></tr>`}</tbody></table>
+  </div>`;
+}
+
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function createCustomer(){
+  const name = document.getElementById('cName').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  const addr = document.getElementById('cAddr').value.trim();
+  if(!name){ toast('Vui lòng nhập họ tên khách hàng', 'err'); return; }
+  store.seq.customer++;
+  const code = 'KH-2026-' + String(store.seq.customer).padStart(6,'0');
+  store.customers.push({id:'c'+Date.now(), code, name, phone, addr});
+  store.auditLog.unshift({t:'Vừa xong', actor:currentRole+'.user', action:`Tạo khách hàng mới ${code} (${name})`, color:'copper'});
+  saveStore();
+  closeModal('modalCustomer');
+  document.getElementById('cName').value=''; document.getElementById('cPhone').value=''; document.getElementById('cAddr').value='';
+  toast(`Đã tạo thành công khách hàng ${code}`);
+  renderView();
+}
+
+/* ================= PROJECTS VIEW ================= */
+function viewProjects(){
+  if(ctx.projectId) return viewProjectDetail(ctx.projectId);
+  return `
+  <div class="page-head">
+    <div><h1>Quản lý Công trình</h1><p>${store.projects.length} dự án công trình · Tự động sinh mã CT-2026-XXXXXX</p></div>
+    ${can('customers')?`<button class="btn btn-copper" onclick="openProjectModal()">+ Tạo công trình mới</button>`:''}
+  </div>
+  <div class="table-wrap">
+    <table><thead><tr><th>Mã công trình</th><th>Tên công trình</th><th>Khách hàng</th><th>Hạng mục</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+    <tbody>${store.projects.map(p=>`
+      <tr class="row-click" onclick="goTo('projects',{projectId:'${p.id}'})">
+        <td class="mono">${p.code}</td><td><b>${esc(p.name)}</b></td><td>${esc(custName(p.customerId))}</td>
+        <td><span class="badge dim">${p.type==='exterior'?'Ngoại thất':'Nội thất'}</span></td>
+        <td><span class="badge ${STATUS_MAP[p.status].badge}">${STATUS_MAP[p.status].label}</span></td>
+        <td style="color:var(--copper);font-weight:600;">Xem chi tiết →</td>
+      </tr>`).join('')}</tbody></table>
+  </div>`;
+}
+
+function openProjectModal(){
+  const sel = document.getElementById('pCustomer');
+  sel.innerHTML = store.customers.map(c=>`<option value="${c.id}">${esc(c.name)} (${c.code})</option>`).join('');
+  openModal('modalProject');
+}
+function createProject(){
+  const customerId = document.getElementById('pCustomer').value;
+  const name = document.getElementById('pName').value.trim();
+  const type = document.getElementById('pType').value;
+  if(!name){ toast('Vui lòng nhập tên công trình', 'err'); return; }
+  store.seq.project++;
+  const code = 'CT-2026-' + String(store.seq.project).padStart(6,'0');
+  const id = 'p'+Date.now();
+  store.projects.push({id, code, customerId, name, type, status:'new', assignedRole:currentRole, images:[], estimate:null, quotes:[]});
+  store.auditLog.unshift({t:'Vừa xong', actor:currentRole+'.user', action:`Khởi tạo dự án công trình ${code}`, color:'copper'});
+  saveStore();
+  closeModal('modalProject');
+  document.getElementById('pName').value='';
+  toast(`Đã khởi tạo dự án ${code}`);
+  goTo('projects', {projectId:id});
+}
+
+function viewProjectDetail(id){
+  const p = store.projects.find(x=>x.id===id);
+  if(!p) return `<div class="empty">Không tìm thấy công trình.</div>`;
+  const steps = ['new','in_progress','render_review','estimating','quote_sent','accepted'];
+  const stepIdx = Math.max(steps.indexOf(p.status), 0);
+  return `
+  <button class="btn btn-ghost btn-sm" onclick="goTo('projects',{projectId:null})" style="margin-bottom:12px;">← Trở lại danh sách công trình</button>
+  <div class="page-head">
+    <div>
+      <h1>${esc(p.name)}</h1>
+      <p class="mono">${p.code} · ${esc(custName(p.customerId))} · ${p.type==='exterior'?'Thi công Ngoại thất':'Thi công Nội thất'}</p>
+    </div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <b style="font-size:14px;color:var(--ink);">Quy trình xử lý dự án</b>
+      <span class="badge ${STATUS_MAP[p.status].badge}">${STATUS_MAP[p.status].label}</span>
+    </div>
+    <div class="status-track"><div class="fill" style="width:${(stepIdx/(steps.length-1))*100}%"></div></div>
+    <div class="status-steps">
+      <span class="${stepIdx>=0?'done':''}">Khởi tạo</span>
+      <span class="${stepIdx>=1?'done':''}">Khảo sát</span>
+      <span class="${p.status==='render_review'?'current':(stepIdx>=2?'done':'')}">AI Render</span>
+      <span class="${p.status==='estimating'?'current':(stepIdx>=3?'done':'')}">Dự toán</span>
+      <span class="${p.status==='quote_sent'?'current':(stepIdx>=4?'done':'')}">Báo giá</span>
+      <span class="${stepIdx>=5?'done':''}">Chốt hợp đồng</span>
+    </div>
+  </div>
+
+  <div class="grid grid-3" style="margin-top:20px;">
+    <div class="card card-hover" style="cursor:pointer;" onclick="goTo('studio',{projectId:'${p.id}'})">
+      <div style="font-size:24px;color:var(--copper);margin-bottom:6px;">✦</div>
+      <b style="font-size:16px;">1. Studio Render AI</b>
+      <p style="color:var(--text-dim);font-size:13px;margin:6px 0 0;">Vẽ vùng mask trên ảnh công trình, ứng dụng hệ sơn & màu sắc để tạo visual Before/After.</p>
+    </div>
+    <div class="card card-hover" style="cursor:pointer;" onclick="goTo('pricing',{projectId:'${p.id}'})">
+      <div style="font-size:24px;color:var(--sage);margin-bottom:6px;">฿</div>
+      <b style="font-size:16px;">2. Bộ Máy Tính Dự Toán</b>
+      <p style="color:var(--text-dim);font-size:13px;margin:6px 0 0;">Nhập diện tích m², bề mặt → Tự động tính toán vật tư, định mức hao hụt, nhân công & VAT.</p>
+    </div>
+    <div class="card card-hover" style="cursor:pointer;" onclick="goTo('quotes',{projectId:'${p.id}'})">
+      <div style="font-size:24px;color:var(--slate);margin-bottom:6px;">▤</div>
+      <b style="font-size:16px;">3. Quản Lý Báo Giá</b>
+      <p style="color:var(--text-dim);font-size:13px;margin:6px 0 0;">${p.quotes.length? p.quotes.length+' báo giá đã phát hành' : 'Chưa có báo giá nào (Bản snapshot bất biến)'}</p>
+    </div>
+  </div>
+  `;
+}
+
+/* ================= STUDIO RENDER AI VIEW ================= */
+let studioState = {
+  maskDataUrl:null, drawing:false, brush:36, tool:'brush', selectedEffect:'e1', selectedColor:'col1',
+  jobStatus:'idle', afterPos:50, currentPreset:'exterior'
+};
+
+/* Presets Generator on Canvas */
+function generateSamplePreset(presetType){
+  const c = document.createElement('canvas');
+  c.width = 640; c.height = 420;
+  const ctx = c.getContext('2d');
+
+  if(presetType==='exterior'){
+    // Villa facade preset
+    ctx.fillStyle = '#C8C2B5'; ctx.fillRect(0,0,640,420);
+    // Sky gradient
+    const sky = ctx.createLinearGradient(0,0,0,180); sky.addColorStop(0,'#A4B3C6'); sky.addColorStop(1,'#DDE4EC');
+    ctx.fillStyle = sky; ctx.fillRect(0,0,640,160);
+    // Building structure
+    ctx.fillStyle = '#6E6B65'; ctx.fillRect(80,120,480,260); // main wall
+    ctx.fillStyle = '#EBE5D8'; ctx.fillRect(100,140,440,240); // inner facade section
+    // Target texture wall area (highlighted)
+    ctx.fillStyle = '#8C8577'; ctx.fillRect(140,160,200,200); // Feature Wall to paint
+    // Windows
+    ctx.fillStyle = '#2C3539'; ctx.fillRect(380,180,120,140);
+    ctx.fillStyle = '#81A1C1'; ctx.globalAlpha = 0.6; ctx.fillRect(390,190,45,120); ctx.fillRect(445,190,45,120); ctx.globalAlpha = 1.0;
+    // Ground
+    ctx.fillStyle = '#5B6B4F'; ctx.fillRect(0,380,640,40);
+  } else if(presetType==='interior'){
+    // Modern living room preset
+    ctx.fillStyle = '#DCD5C9'; ctx.fillRect(0,0,640,420);
+    // Feature wall (center)
+    ctx.fillStyle = '#B7B0A2'; ctx.fillRect(60,40,520,300);
+    // Floor wood
+    const wood = ctx.createLinearGradient(0,340,0,420); wood.addColorStop(0,'#7A5230'); wood.addColorStop(1,'#4A2E16');
+    ctx.fillStyle = wood; ctx.fillRect(0,340,640,80);
+    // Sofa
+    ctx.fillStyle = '#3A4240'; ctx.fillRect(140,260,360,70); ctx.fillRect(120,290,400,50);
+    // Light glow
+    ctx.fillStyle = '#FFF8E7'; ctx.globalAlpha = 0.3; ctx.beginPath(); ctx.arc(320,40,90,0,Math.PI*2); ctx.fill(); ctx.globalAlpha = 1.0;
+  } else {
+    // Perimeter Fence wall preset
+    ctx.fillStyle = '#A39D93'; ctx.fillRect(0,0,640,420);
+    ctx.fillStyle = '#5B6B4F'; ctx.fillRect(0,0,640,100);
+    ctx.fillStyle = '#D4CEB8'; ctx.fillRect(40,80,560,280); // Main Wall surface
+    // Pillars
+    ctx.fillStyle = '#46586B'; ctx.fillRect(40,60,40,320); ctx.fillRect(560,60,40,320);
+    // Green plants
+    ctx.fillStyle = '#48563E'; ctx.beginPath(); ctx.arc(120,360,40,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(520,360,45,0,Math.PI*2); ctx.fill();
+  }
+  return c.toDataURL('image/png');
+}
+
+function viewStudio(){
+  const proj = ctx.projectId ? store.projects.find(p=>p.id===ctx.projectId) : null;
+  return `
+  <div class="page-head">
+    <div>
+      <h1>Studio Render AI</h1>
+      <p>${proj? `Công trình đang chọn: <b>${esc(proj.name)}</b> (${proj.code})` : 'Vẽ vùng thi công (mask), chọn hệ sơn hiệu ứng & tạo bản vẽ Before/After.'}</p>
+    </div>
+  </div>
+
+  <div class="studio-grid">
+    <div>
+      <div class="studio-toolbar">
+        <input type="file" id="imgUpload" accept="image/*" style="display:none" onchange="onImageUpload(event)">
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('imgUpload').click()">⬆ Tải ảnh lên</button>
+        <span style="width:1px;height:20px;background:var(--line);"></span>
+        <div class="preset-pills" style="margin:0;">
+          <button class="preset-pill ${studioState.currentPreset==='exterior'?'active':''}" onclick="loadPreset('exterior')">Mẫu Mặt Tiền</button>
+          <button class="preset-pill ${studioState.currentPreset==='interior'?'active':''}" onclick="loadPreset('interior')">Mẫu Phòng Khách</button>
+          <button class="preset-pill ${studioState.currentPreset==='fence'?'active':''}" onclick="loadPreset('fence')">Mẫu Tường Rào</button>
+        </div>
+        <span style="width:1px;height:20px;background:var(--line);"></span>
+        <button class="tool-btn active" id="toolBrush" title="Cọ vẽ mask" onclick="setTool('brush')">✎</button>
+        <button class="tool-btn" id="toolErase" title="Tẩy mask" onclick="setTool('erase')">⌫</button>
+        <span style="font-size:12px;color:var(--text-dim);">Cỡ cọ</span>
+        <input type="range" class="range-mini" min="10" max="80" value="36" oninput="studioState.brush=+this.value">
+        <button class="btn btn-ghost btn-sm" onclick="clearMask()">Xóa mask</button>
+      </div>
+
+      <div class="canvas-wrap" id="canvasWrap">
+        <div class="empty" id="canvasEmpty">
+          <div class="ic">🖼</div>
+          <h3>Chưa mở ảnh công trình</h3>
+          <p style="font-size:13px;">Bấm chọn một ảnh mẫu phía trên hoặc tải ảnh cá nhân lên.</p>
+        </div>
+      </div>
+
+      <div id="baWrap"></div>
+    </div>
+
+    <div class="side-panel">
+      <div class="card">
+        <div class="field">
+          <label>Chọn Hệ Sơn Hiệu Ứng</label>
+          <div class="effect-list">
+            ${effectSystems.map(e=>`
+              <div class="effect-item ${studioState.selectedEffect===e.id?'selected':''}" onclick="selectEffect('${e.id}')">
+                <span class="effect-swatch" style="background:${e.swatch}"></span>
+                <span style="flex:1;">${esc(e.name)}</span>
+                <span class="badge dim">${e.area==='exterior'?'Ngoại':'Nội'}</span>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Chọn Màu Sơn Chuyên Dụng</label>
+          <div class="swatch-grid" id="colorGrid"></div>
+        </div>
+
+        <div class="field">
+          <label class="hint" style="margin:0 0 4px;display:block;">Feather viền mask (làm mềm viền)</label>
+          <input type="range" min="0" max="10" value="4" id="featherRange" style="width:100%;accent-color:var(--copper);">
+        </div>
+
+        <button class="btn btn-copper" style="width:100%;justify-content:center;padding:12px;" id="renderBtn" onclick="runRender()" disabled>
+          ✦ Tạo AI Render Composite
+        </button>
+        <p class="hint" style="margin-top:10px;line-height:1.4;">Bảo toàn 100% pixel ngoài vùng mask theo quy chuẩn thuật toán Sharp Composite.</p>
+      </div>
+
+      ${studioState.jobStatus!=='idle' ? `
+      <div class="card" style="margin-top:16px;">
+        <b style="font-size:13px;display:block;margin-bottom:6px;">Trạng Thái Render Job</b>
+        <div style="font-size:13px;">${jobStatusLine()}</div>
+      </div>` : ''}
+    </div>
+  </div>`;
+}
+
+function jobStatusLine(){
+  const s = studioState.jobStatus;
+  if(s==='queued') return '<span class="badge dim">queued</span> Đã ghi nhận vào hàng đợi...';
+  if(s==='processing') return '<span class="badge slate">processing</span> Đang gọi Adapter AI & Sharp Composite...';
+  if(s==='needs_review') return '<span class="badge ochre">needs_review</span> Kiểm tra tự động phát hiện sai lệch viền — Cần Kỹ thuật duyệt.';
+  if(s==='completed') return '<span class="badge sage">completed</span> Xử lý thành công — Đã tạo bản Before/After.';
+  return '';
+}
+
+function loadPreset(type){
+  studioState.currentPreset = type;
+  const dataUrl = generateSamplePreset(type);
+  setupCanvas(dataUrl);
+  toast(`Đã tải ảnh mẫu (${type==='exterior'?'Mặt tiền':type==='interior'?'Phòng khách':'Tường rào'})`);
+}
+
+function selectEffect(id){
+  studioState.selectedEffect = id;
+  const firstColor = colors.find(c=>c.esId===id);
+  if(firstColor) studioState.selectedColor = firstColor.id;
+  renderView();
+}
+
+function renderColorGrid(){
+  const grid = document.getElementById('colorGrid');
+  if(!grid) return;
+  const list = colors.filter(c=>c.esId===studioState.selectedEffect);
+  grid.innerHTML = list.map(c=>`<div class="swatch ${studioState.selectedColor===c.id?'selected':''}"
+    style="background:${c.hex}" title="${esc(c.name)}" onclick="pickColor('${c.id}')"></div>`).join('');
+}
+function pickColor(id){ studioState.selectedColor = id; renderColorGrid(); }
+
+let canvasEls = {};
+function onImageUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){ setupCanvas(ev.target.result); };
+  reader.readAsDataURL(file);
+}
+
+function setupCanvas(src){
+  const wrap = document.getElementById('canvasWrap');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  const img = new Image();
+  img.onload = function(){
+    const maxW = 640;
+    const scale = Math.min(1, maxW/img.width);
+    const w = Math.round(img.width*scale), h = Math.round(img.height*scale);
+    const display = document.createElement('canvas');
+    display.width = w; display.height = h;
+    display.style.cursor = 'crosshair';
+    wrap.appendChild(display);
+    const dctx = display.getContext('2d');
+    dctx.drawImage(img, 0, 0, w, h);
+
+    const maskCanvas = document.createElement('canvas');
+    maskCanvas.width = w; maskCanvas.height = h;
+    const mctx = maskCanvas.getContext('2d');
+
+    canvasEls = {img, display, dctx, maskCanvas, mctx, w, h, base: dctx.getImageData(0,0,w,h)};
+
+    let drawing = false;
+    function pos(evt){
+      const r = display.getBoundingClientRect();
+      const cx = (evt.touches? evt.touches[0].clientX : evt.clientX) - r.left;
+      const cy = (evt.touches? evt.touches[0].clientY : evt.clientY) - r.top;
+      return {x: cx*(w/r.width), y: cy*(h/r.height)};
+    }
+    function drawDot(p){
+      mctx.globalCompositeOperation = studioState.tool==='erase' ? 'destination-out' : 'source-over';
+      mctx.fillStyle = 'rgba(166,89,44,1)';
+      mctx.beginPath(); mctx.arc(p.x, p.y, studioState.brush/2, 0, Math.PI*2); mctx.fill();
+      redrawDisplay();
+    }
+    function redrawDisplay(){
+      dctx.putImageData(canvasEls.base, 0, 0);
+      dctx.save();
+      dctx.globalAlpha = 0.45;
+      dctx.drawImage(maskCanvas, 0, 0);
+      dctx.restore();
+    }
+    display.addEventListener('mousedown', e=>{ drawing=true; drawDot(pos(e)); });
+    display.addEventListener('mousemove', e=>{ if(drawing) drawDot(pos(e)); });
+    window.addEventListener('mouseup', ()=>{ drawing=false; updateRenderBtn(); });
+    display.addEventListener('touchstart', e=>{ drawing=true; drawDot(pos(e)); e.preventDefault(); }, {passive:false});
+    display.addEventListener('touchmove', e=>{ if(drawing) drawDot(pos(e)); e.preventDefault(); }, {passive:false});
+    display.addEventListener('touchend', ()=>{ drawing=false; updateRenderBtn(); });
+
+    updateRenderBtn();
+    renderColorGrid();
+  };
+  img.src = src;
+}
+
+function setTool(t){
+  studioState.tool = t;
+  document.getElementById('toolBrush').classList.toggle('active', t==='brush');
+  document.getElementById('toolErase').classList.toggle('active', t==='erase');
+}
+
+function clearMask(){
+  if(!canvasEls.mctx) return;
+  canvasEls.mctx.clearRect(0,0,canvasEls.w,canvasEls.h);
+  canvasEls.dctx.putImageData(canvasEls.base,0,0);
+  updateRenderBtn();
+}
+
+function updateRenderBtn(){
+  const btn = document.getElementById('renderBtn');
+  if(!btn) return;
+  let hasMask = false;
+  if(canvasEls.mctx){
+    const d = canvasEls.mctx.getImageData(0,0,canvasEls.w,canvasEls.h).data;
+    for(let i=3;i<d.length;i+=4*40){ if(d[i]>0){ hasMask=true; break; } }
+  }
+  btn.disabled = !hasMask;
+}
+
+function runRender(){
+  if(store.aiConfig.killSwitch){
+    toast('Hệ thống đang bật Kill Switch. Không thể tạo Render mới!', 'err');
+    return;
+  }
+  if(!canvasEls.mctx) return;
+  studioState.jobStatus = 'queued';
+  renderView();
+  setTimeout(()=>{ studioState.jobStatus='processing'; renderView(); doComposite(); }, 600);
+}
+
+function doComposite(){
+  setTimeout(()=>{
+    const {w,h,mctx,base} = canvasEls;
+    const maskData = mctx.getImageData(0,0,w,h);
+    const outData = new ImageData(new Uint8ClampedArray(base.data), w, h);
+    const color = colors.find(c=>c.id===studioState.selectedColor);
+    const rgb = hexToRgb(color ? color.hex : '#A6592C');
+    let maskedCount=0;
+    for(let i=0;i<outData.data.length;i+=4){
+      const alpha = maskData.data[i+3];
+      if(alpha>10){
+        maskedCount++;
+        const mixT = 0.75; // Blend paint effect onto mask
+        outData.data[i]   = outData.data[i]*(1-mixT) + rgb.r*mixT;
+        outData.data[i+1] = outData.data[i+1]*(1-mixT) + rgb.g*mixT;
+        outData.data[i+2] = outData.data[i+2]*(1-mixT) + rgb.b*mixT;
+      }
+    }
+    const outCanvas = document.createElement('canvas');
+    outCanvas.width=w; outCanvas.height=h;
+    outCanvas.getContext('2d').putImageData(outData,0,0);
+    canvasEls.afterUrl = outCanvas.toDataURL('image/png');
+
+    const baseCanvas = document.createElement('canvas');
+    baseCanvas.width=w; baseCanvas.height=h;
+    baseCanvas.getContext('2d').putImageData(base,0,0);
+    canvasEls.beforeUrl = baseCanvas.toDataURL('image/png');
+
+    const needsReview = maskedCount < (w*h*0.005);
+    studioState.jobStatus = needsReview ? 'needs_review' : 'completed';
+    store.aiConfig.usedToday++;
+    saveStore();
+
+    renderView();
+    mountBeforeAfter();
+    if(ctx.projectId){
+      const p = store.projects.find(x=>x.id===ctx.projectId);
+      if(p) p.status = needsReview ? 'render_review' : 'estimating';
+    }
+    store.auditLog.unshift({t:'Vừa xong', actor:'ai.system', action:`AI Render job ${needsReview?'needs_review':'completed'}${ctx.projectId? ' — '+store.projects.find(x=>x.id===ctx.projectId).code : ''}`, color: needsReview?'ochre':'sage'});
+    saveStore();
+    toast(needsReview? 'Cảnh báo viền — Đã chuyển Kỹ thuật duyệt' : 'Đã Composite render thành công!');
+  }, 900);
+}
+
+function hexToRgb(hex){
+  hex = hex.replace('#','');
+  return {r:parseInt(hex.substr(0,2),16), g:parseInt(hex.substr(2,2),16), b:parseInt(hex.substr(4,2),16)};
+}
+
+function mountBeforeAfter(){
+  const wrap = document.getElementById('baWrap');
+  if(!wrap || !canvasEls.afterUrl) return;
+  const w = canvasEls.w, h = canvasEls.h;
+  wrap.innerHTML = `
+  <div class="section-title">
+    <h2>So sánh Trước / Sau (Before / After)</h2>
+    ${studioState.jobStatus==='needs_review'
+      ? `<button class="btn btn-outline btn-sm" onclick="approveRender()">Duyệt Render này</button>`
+      : `<button class="btn btn-copper btn-sm" onclick="goTo('pricing',{projectId:'${ctx.projectId||''}'})">Chuyển sang bước Dự toán →</button>`}
+  </div>
+  <div class="before-after" style="width:${w}px;max-width:100%;height:${h}px;">
+    <img src="${canvasEls.afterUrl}" style="width:100%;height:100%;object-fit:cover;">
+    <div class="after-clip" id="afterClip" style="width:${studioState.afterPos}%;">
+      <img src="${canvasEls.beforeUrl}" style="width:${w}px;height:${h}px;object-fit:cover;">
+    </div>
+    <div class="ba-tag" style="left:12px;">SAU (AI PAINT)</div>
+    <div class="ba-tag" style="right:12px;">TRƯỚC (GỐC)</div>
+    <div class="ba-handle" id="baHandle" style="left:${studioState.afterPos}%;"></div>
+  </div>
+  <input type="range" min="0" max="100" value="${studioState.afterPos}" style="width:${w}px;max-width:100%;margin-top:10px;accent-color:var(--copper);" oninput="moveBA(this.value)">
+  `;
+}
+
+function moveBA(v){
+  studioState.afterPos = v;
+  document.getElementById('afterClip').style.width = v+'%';
+  document.getElementById('baHandle').style.left = v+'%';
+}
+
+function approveRender(){
+  studioState.jobStatus = 'completed';
+  if(ctx.projectId){ const p = store.projects.find(x=>x.id===ctx.projectId); if(p) p.status='estimating'; }
+  store.auditLog.unshift({t:'Vừa xong', actor:currentRole+'.user', action:'Kỹ thuật đã duyệt ảnh AI Render', color:'sage'});
+  saveStore();
+  toast('Đã duyệt thành công bản vẽ AI Render');
+  renderView(); mountBeforeAfter();
+}
+
+afterRender.studio = function(){
+  renderColorGrid();
+  if(!canvasEls.display){ loadPreset('exterior'); }
+  else { mountBeforeAfter(); }
+};
+
+/* ================= PRICING / ESTIMATE VIEW ================= */
+let pricingState = { area:'', esId:'e1', vat:10, discount:0, labor:2200000, shipping:300000, result:null };
+
+function viewPricing(){
+  const proj = ctx.projectId ? store.projects.find(p=>p.id===ctx.projectId) : null;
+  return `
+  <div class="page-head">
+    <div>
+      <h1>Bộ Máy Tính Dự Toán</h1>
+      <p>${proj? `Công trình đang chọn: <b>${esc(proj.name)}</b> (${proj.code})` : 'Pricing Engine pure-function — Tính định mức vật tư & tổng giá trị.'}</p>
+    </div>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="field"><label>Hệ Sơn Hiệu Ứng Thi Công</label>
+        <select id="estEs" onchange="pricingState.esId=this.value">
+          ${effectSystems.map(e=>`<option value="${e.id}" ${pricingState.esId===e.id?'selected':''}>${esc(e.name)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field"><label>Tổng diện tích bề mặt (m²)</label>
+        <input type="number" id="estArea" placeholder="Ví dụ: 45" value="${pricingState.area}">
+      </div>
+      <div class="grid grid-2">
+        <div class="field"><label>Thuế VAT (%)</label><input type="number" id="estVat" value="${pricingState.vat}"></div>
+        <div class="field"><label>Chiết khấu (VNĐ)</label><input type="number" id="estDiscount" value="${pricingState.discount}"></div>
+        <div class="field"><label>Chi phí Nhân công (VNĐ)</label><input type="number" id="estLabor" value="${pricingState.labor}"></div>
+        <div class="field"><label>Phí Vận chuyển (VNĐ)</label><input type="number" id="estShip" value="${pricingState.shipping}"></div>
+      </div>
+      <button class="btn btn-copper" style="width:100%;justify-content:center;padding:12px;" onclick="computeEstimate()">Tính Dự Toán Chi Tiết</button>
+    </div>
+
+    <div class="card">
+      <b style="font-size:14px;color:var(--ink);display:block;margin-bottom:12px;">Bảng Chi Tiết Vật Tư & Khối Lượng</b>
+      <div id="estResult">${pricingState.result? renderEstimateResult() : `<div class="empty"><div class="ic">฿</div><p style="font-size:13px;">Nhập diện tích m² và bấm "Tính Dự Toán".</p></div>`}</div>
+    </div>
+  </div>`;
+}
+
+function computeEstimate(){
+  const area = parseFloat(document.getElementById('estArea').value);
+  if(!area || area<=0){ toast('Vui lòng nhập diện tích m² hợp lệ', 'err'); return; }
+  pricingState.area = area;
+  pricingState.esId = document.getElementById('estEs').value;
+  pricingState.vat = parseFloat(document.getElementById('estVat').value)||0;
+  pricingState.discount = parseFloat(document.getElementById('estDiscount').value)||0;
+  pricingState.labor = parseFloat(document.getElementById('estLabor').value)||0;
+  pricingState.shipping = parseFloat(document.getElementById('estShip').value)||0;
+
+  const cfg = effectPricing[pricingState.esId];
+  const items = cfg.layers.map(l=>{
+    const theoretical = area * l.coveragePerM2;
+    const actual = theoretical * (1 + l.wastage);
+    const total = actual * l.unit;
+    return {name:l.name, qty: actual, unit:l.unit, total};
+  });
+  const subtotal = items.reduce((a,i)=>a+i.total,0);
+  const vatAmount = subtotal * (pricingState.vat/100);
+  const total = subtotal - pricingState.discount + pricingState.labor + pricingState.shipping + vatAmount;
+  pricingState.result = {items, subtotal, vatAmount, total, area};
+
+  if(ctx.projectId){
+    const p = store.projects.find(x=>x.id===ctx.projectId);
+    if(p){ p.estimate = pricingState.result; if(p.status==='render_review'||p.status==='new') p.status='estimating'; saveStore(); }
+  }
+  document.getElementById('estResult').innerHTML = renderEstimateResult();
+  toast('Đã hoàn tất tính toán dự toán');
+}
+
+function renderEstimateResult(){
+  const r = pricingState.result;
+  return `
+  <div class="table-wrap" style="margin-bottom:12px;">
+    <table><thead><tr><th>Lớp sơn</th><th>Khối lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead>
+    <tbody>${r.items.map(i=>`<tr><td><b>${esc(i.name)}</b></td><td class="mono">${i.qty.toFixed(2)} kg/lít</td>
+      <td class="mono">${money(i.unit)}</td><td class="mono">${money(i.total)}</td></tr>`).join('')}</tbody></table>
+  </div>
+  <div style="border-top:1px solid var(--line);padding-top:10px;font-size:13px;">
+    <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Tạm tính vật tư</span><span class="mono">${money(r.subtotal)}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Thuế VAT (${pricingState.vat}%)</span><span class="mono">${money(r.vatAmount)}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Nhân công & Vận chuyển</span><span class="mono">${money(pricingState.labor+pricingState.shipping)}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Chiết khấu</span><span class="mono">-${money(pricingState.discount)}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:10px 0 0;font-weight:700;font-size:16px;border-top:2px solid var(--ink);margin-top:8px;">
+      <span>TỔNG THÀNH TIỀN</span><span class="mono" style="color:var(--copper);">${money(r.total)}</span></div>
+  </div>
+  ${ctx.projectId?`<button class="btn btn-copper" style="width:100%;justify-content:center;margin-top:16px;padding:12px;" onclick="createQuoteFromEstimate()">Phát Hành Báo Giá (Quote Snapshot) →</button>`:''}
+  `;
+}
+
+function createQuoteFromEstimate(){
+  const p = store.projects.find(x=>x.id===ctx.projectId);
+  if(!p || !pricingState.result){ toast('Chưa có dữ liệu dự toán', 'err'); return; }
+  store.seq.quote++;
+  const no = 'BG-2026-' + String(store.seq.quote).padStart(6,'0');
+  const token = Math.random().toString(36).slice(2,12);
+  const r = pricingState.result;
+  const quote = {
+    id:'q'+Date.now(), no, token, status:'draft', total:r.total, createdAt:new Date().toLocaleDateString('vi-VN'),
+    snapshot:{
+      customerName:custName(p.customerId), projectName:p.name,
+      items:r.items.map(i=>({name:i.name, qty:+i.qty.toFixed(2), unit:i.unit, total:i.total})),
+      subtotal:r.subtotal, vat:r.vatAmount, discount:pricingState.discount, labor:pricingState.labor, shipping:pricingState.shipping, total:r.total
+    }
+  };
+  p.quotes.push(quote);
+  p.status = 'quote_sent';
+  store.auditLog.unshift({t:'Vừa xong', actor:currentRole+'.user', action:`Tạo snapshot báo giá bất biến ${no}`, color:'copper'});
+  saveStore();
+  toast(`Đã phát hành báo giá ${no}`);
+  goTo('quotes', {projectId:p.id, quoteId:quote.id});
+}
+
+/* ================= QUOTES VIEW ================= */
+function viewQuotes(){
+  if(ctx.projectId){
+    const p = store.projects.find(x=>x.id===ctx.projectId);
+    if(p){
+      const q = ctx.quoteId ? p.quotes.find(x=>x.id===ctx.quoteId) : p.quotes[p.quotes.length-1];
+      if(q) return viewQuoteDoc(p, q);
+    }
+  }
+  const all = store.projects.flatMap(p=>p.quotes.map(q=>({p,q})));
+  return `
+  <div class="page-head">
+    <div><h1>Quản lý Báo giá</h1><p>${all.length} bản ghi báo giá đã phát hành · Đã khóa snapshot bất biến (quote_versions)</p></div>
+  </div>
+  <div class="table-wrap">
+    <table><thead><tr><th>Số báo giá</th><th>Tên công trình</th><th>Khách hàng</th><th>Tổng tiền</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+    <tbody>${all.length? all.map(({p,q})=>`
+      <tr class="row-click" onclick="goTo('quotes',{projectId:'${p.id}',quoteId:'${q.id}'})">
+        <td class="mono">${q.no}</td><td><b>${esc(p.name)}</b></td><td>${esc(custName(p.customerId))}</td>
+        <td class="mono" style="color:var(--copper);font-weight:600;">${money(q.total)}</td>
+        <td><span class="badge ${q.status==='sent'?'copper':(q.status==='accepted'?'sage':'dim')}">${q.status==='sent'?'Đã gửi link':q.status==='accepted'?'Khách đã chốt':'Bản nháp'}</span></td>
+        <td style="color:var(--copper);">Xem văn bản →</td>
+      </tr>`).join('') : `<tr><td colspan="6"><div class="empty"><div class="ic">▤</div><h3>Chưa có báo giá</h3><p>Tạo dự toán trong công trình để phát hành báo giá.</p></div></td></tr>`}</tbody></table>
+  </div>`;
+}
+
+function viewQuoteDoc(p, q){
+  const s = q.snapshot;
+  const publicUrl = `https://sonhieuungviet.vn/quotes/${q.token}`;
+  return `
+  <button class="btn btn-ghost btn-sm" onclick="goTo('quotes',{projectId:null})" style="margin-bottom:12px;">← Danh sách báo giá</button>
+  <div>
+    ${q.status==='draft' ? `<div class="locked-banner">🔒 BẢN NHÁP SNAPSHOT — Dữ liệu giá được khóa tại thời điểm tạo, không thay đổi khi sửa PriceBook.</div>`
+      : `<div class="locked-banner">🔗 Đã kích hoạt liên kết xem Public: <span class="mono">${publicUrl}</span></div>`}
+    <div class="quote-doc">
+      <div class="qhead">
+        <div>
+          <h2>BÁO GIÁ THI CÔNG SƠN HIỆU ỨNG</h2>
+          <div class="token mono">${q.no} · Ngày tạo: ${q.createdAt}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-weight:700;font-size:16px;">Sơn Hiệu Ứng Việt</div>
+          <div class="token">Token Snapshot: #${q.token.slice(0,8)}</div>
+        </div>
+      </div>
+      <div class="grid grid-2" style="margin-bottom:20px;">
+        <div><div class="hint" style="color:var(--text-dim);font-size:11.5px;">TÊN KHÁCH HÀNG</div><b>${esc(s.customerName)}</b></div>
+        <div><div class="hint" style="color:var(--text-dim);font-size:11.5px;">HẠNG MỤC CÔNG TRÌNH</div><b>${esc(s.projectName)}</b></div>
+      </div>
+      <div class="table-wrap" style="margin-bottom:14px;">
+        <table><thead><tr><th>Hạng mục vật tư</th><th>Khối lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead>
+        <tbody>${s.items.map(i=>`<tr><td><b>${esc(i.name)}</b></td><td class="mono">${i.qty} kg/lít</td><td class="mono">${money(i.unit)}</td><td class="mono">${money(i.total)}</td></tr>`).join('')}</tbody></table>
+      </div>
+      <div style="font-size:13.5px;">
+        <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Tạm tính vật tư</span><span class="mono">${money(s.subtotal)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Thuế VAT</span><span class="mono">${money(s.vat)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Nhân công & Vận chuyển</span><span class="mono">${money(s.labor+s.shipping)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Chiết khấu</span><span class="mono">-${money(s.discount)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0 0;font-weight:700;font-size:18px;border-top:2px solid var(--ink);margin-top:8px;">
+          <span>TỔNG THÀNH TIỀN THANH TOÁN</span><span class="mono" style="color:var(--copper);">${money(s.total)}</span></div>
+      </div>
+    </div>
+    <div style="margin-top:20px;display:flex;gap:12px;justify-content:center;">
+      ${q.status==='draft'?`<button class="btn btn-copper" onclick="sendQuote('${p.id}','${q.id}')">Gửi báo giá cho khách (Public Token)</button>`:''}
+      <button class="btn btn-outline" onclick="window.print()">🖨 In / Xuất PDF Báo giá</button>
+    </div>
+  </div>`;
+}
+
+function sendQuote(pid, qid){
+  const p = store.projects.find(x=>x.id===pid); const q = p.quotes.find(x=>x.id===qid);
+  q.status = 'sent';
+  store.auditLog.unshift({t:'Vừa xong', actor:currentRole+'.user', action:`Kích hoạt liên kết public token cho báo giá ${q.no}`, color:'copper'});
+  saveStore();
+  toast('Đã gửi báo giá thành công'); renderView();
+}
+
+/* ================= CUSTOMER PORTAL VIEW ================= */
+function viewPortal(){
+  const q = store.projects.flatMap(p=>p.quotes.map(qq=>({p,qq}))).find(x=>x.qq.status!=='draft') || store.projects.flatMap(p=>p.quotes.map(qq=>({p,qq})))[0];
+  if(!q) return `<div class="empty" style="margin-top:60px;"><div class="ic">▤</div><h3>Chưa có báo giá công khai</h3></div>`;
+  const s = q.qq.snapshot;
+  return `
+  <div style="max-width:680px;margin:0 auto;">
+    <div class="diff-flag"><span>ⓘ</span><span>Mô phỏng giao diện Cổng xem báo giá công khai dành cho Khách hàng qua Token <span class="mono">/quotes/[token]</span>. Không yêu cầu đăng nhập.</span></div>
+    <div class="quote-doc">
+      <div class="qhead">
+        <div><h2>BÁO GIÁ DÀNH CHO BẠN</h2><div class="token mono">${q.qq.no}</div></div>
+        <div style="text-align:right;"><div style="font-weight:700;">Sơn Hiệu Ứng Việt</div></div>
+      </div>
+      <div class="grid grid-2" style="margin-bottom:18px;">
+        <div><div class="hint" style="color:var(--text-dim);font-size:11.5px;">KHÁCH HÀNG</div><b>${esc(s.customerName)}</b></div>
+        <div><div class="hint" style="color:var(--text-dim);font-size:11.5px;">CÔNG TRÌNH</div><b>${esc(s.projectName)}</b></div>
+      </div>
+      <div class="table-wrap" style="margin-bottom:14px;">
+        <table><thead><tr><th>Hạng mục vật tư</th><th>Khối lượng</th><th>Thành tiền</th></tr></thead>
+        <tbody>${s.items.map(i=>`<tr><td><b>${esc(i.name)}</b></td><td class="mono">${i.qty} kg/lít</td><td class="mono">${money(i.total)}</td></tr>`).join('')}</tbody></table>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:12px 0 0;font-weight:700;font-size:18px;border-top:2px solid var(--ink);margin-top:8px;">
+        <span>TỔNG THÀNH TIỀN</span><span class="mono" style="color:var(--copper);">${money(s.total)}</span></div>
+    </div>
+    <div style="margin-top:20px;display:flex;gap:12px;justify-content:center;">
+      <button class="btn btn-copper" onclick="portalRespond('${q.p.id}','${q.qq.id}','accepted')">✓ ĐỒNG Ý BÁO GIÁ NÀY</button>
+      <button class="btn btn-outline" onclick="portalRespond('${q.p.id}','${q.qq.id}','rejected')">Yêu cầu chỉnh sửa / Từ chối</button>
+    </div>
+  </div>`;
+}
+
+function portalRespond(pid, qid, decision){
+  const p = store.projects.find(x=>x.id===pid); const q = p.quotes.find(x=>x.id===qid);
+  q.status = decision; p.status = decision;
+  store.auditLog.unshift({t:'Vừa xong', actor:'customer.portal', action:`Khách hàng ${decision==='accepted'?'đồng ý':'từ chối'} báo giá ${q.no}`, color: decision==='accepted'?'sage':'crimson'});
+  saveStore();
+  toast(decision==='accepted'? 'Cảm ơn quý khách đã xác nhận hợp đồng!' : 'Đã ghi nhận phản hồi của quý khách');
+  renderView();
+}
+
+/* ================= ADMIN VIEW ================= */
+function viewAdmin(){
+  return `
+  <div class="page-head">
+    <div><h1>Quản trị Hệ thống</h1><p>Cấu hình Adapter AI Provider, Quản lý Kill Switch khẩn cấp và Audit Logs</p></div>
+    <button class="btn btn-outline btn-sm" onclick="resetStore()">🔄 Khôi phục dữ liệu mẫu ban đầu</button>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <b style="font-size:14px;color:var(--ink);display:block;margin-bottom:12px;">Cấu Hình Adapter AI Provider</b>
+      <div class="field"><label>Provider Rendering hiện tại</label>
+        <select onchange="store.aiConfig.provider=this.value; saveStore(); toast('Đã thay đổi AI Adapter');">
+          <option ${store.aiConfig.provider==='OpenAI Image'?'selected':''}>OpenAI Image Adapter (DALL-E 3 / Inpainting)</option>
+          <option ${store.aiConfig.provider==='Google Imagen'?'selected':''}>Google Imagen Adapter (Vertex AI)</option>
+        </select>
+      </div>
+      <div class="field"><label>Hạn ngạch Render theo ngày (Toàn tổ chức)</label>
+        <input type="number" value="${store.aiConfig.dailyLimit}" onchange="store.aiConfig.dailyLimit=+this.value; saveStore();">
+      </div>
+      <div class="field"><label>Đã sử dụng trong ngày</label>
+        <div class="status-track"><div class="fill" style="width:${(store.aiConfig.usedToday/store.aiConfig.dailyLimit)*100}%"></div></div>
+        <p class="hint">${store.aiConfig.usedToday} / ${store.aiConfig.dailyLimit} lượt render AI</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);">
+        <button class="switch ${store.aiConfig.killSwitch?'on':''}" onclick="toggleKill(this)"></button>
+        <div>
+          <b style="font-size:13px;display:block;">Kill Switch Toàn Hệ Thống</b>
+          <span style="font-size:12px;color:var(--text-dim);">Khóa tức thì mọi request Render AI mới để ngăn ngừa rò rỉ chi phí API.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <b style="font-size:14px;color:var(--ink);display:block;margin-bottom:12px;">Danh Sách Người Dùng & Phân Quyền</b>
+      <div class="table-wrap">
+        <table><thead><tr><th>Tài khoản</th><th>Vai trò RBAC</th><th>MFA (2FA)</th></tr></thead>
+        <tbody>
+          <tr><td>sale.minh@sonhieuung.vn</td><td><span class="badge slate">Sale</span></td><td><span class="badge dim">Tắt</span></td></tr>
+          <tr><td>ky.thuat.duc@sonhieuung.vn</td><td><span class="badge slate">Kỹ thuật</span></td><td><span class="badge dim">Tắt</span></td></tr>
+          <tr><td>manager.hai@sonhieuung.vn</td><td><span class="badge copper">Quản lý</span></td><td><span class="badge sage">Bật</span></td></tr>
+          <tr><td>admin.an@sonhieuung.vn</td><td><span class="badge copper">Super Admin</span></td><td><span class="badge sage">Bật</span></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title"><h2>Audit Logs Chi Tiết</h2></div>
+  <div class="card">${store.auditLog.map(a=>`
+    <div class="audit-row"><div class="t">${a.t}</div><div class="dot" style="background:var(--${a.color})"></div>
+    <div><b>${esc(a.actor)}</b> — ${esc(a.action)}</div></div>`).join('')}</div>
+  `;
+}
+
+function toggleKill(btn){
+  store.aiConfig.killSwitch = !store.aiConfig.killSwitch;
+  saveStore();
+  btn.classList.toggle('on', store.aiConfig.killSwitch);
+  store.auditLog.unshift({t:'Vừa xong', actor:currentRole+'.user', action:`${store.aiConfig.killSwitch?'Bật':'Tắt'} Kill Switch AI Provider`, color:'ochre'});
+  saveStore();
+  renderView();
+}
+
+/* Initial Execution */
+document.getElementById('avatarInit').textContent = ROLES[currentRole].initial;
+renderNav();
+renderView();
+</script>
+</body>
+</html>

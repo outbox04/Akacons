@@ -1,0 +1,1528 @@
+﻿[
+    {
+        "code":  "XT-01",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-01.png"
+    },
+    {
+        "code":  "XT-02",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-02.png"
+    },
+    {
+        "code":  "XT-03",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-03.png"
+    },
+    {
+        "code":  "XT-05",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-05.png"
+    },
+    {
+        "code":  "XT-06",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-06.png"
+    },
+    {
+        "code":  "XT-07",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-07.png"
+    },
+    {
+        "code":  "XT-08",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-08.png"
+    },
+    {
+        "code":  "XT-09",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-09.png"
+    },
+    {
+        "code":  "XT-10",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-10.png"
+    },
+    {
+        "code":  "XT-11",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-11.png"
+    },
+    {
+        "code":  "XT-12",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-12.png"
+    },
+    {
+        "code":  "XT-14",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-14.png"
+    },
+    {
+        "code":  "XT-15",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-15.png"
+    },
+    {
+        "code":  "XT-16",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-16.png"
+    },
+    {
+        "code":  "XT-17",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-17.png"
+    },
+    {
+        "code":  "XT-19",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-19.png"
+    },
+    {
+        "code":  "XT-20",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-20.png"
+    },
+    {
+        "code":  "XT-22",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-22.png"
+    },
+    {
+        "code":  "XT-23",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-23.png"
+    },
+    {
+        "code":  "XT-24",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-24.png"
+    },
+    {
+        "code":  "XT-25",
+        "name":  "Ghi",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-25.png"
+    },
+    {
+        "code":  "XT-101",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-101.png"
+    },
+    {
+        "code":  "XT-102",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-102.png"
+    },
+    {
+        "code":  "XT-103",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-103.png"
+    },
+    {
+        "code":  "XT-104",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-104.png"
+    },
+    {
+        "code":  "XT-105",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-105.png"
+    },
+    {
+        "code":  "XT-106",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-106.png"
+    },
+    {
+        "code":  "XT-107",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-107.png"
+    },
+    {
+        "code":  "XT-108",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-108.png"
+    },
+    {
+        "code":  "XT-109",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-109.png"
+    },
+    {
+        "code":  "XT-110",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-110.png"
+    },
+    {
+        "code":  "XT-111",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-111.png"
+    },
+    {
+        "code":  "XT-113",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-113.png"
+    },
+    {
+        "code":  "XT-114",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-114.png"
+    },
+    {
+        "code":  "XT-115",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-115.png"
+    },
+    {
+        "code":  "XT-116",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-116.png"
+    },
+    {
+        "code":  "XT-117",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-117.png"
+    },
+    {
+        "code":  "XT-119",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-119.png"
+    },
+    {
+        "code":  "XT-120",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-120.png"
+    },
+    {
+        "code":  "XT-121",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-121.png"
+    },
+    {
+        "code":  "XT-122",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-122.png"
+    },
+    {
+        "code":  "XT-123",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-123.png"
+    },
+    {
+        "code":  "XT-124",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-124.png"
+    },
+    {
+        "code":  "XT-125",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-125.png"
+    },
+    {
+        "code":  "XT-126",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-126.png"
+    },
+    {
+        "code":  "XT-127",
+        "name":  "Be",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-127.png"
+    },
+    {
+        "code":  "XT-201",
+        "name":  "Cam",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-201.png"
+    },
+    {
+        "code":  "XT-202",
+        "name":  "Cam",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-202.png"
+    },
+    {
+        "code":  "XT-203",
+        "name":  "Cam",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-203.png"
+    },
+    {
+        "code":  "XT-204",
+        "name":  "Cam",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-204.png"
+    },
+    {
+        "code":  "XT-205",
+        "name":  "Cam",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-205.png"
+    },
+    {
+        "code":  "XT-206",
+        "name":  "Cam",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-206.png"
+    },
+    {
+        "code":  "XT-207",
+        "name":  "Cam hồng",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-207.png"
+    },
+    {
+        "code":  "XT-209",
+        "name":  "Cam",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-209.png"
+    },
+    {
+        "code":  "XT-251",
+        "name":  "Hồng",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-251.png"
+    },
+    {
+        "code":  "XT-252",
+        "name":  "Hồng",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-252.png"
+    },
+    {
+        "code":  "XT-253",
+        "name":  "Hồng",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-253.png"
+    },
+    {
+        "code":  "XT-254",
+        "name":  "Hồng",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-254.png"
+    },
+    {
+        "code":  "XT-301",
+        "name":  "Nâu",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-301.jpg"
+    },
+    {
+        "code":  "XT-302",
+        "name":  "Nâu",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-302.jpg"
+    },
+    {
+        "code":  "XT-303",
+        "name":  "Nâu",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-303.jpg"
+    },
+    {
+        "code":  "XT-304",
+        "name":  "Nâu",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-304.jpg"
+    },
+    {
+        "code":  "XT-305",
+        "name":  "Nâu",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-305.jpg"
+    },
+    {
+        "code":  "XT-306",
+        "name":  "Nâu",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-306.jpg"
+    },
+    {
+        "code":  "XT-401",
+        "name":  "Tím",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-401.png"
+    },
+    {
+        "code":  "XT-402",
+        "name":  "Tím",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-402.png"
+    },
+    {
+        "code":  "XT-403",
+        "name":  "Tím",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-403.png"
+    },
+    {
+        "code":  "XT-404",
+        "name":  "Tím",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-404.png"
+    },
+    {
+        "code":  "XT-405",
+        "name":  "Tím",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-405.png"
+    },
+    {
+        "code":  "XT-450",
+        "name":  "Đỏ",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-450.jpg"
+    },
+    {
+        "code":  "XT-451",
+        "name":  "Đỏ",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-451.jpg"
+    },
+    {
+        "code":  "XT-452",
+        "name":  "Đỏ",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-452.jpg"
+    },
+    {
+        "code":  "XT-453",
+        "name":  "Đỏ",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-453.png"
+    },
+    {
+        "code":  "XT-501",
+        "name":  "Xanh",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-501.jpg"
+    },
+    {
+        "code":  "XT-502",
+        "name":  "Xanh",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-502.jpg"
+    },
+    {
+        "code":  "XT-504",
+        "name":  "Xanh",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-504.jpg"
+    },
+    {
+        "code":  "XT-505",
+        "name":  "Xanh",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-505.jpg"
+    },
+    {
+        "code":  "XT-506",
+        "name":  "Xanh",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-506.jpg"
+    },
+    {
+        "code":  "XT-507",
+        "name":  "Xanh",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-507.jpg"
+    },
+    {
+        "code":  "XT-550",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-550.jpg"
+    },
+    {
+        "code":  "XT-551",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-551.jpg"
+    },
+    {
+        "code":  "XT-552",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-552.jpg"
+    },
+    {
+        "code":  "XT-553",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-553.jpg"
+    },
+    {
+        "code":  "XT-554",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-554.jpg"
+    },
+    {
+        "code":  "XT-555",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-555.jpg"
+    },
+    {
+        "code":  "XT-556",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-556.jpg"
+    },
+    {
+        "code":  "XT-557",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-557.jpg"
+    },
+    {
+        "code":  "XT-559",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-559.jpg"
+    },
+    {
+        "code":  "XT-560",
+        "name":  "Xanh nước",
+        "category":  "Sơn hiệu ứng bê tông",
+        "categoryId":  "be-tong",
+        "image":  "/paints/xt-560.jpg"
+    },
+    {
+        "code":  "XV-01",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-01.jpg"
+    },
+    {
+        "code":  "XV-02",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-02.jpg"
+    },
+    {
+        "code":  "XV-03",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-03.jpg"
+    },
+    {
+        "code":  "XV-04",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-04.jpg"
+    },
+    {
+        "code":  "XV-05",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-05.jpg"
+    },
+    {
+        "code":  "XV-06",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-06.jpg"
+    },
+    {
+        "code":  "XV-07",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-07.jpg"
+    },
+    {
+        "code":  "XV-08",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-08.jpg"
+    },
+    {
+        "code":  "XV-09",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-09.jpg"
+    },
+    {
+        "code":  "XV-10",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-10.jpg"
+    },
+    {
+        "code":  "XV-11",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-11.jpg"
+    },
+    {
+        "code":  "XV-12",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-12.jpg"
+    },
+    {
+        "code":  "XV-13",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-13.jpg"
+    },
+    {
+        "code":  "XV-14",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-14.jpg"
+    },
+    {
+        "code":  "XV-15",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-15.jpg"
+    },
+    {
+        "code":  "XV-16",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-16.jpg"
+    },
+    {
+        "code":  "XV-17",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-17.jpg"
+    },
+    {
+        "code":  "XV-18",
+        "name":  "Be",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-18.jpg"
+    },
+    {
+        "code":  "XV-100",
+        "name":  "Cam",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-100.jpg"
+    },
+    {
+        "code":  "XV-101",
+        "name":  "Cam",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-101.jpg"
+    },
+    {
+        "code":  "XV-102",
+        "name":  "Cam",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-102.jpg"
+    },
+    {
+        "code":  "XV-103",
+        "name":  "Cam",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-103.jpg"
+    },
+    {
+        "code":  "XV-104",
+        "name":  "Cam",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-104.jpg"
+    },
+    {
+        "code":  "XV-105",
+        "name":  "Cam",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-105.jpg"
+    },
+    {
+        "code":  "XV-106",
+        "name":  "Cam",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-106.jpg"
+    },
+    {
+        "code":  "XV-120",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-120.jpg"
+    },
+    {
+        "code":  "XV-121",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-121.jpg"
+    },
+    {
+        "code":  "XV-122",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-122.jpg"
+    },
+    {
+        "code":  "XV-123",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-123.jpg"
+    },
+    {
+        "code":  "XV-124",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-124.jpg"
+    },
+    {
+        "code":  "XV-125",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-125.jpg"
+    },
+    {
+        "code":  "XV-126",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-126.jpg"
+    },
+    {
+        "code":  "XV-127",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-127.jpg"
+    },
+    {
+        "code":  "XV-128",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-128.jpg"
+    },
+    {
+        "code":  "XV-129",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-129.jpg"
+    },
+    {
+        "code":  "XV-130",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-130.jpg"
+    },
+    {
+        "code":  "XV-131",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-131.jpg"
+    },
+    {
+        "code":  "XV-132",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-132.jpg"
+    },
+    {
+        "code":  "XV-133",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-133.jpg"
+    },
+    {
+        "code":  "XV-134",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-134.jpg"
+    },
+    {
+        "code":  "XV-135",
+        "name":  "Nâu",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-135.jpg"
+    },
+    {
+        "code":  "XV-150",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-150.jpg"
+    },
+    {
+        "code":  "XV-151",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-151.jpg"
+    },
+    {
+        "code":  "XV-152",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-152.jpg"
+    },
+    {
+        "code":  "XV-153",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-153.jpg"
+    },
+    {
+        "code":  "XV-154",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-154.jpg"
+    },
+    {
+        "code":  "XV-155",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-155.jpg"
+    },
+    {
+        "code":  "XV-156",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-156.jpg"
+    },
+    {
+        "code":  "XV-157",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-157.jpg"
+    },
+    {
+        "code":  "XV-158",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-158.jpg"
+    },
+    {
+        "code":  "XV-159",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-159.jpg"
+    },
+    {
+        "code":  "XV-160",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-160.jpg"
+    },
+    {
+        "code":  "XV-161",
+        "name":  "Xanh",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-161.jpg"
+    },
+    {
+        "code":  "XV-180",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-180.jpg"
+    },
+    {
+        "code":  "XV-181",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-181.jpg"
+    },
+    {
+        "code":  "XV-182",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-182.jpg"
+    },
+    {
+        "code":  "XV-183",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-183.jpg"
+    },
+    {
+        "code":  "XV-184",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-184.jpg"
+    },
+    {
+        "code":  "XV-185",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-185.jpg"
+    },
+    {
+        "code":  "XV-186",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-186.jpg"
+    },
+    {
+        "code":  "XV-187",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-187.jpg"
+    },
+    {
+        "code":  "XV-188",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-188.jpg"
+    },
+    {
+        "code":  "XV-189",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-189.jpg"
+    },
+    {
+        "code":  "XV-190",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-190.jpg"
+    },
+    {
+        "code":  "XV-191",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-191.jpg"
+    },
+    {
+        "code":  "XV-192",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-192.jpg"
+    },
+    {
+        "code":  "XV-193",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-193.jpg"
+    },
+    {
+        "code":  "XV-194",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-194.jpg"
+    },
+    {
+        "code":  "XV-195",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-195.jpg"
+    },
+    {
+        "code":  "XV-196",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-196.jpg"
+    },
+    {
+        "code":  "XV-197",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-197.jpg"
+    },
+    {
+        "code":  "XV-198",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-198.jpg"
+    },
+    {
+        "code":  "XV-199",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-199.jpg"
+    },
+    {
+        "code":  "XV-200",
+        "name":  "Xanh nước",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-200.jpg"
+    },
+    {
+        "code":  "XV-230",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-230.jpg"
+    },
+    {
+        "code":  "XV-231",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-231.jpg"
+    },
+    {
+        "code":  "XV-232",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-232.jpg"
+    },
+    {
+        "code":  "XV-233",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-233.jpg"
+    },
+    {
+        "code":  "XV-234",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-234.jpg"
+    },
+    {
+        "code":  "XV-235",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-235.jpg"
+    },
+    {
+        "code":  "XV-236",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-236.jpg"
+    },
+    {
+        "code":  "XV-237",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-237.jpg"
+    },
+    {
+        "code":  "XV-238",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-238.jpg"
+    },
+    {
+        "code":  "XV-239",
+        "name":  "Hồng",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-239.jpg"
+    },
+    {
+        "code":  "XV-240",
+        "name":  "Đỏ",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-240.jpg"
+    },
+    {
+        "code":  "XV-241",
+        "name":  "Đỏ",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-241.jpg"
+    },
+    {
+        "code":  "XV-242",
+        "name":  "Đỏ",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-242.jpg"
+    },
+    {
+        "code":  "XV-243",
+        "name":  "Đỏ",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-243.jpg"
+    },
+    {
+        "code":  "XV-244",
+        "name":  "Đỏ",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-244.jpg"
+    },
+    {
+        "code":  "XV-245",
+        "name":  "Đỏ",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-245.jpg"
+    },
+    {
+        "code":  "XV-250",
+        "name":  "Tím",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-250.jpg"
+    },
+    {
+        "code":  "XV-251",
+        "name":  "Tím",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-251.jpg"
+    },
+    {
+        "code":  "XV-252",
+        "name":  "Tím",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-252.jpg"
+    },
+    {
+        "code":  "XV-253",
+        "name":  "Tím",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-253.jpg"
+    },
+    {
+        "code":  "XV-254",
+        "name":  "Tím",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-254.jpg"
+    },
+    {
+        "code":  "XV-255",
+        "name":  "Tím",
+        "category":  "Sơn vôi Limewash",
+        "categoryId":  "son-voi",
+        "image":  "/paints/xv-255.jpg"
+    },
+    {
+        "code":  "XM-01",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-01.png"
+    },
+    {
+        "code":  "XM-02",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-02.png"
+    },
+    {
+        "code":  "XM-03",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-03.png"
+    },
+    {
+        "code":  "XM-04",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-04.png"
+    },
+    {
+        "code":  "XM-05",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-05.png"
+    },
+    {
+        "code":  "XM-06",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-06.png"
+    },
+    {
+        "code":  "XM-07",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-07.png"
+    },
+    {
+        "code":  "XM-08",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-08.png"
+    },
+    {
+        "code":  "XM-09",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-09.png"
+    },
+    {
+        "code":  "XM-10",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-10.png"
+    },
+    {
+        "code":  "XM-11",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-11.png"
+    },
+    {
+        "code":  "XM-12",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-12.png"
+    },
+    {
+        "code":  "XM-13",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-13.png"
+    },
+    {
+        "code":  "XM-14",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-14.png"
+    },
+    {
+        "code":  "XM-15",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-15.png"
+    },
+    {
+        "code":  "XM-16",
+        "name":  "Gỉ sét",
+        "category":  "Sơn hiệu ứng gỉ sét",
+        "categoryId":  "gi-set",
+        "image":  "/paints/xm-16.png"
+    },
+    {
+        "code":  "MP-01",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-01.webp"
+    },
+    {
+        "code":  "MP-02",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-02.webp"
+    },
+    {
+        "code":  "MP-03",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-03.webp"
+    },
+    {
+        "code":  "MP-04",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-04.webp"
+    },
+    {
+        "code":  "MP-05",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-05.webp"
+    },
+    {
+        "code":  "MP-06",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-06.webp"
+    },
+    {
+        "code":  "MP-07",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-07.webp"
+    },
+    {
+        "code":  "MP-08",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-08.webp"
+    },
+    {
+        "code":  "MP-09",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-09.webp"
+    },
+    {
+        "code":  "MP-10",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-10.webp"
+    },
+    {
+        "code":  "MP-11",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-11.webp"
+    },
+    {
+        "code":  "MP-12",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-12.webp"
+    },
+    {
+        "code":  "MP-13",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-13.webp"
+    },
+    {
+        "code":  "MP-14",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-14.webp"
+    },
+    {
+        "code":  "MP-15",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-15.webp"
+    },
+    {
+        "code":  "MP-16",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-16.webp"
+    },
+    {
+        "code":  "MP-17",
+        "name":  "Ngọc trai",
+        "category":  "Sơn hiệu ứng ngọc trai",
+        "categoryId":  "ngoc-trai",
+        "image":  "/paints/mp-17.webp"
+    }
+]

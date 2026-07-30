@@ -1,0 +1,23 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'oaidalleapiprodscus.blob.core.windows.net',
+      },
+    ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
+  },
+};
+
+export default nextConfig;
