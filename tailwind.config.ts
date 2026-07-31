@@ -17,9 +17,9 @@ const config: Config = {
         ochre: '#B8862B',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Fraunces', 'serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
+        sans: ['Kanit', 'sans-serif'],
+        serif: ['Kanit', 'sans-serif'],
+        mono: ['Kanit', 'sans-serif'],
       },
     },
   },

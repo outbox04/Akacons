@@ -17,10 +17,33 @@
   --ochre: #B8862B;
 }
 
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--paper);
   color: #242A28;
   font-family: 'Kanit', sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 @keyframes fadeIn {

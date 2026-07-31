@@ -9,7 +9,7 @@ import './brand-home.css';
 const categories = [['all','Tất cả',paints.length],['be-tong','Hiệu ứng bê tông',89],['son-voi','Sơn vôi Limewash',96],['gi-set','Hiệu ứng gỉ sét',16],['ngoc-trai','Hiệu ứng ngọc trai',17]] as const;
 const featured = [['XT-01','Bê tông nguyên bản','Mộc mạc · Tối giản'],['XV-180','Limewash xanh cổ','Tĩnh tại · Thủ công'],['XM-03','Gỉ sét oxy hóa','Cá tính · Công nghiệp'],['MP-06','Ngọc trai ánh kim','Tinh tế · Sang trọng']];
 
-export default function BrandHome() {
+export default function BrandHome({ initialSection }: { initialSection?: string }) {
  const [category,setCategory]=useState('all'),[query,setQuery]=useState(''),[visible,setVisible]=useState(12),[selected,setSelected]=useState<(typeof paints)[number]|null>(null),[menu,setMenu]=useState(false);
  const [scrollProgress,setScrollProgress]=useState(0);
  const filtered=useMemo(()=>{const q=query.trim().toLocaleLowerCase('vi');return paints.filter(p=>(category==='all'||p.categoryId===category)&&(!q||p.code.toLowerCase().includes(q)||p.name.toLocaleLowerCase('vi').includes(q)))},[category,query]);
@@ -23,9 +23,14 @@ export default function BrandHome() {
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});
   return()=>{observer.disconnect();window.removeEventListener('scroll',onScroll)};
  },[]);
- return <div className="aka-site">
+ useEffect(()=>{
+  if (!initialSection) return;
+  const frame=requestAnimationFrame(()=>document.getElementById(initialSection)?.scrollIntoView({block:'start'}));
+  return()=>cancelAnimationFrame(frame);
+ },[initialSection]);
+ return <div className={`aka-site aka-page-${initialSection ?? 'home'}`}>
   <div className="aka-scroll-progress" style={{width:`${scrollProgress}%`}}/>
-  <header className="aka-header"><a className="aka-brand" href="#"><Logo/></a><nav className={menu?'aka-nav open':'aka-nav'}>{[['about','Về AKACONS'],['collections','Bộ sưu tập'],['catalog','Mã sơn'],['tools','Công cụ AI']].map(([id,t])=><button key={id} onClick={()=>go(id)}>{t}</button>)}</nav><button className="aka-header-cta" onClick={()=>go('contact')}>Nhận tư vấn <ArrowRight size={17}/></button><button className="aka-menu" onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>
+  <header className="aka-header"><Link className="aka-brand" href="/"><Logo/></Link><nav className={menu?'aka-nav open':'aka-nav'}>{[['/gioi-thieu','Về AKACONS'],['/bo-suu-tap','Bộ sưu tập'],['/ma-son','Mã sơn'],['/cong-cu','Công cụ AI']].map(([href,t])=><Link key={href} href={href} onClick={()=>setMenu(false)}>{t}</Link>)}</nav><Link className="aka-header-cta" href="/lien-he">Nhận tư vấn <ArrowRight size={17}/></Link><button className="aka-menu" aria-label="Mở menu" onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>
   <section className="aka-hero" id="about"><div className="aka-hero-copy"><div className="aka-eyebrow"><span/> NGHỆ THUẬT TRÊN BỀ MẶT</div><h1>Không gian có<br/>một <em>chất riêng.</em></h1><p>AKACONS kiến tạo những bề mặt giàu cảm xúc bằng sơn hiệu ứng thủ công — nơi màu sắc, vật liệu và ánh sáng cùng kể câu chuyện của không gian.</p><div className="aka-actions"><button className="aka-primary" onClick={()=>go('catalog')}>Khám phá bảng màu <ArrowRight size={18}/></button><button className="aka-link" onClick={()=>go('process')}>Quy trình của chúng tôi <span>↘</span></button></div><div className="aka-proof"><div><strong>218+</strong><span>Mã màu độc bản</span></div><div><strong>04</strong><span>Dòng hiệu ứng</span></div><div><strong>100%</strong><span>Hoàn thiện thủ công</span></div></div></div><div className="aka-hero-visual"><Image src="/paints/xt-301.jpg" alt="Bề mặt sơn hiệu ứng AKACONS" fill priority sizes="(max-width:900px) 100vw,48vw"/><div className="aka-material"><span><Image src="/paints/xt-301.jpg" alt="" fill sizes="70px"/></span><div><small>MẪU ĐƯỢC YÊU THÍCH</small><strong>XT-301 · Nâu</strong><p>Hiệu ứng bê tông</p></div></div><b>Bề mặt thật · Sắc độ thật · Cảm xúc thật</b></div></section>
   <section className="aka-manifesto"><p>Không chỉ là màu sơn.</p><h2>Đó là dấu ấn của <em>vật liệu</em><br/>trong từng không gian sống.</h2></section>
   <section className="aka-section" id="collections"><Heading no="01" eyebrow="BỘ SƯU TẬP TIÊU BIỂU" title={<>Chạm vào từng<br/><em>sắc độ.</em></>} text="Mỗi bề mặt là một trải nghiệm thị giác khác biệt, được tạo nên từ kỹ thuật thủ công và sự thấu hiểu vật liệu."/><div className="aka-featured">{featured.map(([code,label,note],i)=>{const p=paints.find(x=>x.code===code)!;return <button className={`aka-feature f${i+1}`} key={code} onClick={()=>setSelected(p)}><span><Image src={p.image} alt={`${p.category} ${p.code}`} fill sizes="(max-width:700px) 100vw,30vw"/></span><i>0{i+1}</i><div><small>{note}</small><strong>{label}</strong><b>{code} <ArrowRight size={16}/></b></div></button>})}</div></section>

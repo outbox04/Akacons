@@ -134,4 +134,6 @@ function DashboardPage() {
   );
 }
 
-export default BrandHome;
+export default function HomePage() {
+  return <BrandHome />;
+}
