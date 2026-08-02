@@ -1495,3 +1495,226 @@
     min-height: 430px;
   }
 }
+
+/* Final homepage hierarchy, synchronized sample card and expanded footer */
+.aka-material-stack {
+  position: absolute;
+  z-index: 3;
+  bottom: 42px;
+  left: -48px;
+  width: 330px;
+  height: 116px;
+}
+.aka-material-stack .aka-material {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  gap: 16px;
+  opacity: 0;
+  animation: akaMaterialCycle 16s infinite;
+}
+.aka-material-stack .aka-material:nth-child(2) {
+  animation-delay: 4s;
+}
+.aka-material-stack .aka-material:nth-child(3) {
+  animation-delay: 8s;
+}
+.aka-material-stack .aka-material:nth-child(4) {
+  animation-delay: 12s;
+}
+.aka-material-stack .aka-material > span {
+  width: 86px;
+  height: 86px;
+}
+.aka-material-stack .aka-material small {
+  font-size: 9px;
+  white-space: nowrap;
+}
+.aka-material-stack .aka-material strong {
+  max-width: 195px;
+  overflow: hidden;
+  font-size: 18px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aka-material-stack .aka-material p {
+  font-size: 10px;
+}
+@keyframes akaMaterialCycle {
+  0%,
+  24% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  30%,
+  94% {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  95%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.aka-process-title > span {
+  color: #079391;
+}
+.aka-process-title h2,
+.aka-catalog .aka-heading h2,
+.aka-projects .aka-heading h2 {
+  white-space: nowrap;
+}
+.aka-process-title h2 {
+  font-size: clamp(40px, 4.2vw, 64px);
+}
+.aka-catalog .aka-heading h2 {
+  font-size: clamp(34px, 3.6vw, 54px);
+}
+.aka-projects .aka-heading h2 {
+  font-size: clamp(38px, 4vw, 62px);
+}
+.aka-process-list p,
+.aka-process-title > p,
+.aka-catalog .aka-heading > p {
+  font-size: 10px;
+}
+.aka-footer-new {
+  padding: 72px 7vw 24px;
+  grid-template-columns: 1.35fr 0.8fr 0.7fr 1.15fr;
+  gap: clamp(36px, 5vw, 84px);
+}
+.aka-footer-new .aka-footer-contact h3 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.aka-footer-new .aka-footer-contact > p {
+  max-width: 390px;
+  margin: 0 0 28px;
+  color: #b9c6d3;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.aka-footer-new .aka-footer-contact address,
+.aka-footer-new .aka-footer-contact > a {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 0 0 20px;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 1.55;
+}
+.aka-footer-new .aka-footer-contact svg {
+  width: 20px;
+  flex: none;
+  color: #26c9c3;
+}
+.aka-footer-new h4 {
+  margin-bottom: 25px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+.aka-footer-new > section {
+  gap: 17px;
+}
+.aka-footer-new > section a,
+.aka-footer-new > section button,
+.aka-footer-new > section span {
+  color: #eef3f7;
+  font-size: 13px;
+}
+.aka-newsletter form {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+.aka-newsletter input {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid #b8c8d8;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+}
+.aka-newsletter form button {
+  width: 100%;
+  padding: 14px;
+  background: #079391;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.aka-socials {
+  display: flex;
+  gap: 13px;
+  margin-top: 10px;
+}
+.aka-socials a {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background: #079391;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+}
+.aka-footer-new > aside {
+  justify-content: center;
+  font-size: 11px;
+}
+@media (max-width: 1050px) {
+  .aka-footer-new {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+  .aka-footer-new .aka-newsletter {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 900px) {
+  .aka-material-stack {
+    left: 6vw;
+  }
+  .aka-process-title h2,
+  .aka-catalog .aka-heading h2,
+  .aka-projects .aka-heading h2 {
+    white-space: normal;
+  }
+}
+@media (max-width: 650px) {
+  .aka-material-stack {
+    width: 290px;
+    height: 104px;
+    bottom: 22px;
+  }
+  .aka-material-stack .aka-material > span {
+    width: 74px;
+    height: 74px;
+  }
+  .aka-material-stack .aka-material strong {
+    max-width: 165px;
+    font-size: 16px;
+  }
+  .aka-footer-new {
+    grid-template-columns: 1fr 1fr;
+  }
+  .aka-footer-new .aka-footer-contact,
+  .aka-footer-new .aka-newsletter {
+    grid-column: 1 / -1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aka-material-stack .aka-material {
+    animation: none;
+    opacity: 0;
+  }
+  .aka-material-stack .aka-material:first-child {
+    opacity: 1;
+  }
+}

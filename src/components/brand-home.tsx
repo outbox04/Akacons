@@ -8,6 +8,8 @@ import {
   Check,
   ChevronDown,
   ImagePlus,
+  Mail,
+  MapPin,
   Menu,
   Paintbrush,
   Phone,
@@ -197,15 +199,24 @@ export default function BrandHome({
               );
             })}
           </div>
-          <div className="aka-material">
-            <span>
-              <Image src="/paints/xt-301.jpg" alt="" fill sizes="70px" />
-            </span>
-            <div>
-              <small>MẪU ĐƯỢC YÊU THÍCH</small>
-              <strong>XT-301 · Nâu</strong>
-              <p>Hiệu ứng bê tông</p>
-            </div>
+          <div className="aka-material-stack">
+            {heroMaps.map((code) => {
+              const paint = paints.find((item) => item.code === code)!;
+              return (
+                <div className="aka-material" key={code}>
+                  <span>
+                    <Image src={paint.image} alt="" fill sizes="86px" />
+                  </span>
+                  <div>
+                    <small>MẪU ĐƯỢC YÊU THÍCH</small>
+                    <strong>
+                      {paint.code} · {paint.name}
+                    </strong>
+                    <p>{paint.category}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
           <b>Bề mặt thật · Sắc độ thật · Cảm xúc thật</b>
         </div>
@@ -217,46 +228,6 @@ export default function BrandHome({
           <br />
           cho không gian sống đẳng cấp.
         </h2>
-      </section>
-      <section className="aka-projects aka-section" id="projects">
-        <Heading
-          no="02"
-          eyebrow="CÔNG TRÌNH TIÊU BIỂU"
-          title={
-            <>
-              Dấu ấn riêng
-              <br />
-              <em>trong từng không gian.</em>
-            </>
-          }
-          text="Các hướng ứng dụng tiêu biểu của sơn hiệu ứng AKACONS trong không gian sống, nghỉ dưỡng và nội thất."
-        />
-        <div className="aka-project-grid">
-          {projects.map(([code, title, type], index) => {
-            const p = paints.find((item) => item.code === code)!;
-            return (
-              <article className={index === 0 ? "featured" : ""} key={code}>
-                <span>
-                  <Image
-                    src={p.image}
-                    alt={`${title} – ${type}`}
-                    fill
-                    sizes="(max-width:700px) 100vw,40vw"
-                  />
-                </span>
-                <div>
-                  <small>
-                    0{index + 1} · {type}
-                  </small>
-                  <h3>{title}</h3>
-                  <Link href="/lien-he">
-                    Tư vấn cho công trình <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
-        </div>
       </section>
       <section className="aka-section" id="collections">
         <Heading
@@ -469,6 +440,46 @@ export default function BrandHome({
           AKACONS khuyến nghị xem mẫu trực tiếp tại công trình.
         </p>
       </section>
+      <section className="aka-projects aka-section" id="projects">
+        <Heading
+          no="04"
+          eyebrow="CÔNG TRÌNH TIÊU BIỂU"
+          title={
+            <>
+              <span>Dấu ấn riêng</span>
+              <br />
+              <em>trong từng không gian.</em>
+            </>
+          }
+          text="Các hướng ứng dụng tiêu biểu của sơn hiệu ứng AKACONS trong không gian sống, nghỉ dưỡng và nội thất."
+        />
+        <div className="aka-project-grid">
+          {projects.map(([code, title, type], index) => {
+            const paint = paints.find((item) => item.code === code)!;
+            return (
+              <article className={index === 0 ? "featured" : ""} key={code}>
+                <span>
+                  <Image
+                    src={paint.image}
+                    alt={`${title} – ${type}`}
+                    fill
+                    sizes="(max-width:700px) 100vw,40vw"
+                  />
+                </span>
+                <div>
+                  <small>
+                    0{index + 1} · {type}
+                  </small>
+                  <h3>{title}</h3>
+                  <Link href="/lien-he">
+                    Tư vấn cho công trình <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
       <section className="aka-contact aka-section" id="contact">
         <div>
           <Sparkles size={20} /> TƯ VẤN MẪU MIỄN PHÍ
@@ -491,39 +502,66 @@ export default function BrandHome({
           </a>
         </section>
       </section>
-      <footer>
-        <div>
-          <a className="aka-brand inverse" href="#">
-            <Logo />
-          </a>
+      <footer className="aka-footer-new">
+        <div className="aka-footer-contact">
+          <h3>AKACONS Surface Studio</h3>
           <p>
-            <strong>AKACONS Surface Studio</strong>
-            <br />
-            Kiến tạo bề mặt. Khơi mở cảm xúc.
-            <br />
-            Sơn hiệu ứng thủ công cho không gian Việt.
-            <br />
-            <br />
-            Tầng 2, BT4, Số 1 bán đảo Linh Đàm,
-            <br />
-            Hoàng Liệt, Hoàng Mai, Hà Nội
+            Tư vấn và thi công sơn hiệu ứng thủ công, kiến tạo bề mặt độc bản
+            cho mọi không gian.
           </p>
+          <address>
+            <MapPin />
+            <span>
+              Tầng 2, BT4, Số 1 bán đảo Linh Đàm,
+              <br />
+              Hoàng Liệt, Hoàng Mai, Hà Nội
+            </span>
+          </address>
+          <a href="mailto:lienhe.aka@gmail.com">
+            <Mail /> lienhe.aka@gmail.com
+          </a>
+          <a href="tel:0945555017">
+            <Phone /> 0945 555 017
+          </a>
         </div>
         <section>
-          <h4>Khám phá</h4>
-          <button onClick={() => go("collections")}>Bộ sưu tập</button>
-          <button onClick={() => go("catalog")}>Thư viện mã sơn</button>
-          <button onClick={() => go("process")}>Quy trình thi công</button>
+          <h4>Thương hiệu</h4>
+          <Link href="/gioi-thieu">Về chúng tôi</Link>
+          <button onClick={() => go("collections")}>Lĩnh vực hoạt động</button>
+          <button onClick={() => go("projects")}>Dự án</button>
+          <span>Tin tức</span>
+          <span>Tuyển dụng</span>
         </section>
         <section>
           <h4>Liên hệ</h4>
-          <a href="mailto:lienhe.aka@gmail.com">lienhe.aka@gmail.com</a>
-          <a href="tel:0945555017">0945 555 017</a>
-          <span>Hà Nội, Việt Nam</span>
+          <span>FAQ – Hỏi đáp</span>
+          <button onClick={() => go("collections")}>Lĩnh vực hoạt động</button>
+          <Link href="/lien-he">Liên hệ</Link>
         </section>
-        <aside>
-          © 2026 AKACONS Surface Studio.<span>Made for spaces with soul.</span>
-        </aside>
+        <section className="aka-newsletter">
+          <h4>Đăng ký nhận tin</h4>
+          <form onSubmit={(event) => event.preventDefault()}>
+            <input
+              type="email"
+              aria-label="Địa chỉ email"
+              placeholder="Địa chỉ email"
+              required
+            />
+            <button type="submit">Gửi</button>
+          </form>
+          <div className="aka-socials">
+            <a href="#" aria-label="Facebook">
+              f
+            </a>
+            <a href="#" aria-label="YouTube">
+              ▶
+            </a>
+            <a href="#" aria-label="Zalo">
+              Zalo
+            </a>
+          </div>
+        </section>
+        <aside>© All Right Reserved by AKACONS</aside>
       </footer>
       {selected && (
         <div className="aka-backdrop" onClick={() => setSelected(null)}>

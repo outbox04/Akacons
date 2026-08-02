@@ -27,3 +27,11 @@ Cập nhật: 02/08/2026
 
 - Ảnh công trình thực tế, tên công trình và loại hiệu ứng đã thi công để thay các ảnh minh họa hiện tại.
 - Tên pháp lý đầy đủ của công ty để thay tên hiển thị “AKACONS Surface Studio” nếu cần xuất hiện đúng theo đăng ký doanh nghiệp.
+
+## Cập nhật bố cục lần 2
+
+- Ô “Mẫu được yêu thích” đã đổi đồng bộ với ảnh map màu, tăng cỡ chữ và giữ tên mẫu trên một dòng.
+- Thứ tự section đã chuẩn hóa: Bộ sưu tập 01, Quy trình 02, Thư viện vật liệu 03, Công trình tiêu biểu 04.
+- Công trình tiêu biểu đã chuyển xuống sau Thư viện vật liệu; tiêu đề được khóa thành hai dòng trên desktop.
+- Màu số 02 của Quy trình đã đổi về teal thương hiệu; tiêu đề quy trình và thư viện đều được khóa đúng hai dòng, nội dung phụ giữ cỡ nhỏ.
+- Footer được dựng lại theo bố cục bốn cột của ảnh tham chiếu, giữ tên “AKACONS Surface Studio” và dùng thông tin liên hệ đã cung cấp.
