@@ -2,28 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face { font-family: 'Kanit'; src: url('/fonts/Kanit-Light.ttf') format('truetype'); font-weight: 300; font-display: swap; }
-@font-face { font-family: 'Kanit'; src: url('/fonts/Kanit-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
-@font-face { font-family: 'Kanit'; src: url('/fonts/Kanit-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
-@font-face { font-family: 'Kanit'; src: url('/fonts/Kanit-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
-@font-face { font-family: 'Kanit'; src: url('/fonts/Kanit-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
 
 :root {
-  --ink: #1C2321;
-  --paper: #FAF7F2;
-  --copper: #A6592C;
-  --sage: #5B6B4F;
-  --slate: #46586B;
-  --ochre: #B8862B;
+  --ink: #1c2321;
+  --paper: #faf7f2;
+  --copper: #a6592c;
+  --sage: #5b6b4f;
+  --slate: #46586b;
+  --ochre: #b8862b;
 }
 
 html {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
 }
 
 html,
@@ -35,8 +64,8 @@ body {
 
 body {
   background-color: var(--paper);
-  color: #242A28;
-  font-family: 'Kanit', sans-serif;
+  color: #242a28;
+  font-family: "Kanit", sans-serif;
 }
 
 button,
@@ -47,13 +76,23 @@ textarea {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleUp {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-fadeIn {
