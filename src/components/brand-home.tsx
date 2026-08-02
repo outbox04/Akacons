@@ -39,6 +39,14 @@ const projects = [
   ["MP-06", "Điểm nhấn nội thất", "Hiệu ứng ngọc trai"],
 ] as const;
 const heroMaps = ["XT-301", "XV-180", "XM-03", "MP-06"] as const;
+const chapters = [
+  ["about", "Mở đầu"],
+  ["collections", "Bộ sưu tập"],
+  ["process", "Quy trình"],
+  ["catalog", "Thư viện"],
+  ["projects", "Công trình"],
+  ["contact", "Liên hệ"],
+] as const;
 
 export default function BrandHome({
   initialSection,
@@ -51,6 +59,7 @@ export default function BrandHome({
     [selected, setSelected] = useState<(typeof paints)[number] | null>(null),
     [menu, setMenu] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeChapter, setActiveChapter] = useState("about");
   const filtered = useMemo(() => {
     const q = query.trim().toLocaleLowerCase("vi");
     return paints.filter(
@@ -103,6 +112,23 @@ export default function BrandHome({
     };
   }, []);
   useEffect(() => {
+    if (initialSection) return;
+    const sections = chapters
+      .map(([id]) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+    const chapterObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveChapter(visible.target.id);
+      },
+      { threshold: [0.12, 0.3, 0.55], rootMargin: "-22% 0px -48% 0px" },
+    );
+    sections.forEach((section) => chapterObserver.observe(section));
+    return () => chapterObserver.disconnect();
+  }, [initialSection]);
+  useEffect(() => {
     if (!initialSection) return;
     const frame = requestAnimationFrame(() =>
       document
@@ -146,6 +172,33 @@ export default function BrandHome({
           </button>
         </div>
       </header>
+      {!initialSection && (
+        <aside className="aka-story-rail" aria-label="Các chương nội dung">
+          <span className="aka-story-count">
+            {String(
+              chapters.findIndex(([id]) => id === activeChapter) + 1,
+            ).padStart(2, "0")}
+            <i>/</i>
+            {String(chapters.length).padStart(2, "0")}
+          </span>
+          <div>
+            {chapters.map(([id, label], index) => (
+              <button
+                key={id}
+                className={activeChapter === id ? "active" : ""}
+                aria-label={`Đi đến ${label}`}
+                aria-current={activeChapter === id ? "step" : undefined}
+                onClick={() => go(id)}
+              >
+                <i />
+                <span>
+                  {String(index + 1).padStart(2, "0")} · {label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </aside>
+      )}
       <section className="aka-hero" id="about">
         <div className="aka-hero-copy">
           <div className="aka-eyebrow">

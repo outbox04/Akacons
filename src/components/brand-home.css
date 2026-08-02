@@ -1731,3 +1731,180 @@
   width: 0;
   height: 0;
 }
+
+/* Scrollytelling chapters */
+.aka-story-rail {
+  position: fixed;
+  z-index: 24;
+  top: 50%;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+  transform: translateY(-50%);
+  color: var(--navy);
+}
+.aka-story-count {
+  padding-right: 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.aka-story-count i {
+  margin: 0 4px;
+  color: #91a3a1;
+  font-style: normal;
+}
+.aka-story-rail > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.aka-story-rail button {
+  position: relative;
+  display: flex;
+  min-height: 25px;
+  padding: 4px 2px 4px 12px;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.aka-story-rail button > i {
+  width: 8px;
+  height: 8px;
+  border: 1px solid #78918f;
+  border-radius: 50%;
+  background: var(--paper);
+  transition: 0.3s ease;
+}
+.aka-story-rail button > span {
+  padding: 5px 9px;
+  background: #f5f8f7e8;
+  box-shadow: 0 5px 18px #17335314;
+  color: #516563;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: 0.25s ease;
+  white-space: nowrap;
+}
+.aka-story-rail button:hover > span,
+.aka-story-rail button:focus-visible > span,
+.aka-story-rail button.active > span {
+  opacity: 1;
+  transform: translateX(0);
+}
+.aka-story-rail button.active > i {
+  border-color: #079391;
+  background: #079391;
+  box-shadow: 0 0 0 5px #07939120;
+  transform: scale(1.15);
+}
+.aka-page-home .aka-manifesto {
+  min-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.aka-page-home #collections,
+.aka-page-home #catalog,
+.aka-page-home #projects {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(48px, 7vw, 120px);
+  align-items: start;
+}
+.aka-page-home #collections > .aka-heading,
+.aka-page-home #catalog > .aka-heading,
+.aka-page-home #projects > .aka-heading {
+  position: sticky;
+  top: 135px;
+  display: block;
+  margin: 0;
+}
+.aka-page-home #collections > .aka-heading h2,
+.aka-page-home #catalog > .aka-heading h2,
+.aka-page-home #projects > .aka-heading h2 {
+  margin: 30px 0 24px;
+  white-space: normal;
+}
+.aka-page-home #collections > .aka-heading > p,
+.aka-page-home #catalog > .aka-heading > p,
+.aka-page-home #projects > .aka-heading > p {
+  max-width: 390px;
+}
+.aka-page-home #collections > .aka-featured,
+.aka-page-home #projects > .aka-project-grid,
+.aka-page-home #catalog > :not(.aka-heading) {
+  grid-column: 2;
+}
+.aka-page-home #collections > .aka-featured,
+.aka-page-home #projects > .aka-project-grid {
+  grid-row: 1 / span 5;
+}
+.aka-page-home #catalog > .aka-tools {
+  grid-row: 1;
+}
+.aka-page-home #catalog > .aka-paints {
+  grid-row: 2;
+}
+.aka-page-home #catalog > .aka-more,
+.aka-page-home #catalog > .aka-empty {
+  grid-row: 3;
+}
+.aka-page-home #catalog > .aka-note {
+  grid-row: 4;
+}
+.aka-page-home .aka-process {
+  min-height: 100vh;
+}
+.aka-page-home .aka-process-title {
+  position: sticky;
+  top: 145px;
+  align-self: start;
+}
+.aka-page-home .aka-contact {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 1100px) {
+  .aka-story-rail {
+    right: 12px;
+  }
+  .aka-story-rail button > span {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .aka-story-rail {
+    display: none;
+  }
+  .aka-page-home #collections,
+  .aka-page-home #catalog,
+  .aka-page-home #projects {
+    display: block;
+  }
+  .aka-page-home #collections > .aka-heading,
+  .aka-page-home #catalog > .aka-heading,
+  .aka-page-home #projects > .aka-heading,
+  .aka-page-home .aka-process-title {
+    position: static;
+    margin-bottom: 50px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aka-story-rail button,
+  .aka-story-rail button > i,
+  .aka-story-rail button > span {
+    transition: none;
+  }
+}
