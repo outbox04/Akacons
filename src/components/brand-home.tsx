@@ -177,6 +177,27 @@ export default function BrandHome({
           </div>
         </aside>
       )}
+      {!initialSection && (
+        <div className="aka-cinema-canvas" aria-hidden="true">
+          <div className="aka-cinema-images">
+            {heroMaps.map((code) => {
+              const paint = paints.find((item) => item.code === code)!;
+              return (
+                <Image key={code} src={paint.image} alt="" fill sizes="100vw" />
+              );
+            })}
+          </div>
+          <div className="aka-cinema-wash" />
+          <div className="aka-cinema-chapters">
+            {chapters.map(([id, label], index) => (
+              <span className="aka-cinema-chapter" data-chapter={id} key={id}>
+                <b>{String(index + 1).padStart(2, "0")}</b>
+                <small>{label}</small>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
       <section className="aka-hero" id="about">
         <div className="aka-hero-copy">
           <div className="aka-eyebrow">

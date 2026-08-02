@@ -1955,3 +1955,135 @@
     transition: none;
   }
 }
+
+/* One continuous visual canvas; semantic sections remain in the document flow. */
+.aka-cinema-canvas {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #f5f8f7;
+  opacity: 0;
+}
+.cinematic-active .aka-cinema-canvas {
+  opacity: 1;
+}
+.aka-cinema-images,
+.aka-cinema-images > img,
+.aka-cinema-wash {
+  position: absolute;
+  inset: 0;
+}
+.aka-cinema-images > img {
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.12);
+  will-change: transform, opacity;
+}
+.aka-cinema-wash {
+  background:
+    radial-gradient(
+      circle at 76% 30%,
+      transparent 0,
+      #f5f8f733 35%,
+      #f5f8f7d9 78%
+    ),
+    linear-gradient(90deg, #f5f8f7f5 0, #f5f8f7bd 48%, transparent 82%);
+}
+.aka-cinema-chapters {
+  position: absolute;
+  right: clamp(26px, 4vw, 72px);
+  bottom: clamp(28px, 5vw, 70px);
+  width: 180px;
+  height: 74px;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+.aka-cinema-chapter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 12px;
+  opacity: 0;
+}
+.aka-cinema-chapter b {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+}
+.aka-cinema-chapter small {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.cinematic-active .aka-page-home {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+.cinematic-active .aka-page-home .aka-hero,
+.cinematic-active .aka-page-home .aka-manifesto,
+.cinematic-active .aka-page-home #collections,
+.cinematic-active .aka-page-home .aka-process,
+.cinematic-active .aka-page-home #catalog,
+.cinematic-active .aka-page-home #projects,
+.cinematic-active .aka-page-home .aka-contact {
+  z-index: 1;
+  background: transparent;
+}
+.cinematic-active .aka-page-home .aka-section {
+  padding-block: clamp(76px, 8vw, 120px);
+}
+.cinematic-active .aka-page-home .aka-manifesto {
+  min-height: 72svh;
+}
+.cinematic-active .aka-page-home .aka-process {
+  min-height: 86svh;
+}
+.cinematic-active .aka-page-home .aka-contact {
+  min-height: 74svh;
+}
+.cinematic-active .aka-page-home .aka-process::before,
+.cinematic-active .aka-page-home .aka-contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: #102c4c1f;
+  pointer-events: none;
+}
+.cinematic-active .aka-page-home .aka-contact::before {
+  background: #07939117;
+}
+.cinematic-active .aka-page-home .aka-footer-new {
+  position: relative;
+  z-index: 2;
+  background: #112c4cf5;
+}
+@media (max-width: 900px) {
+  .aka-cinema-chapters {
+    display: none;
+  }
+  .aka-cinema-wash {
+    background: linear-gradient(180deg, #f5f8f7d9, #f5f8f7ad 55%, #f5f8f7e8);
+  }
+  .cinematic-active .aka-page-home .aka-manifesto,
+  .cinematic-active .aka-page-home .aka-process,
+  .cinematic-active .aka-page-home .aka-contact {
+    min-height: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aka-cinema-canvas {
+    display: none;
+  }
+  .aka-page-home .aka-process {
+    background: linear-gradient(135deg, #132d4e, #1c4262);
+  }
+  .aka-page-home .aka-contact {
+    background: linear-gradient(135deg, #079391, #087d86);
+  }
+}

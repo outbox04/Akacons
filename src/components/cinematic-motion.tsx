@@ -8,11 +8,280 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function buildHomeMaster(home: Element) {
+  const page = home as HTMLElement;
+  const maxScroll = Math.max(1, page.scrollHeight - window.innerHeight);
+  const positionOf = (selector: string) => {
+    const element = page.querySelector<HTMLElement>(selector);
+    return element
+      ? gsap.utils.clamp(0, 0.98, element.offsetTop / maxScroll)
+      : 0;
+  };
+  const positions = {
+    about: 0,
+    manifesto: positionOf(".aka-manifesto"),
+    collections: positionOf("#collections"),
+    process: positionOf("#process"),
+    catalog: positionOf("#catalog"),
+    projects: positionOf("#projects"),
+    contact: positionOf("#contact"),
+    footer: positionOf(".aka-footer-new"),
+  };
+  const master = gsap.timeline({
+    defaults: { ease: "none" },
+    scrollTrigger: {
+      trigger: page,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.85,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+    },
+  });
+  const layers = gsap.utils.toArray<HTMLElement>(".aka-cinema-images > img");
+  const chapterEls = gsap.utils.toArray<HTMLElement>(".aka-cinema-chapter");
+  gsap.set(layers, { opacity: 0, scale: 1.12 });
+  gsap.set(layers[0], { opacity: 0.2 });
+  gsap.set(chapterEls, { opacity: 0, yPercent: 70 });
+  gsap.set(chapterEls[0], { opacity: 1, yPercent: 0 });
+
+  const scenes = [
+    { key: "about", color: "#f5f8f7", layer: 0 },
+    { key: "collections", color: "#edf3f1", layer: 1 },
+    { key: "process", color: "#163756", layer: 2 },
+    { key: "catalog", color: "#f1f5f4", layer: 3 },
+    { key: "projects", color: "#e5edeb", layer: 0 },
+    { key: "contact", color: "#078d8c", layer: 3 },
+  ] as const;
+  scenes.forEach((scene, index) => {
+    const at = positions[scene.key];
+    const previousAt = index ? positions[scenes[index - 1].key] : 0;
+    const transition = Math.min(
+      0.075,
+      Math.max(0.035, (at - previousAt) * 0.22),
+    );
+    const start = Math.max(0, at - transition * 0.25);
+    master.to(
+      ".aka-cinema-canvas",
+      { backgroundColor: scene.color, duration: transition },
+      start,
+    );
+    layers.forEach((layer, layerIndex) => {
+      master.to(
+        layer,
+        {
+          opacity:
+            layerIndex === scene.layer
+              ? scene.key === "process"
+                ? 0.1
+                : 0.18
+              : 0,
+          scale: layerIndex === scene.layer ? 1.02 : 1.12,
+          duration: transition,
+        },
+        start,
+      );
+    });
+    if (index > 0) {
+      master.to(
+        chapterEls[index - 1],
+        { opacity: 0, yPercent: -70, duration: transition * 0.48 },
+        start,
+      );
+      master.fromTo(
+        chapterEls[index],
+        { opacity: 0, yPercent: 70 },
+        { opacity: 1, yPercent: 0, duration: transition * 0.62 },
+        start + transition * 0.28,
+      );
+    }
+  });
+  master.to(
+    ".aka-cinema-canvas",
+    { backgroundColor: "#112c4c", duration: 0.045 },
+    positions.footer - 0.015,
+  );
+
+  master
+    .to(
+      ".aka-hero-copy",
+      { yPercent: -12, opacity: 0.1, duration: 0.075 },
+      0.01,
+    )
+    .to(
+      ".aka-hero-visual",
+      { scale: 0.82, clipPath: "inset(8% 7% 10% 7%)", duration: 0.085 },
+      0.005,
+    )
+    .to(
+      ".aka-material-stack",
+      { y: -45, scale: 0.86, opacity: 0, duration: 0.065 },
+      0.018,
+    )
+    .fromTo(
+      ".aka-manifesto h2",
+      { opacity: 0.08, y: 75, scale: 0.93 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.07 },
+      Math.max(0.01, positions.manifesto - 0.035),
+    );
+
+  const addSceneReveal = (
+    selector: string,
+    at: number,
+    from: gsap.TweenVars,
+    duration = 0.065,
+  ) => {
+    master.fromTo(
+      selector,
+      from,
+      {
+        x: 0,
+        y: 0,
+        xPercent: 0,
+        opacity: 1,
+        scale: 1,
+        clipPath: "inset(0% 0% 0% 0%)",
+        stagger: 0.006,
+        duration,
+      },
+      Math.max(0, at - duration * 0.28),
+    );
+  };
+  addSceneReveal("#collections .aka-heading > *", positions.collections, {
+    y: 44,
+    opacity: 0,
+  });
+  addSceneReveal(
+    ".aka-feature",
+    positions.collections + 0.018,
+    { y: 80, opacity: 0, scale: 0.96, clipPath: "inset(14% 8% 14% 8%)" },
+    0.085,
+  );
+  addSceneReveal(".aka-process-title", positions.process, {
+    x: -65,
+    opacity: 0.1,
+  });
+  addSceneReveal(
+    ".aka-process-list > div",
+    positions.process + 0.012,
+    { x: 90, opacity: 0 },
+    0.08,
+  );
+  addSceneReveal("#catalog .aka-heading > *", positions.catalog, {
+    y: 44,
+    opacity: 0,
+  });
+  addSceneReveal(
+    ".aka-paint",
+    positions.catalog + 0.015,
+    { y: 65, opacity: 0, scale: 0.95 },
+    0.11,
+  );
+  addSceneReveal("#projects .aka-heading > *", positions.projects, {
+    y: 44,
+    opacity: 0,
+  });
+  addSceneReveal(
+    ".aka-project-grid article",
+    positions.projects + 0.012,
+    { xPercent: 20, opacity: 0, clipPath: "inset(0 0 0 28%)" },
+    0.08,
+  );
+  addSceneReveal(
+    ".aka-contact > *",
+    positions.contact,
+    { y: 48, opacity: 0 },
+    0.07,
+  );
+
+  document
+    .querySelectorAll<HTMLElement>(".aka-proof strong")
+    .forEach((element) => {
+      const original = element.textContent ?? "0";
+      const target = Number(original.replace(/\D/g, ""));
+      const prefix = original.startsWith("0") ? "0" : "";
+      const suffix = original.replace(/[\d]/g, "");
+      const counter = { value: 0 };
+      master.to(
+        counter,
+        {
+          value: target,
+          duration: 0.045,
+          snap: { value: 1 },
+          onUpdate: () => {
+            const value = Math.round(counter.value);
+            element.textContent = `${prefix && value < 10 ? prefix : ""}${value}${suffix}`;
+          },
+        },
+        0.005,
+      );
+    });
+}
+
+function buildHomeMobileMaster(home: Element) {
+  const page = home as HTMLElement;
+  const maxScroll = Math.max(1, page.scrollHeight - window.innerHeight);
+  const positionOf = (selector: string) => {
+    const element = page.querySelector<HTMLElement>(selector);
+    return element
+      ? gsap.utils.clamp(0, 0.98, element.offsetTop / maxScroll)
+      : 0;
+  };
+  const master = gsap.timeline({
+    defaults: { ease: "none" },
+    scrollTrigger: {
+      trigger: page,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.45,
+      invalidateOnRefresh: true,
+    },
+  });
+  const layers = gsap.utils.toArray<HTMLElement>(".aka-cinema-images > img");
+  gsap.set(layers, { opacity: 0, scale: 1.04 });
+  const scenes = [
+    [".aka-hero", "#f5f8f7", 0],
+    ["#collections", "#edf3f1", 1],
+    ["#process", "#163756", 2],
+    ["#catalog", "#f1f5f4", 3],
+    ["#projects", "#e5edeb", 0],
+    ["#contact", "#078d8c", 3],
+    [".aka-footer-new", "#112c4c", -1],
+  ] as const;
+  scenes.forEach(([selector, color, activeLayer], index) => {
+    const at = positionOf(selector);
+    const duration = index ? 0.035 : 0.01;
+    master.to(
+      ".aka-cinema-canvas",
+      { backgroundColor: color, duration },
+      Math.max(0, at - 0.01),
+    );
+    layers.forEach((layer, layerIndex) => {
+      master.to(
+        layer,
+        { opacity: layerIndex === activeLayer ? 0.07 : 0, duration },
+        Math.max(0, at - 0.01),
+      );
+    });
+  });
+}
+
 export default function CinematicMotion() {
   const pathname = usePathname();
   const curtainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const hasHome = Boolean(document.querySelector(".aka-page-home"));
+    const canvasMode = window.matchMedia(
+      "(prefers-reduced-motion: no-preference)",
+    );
+    const syncCanvasMode = () =>
+      document.documentElement.classList.toggle(
+        "cinematic-active",
+        hasHome && canvasMode.matches,
+      );
+    syncCanvasMode();
+    canvasMode.addEventListener("change", syncCanvasMode);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const desktop = window.matchMedia("(min-width: 901px)");
     let frame = 0;
@@ -62,6 +331,9 @@ export default function CinematicMotion() {
       media.add("(min-width: 901px)", () => {
         const home = document.querySelector(".aka-page-home");
         if (home) {
+          buildHomeMaster(home);
+        }
+        if (home && home.hasAttribute("data-legacy-motion")) {
           gsap
             .timeline({
               scrollTrigger: {
@@ -312,6 +584,8 @@ export default function CinematicMotion() {
       });
 
       media.add("(max-width: 900px)", () => {
+        const mobileHome = document.querySelector(".aka-page-home");
+        if (mobileHome) buildHomeMobileMaster(mobileHome);
         gsap.utils
           .toArray<HTMLElement>(
             ".aka-heading, .aka-feature, .aka-process-list > div, .aka-paint, .aka-project-grid article, .public-site [data-reveal], .tool-page .tool-card",
@@ -347,6 +621,8 @@ export default function CinematicMotion() {
       lenis?.destroy();
       media?.revert();
       context.revert();
+      canvasMode.removeEventListener("change", syncCanvasMode);
+      document.documentElement.classList.remove("cinematic-active");
     };
   }, [pathname]);
 
