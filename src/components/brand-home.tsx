@@ -41,6 +41,7 @@ const projects = [
 const heroMaps = ["XT-301", "XV-180", "XM-03", "MP-06"] as const;
 const chapters = [
   ["about", "Mở đầu"],
+  ["manifesto", "Thương hiệu"],
   ["collections", "Bộ sưu tập"],
   ["process", "Quy trình"],
   ["catalog", "Thư viện"],
@@ -71,13 +72,33 @@ export default function BrandHome({
     );
   }, [category, query]);
   const go = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const chapterIndex = chapters.findIndex(([chapterId]) => chapterId === id);
+    const track = document.querySelector<HTMLElement>(".aka-story-track");
+    if (chapterIndex >= 0 && track) {
+      const distance = Math.max(0, track.offsetHeight - window.innerHeight);
+      window.scrollTo({
+        top:
+          track.offsetTop + distance * (chapterIndex / (chapters.length - 1)),
+        behavior: "smooth",
+      });
+    } else document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenu(false);
   };
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+      const track = document.querySelector<HTMLElement>(".aka-story-track");
+      if (track) {
+        const distance = Math.max(1, track.offsetHeight - window.innerHeight);
+        const storyProgress = Math.max(
+          0,
+          Math.min(1, (window.scrollY - track.offsetTop) / distance),
+        );
+        setScrollProgress(storyProgress * 100);
+        setActiveChapter(
+          chapters[Math.round(storyProgress * (chapters.length - 1))][0],
+        );
+      } else setScrollProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
       document.documentElement.style.setProperty(
         "--aka-parallax",
         `${Math.min(window.scrollY * 0.08, 70)}px`,
@@ -89,23 +110,6 @@ export default function BrandHome({
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-  useEffect(() => {
-    if (initialSection) return;
-    const sections = chapters
-      .map(([id]) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section));
-    const chapterObserver = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveChapter(visible.target.id);
-      },
-      { threshold: [0.12, 0.3, 0.55], rootMargin: "-22% 0px -48% 0px" },
-    );
-    sections.forEach((section) => chapterObserver.observe(section));
-    return () => chapterObserver.disconnect();
-  }, [initialSection]);
   useEffect(() => {
     if (!initialSection) return;
     const frame = requestAnimationFrame(() =>
@@ -198,362 +202,397 @@ export default function BrandHome({
           </div>
         </div>
       )}
-      <section className="aka-hero" id="about">
-        <div className="aka-hero-copy">
-          <div className="aka-eyebrow">
-            <span /> NGHỆ THUẬT BỀ MẶT
-          </div>
-          <h1>
-            Kiến tạo không gian
-            <br />
-            <em>đậm chất riêng.</em>
-          </h1>
-          <p>
-            AKACONS là đơn vị tư vấn và thi công sơn hiệu ứng thủ công, tạo nên
-            những bề mặt độc bản cho không gian sống.
-          </p>
-          <div className="aka-actions">
-            <button className="aka-primary" onClick={() => go("catalog")}>
-              Khám phá bảng màu <ArrowRight size={18} />
-            </button>
-            <button className="aka-link" onClick={() => go("projects")}>
-              Công trình tiêu biểu <span>↘</span>
-            </button>
-          </div>
-          <div className="aka-proof">
-            <div>
-              <strong>218+</strong>
-              <span>Mẫu & màu độc bản</span>
+      <div className="aka-story-track">
+        <div className="aka-story-stage">
+          <section
+            className="aka-hero aka-story-scene"
+            id="about"
+            data-scene="0"
+          >
+            <div className="aka-hero-copy">
+              <div className="aka-eyebrow">
+                <span /> NGHỆ THUẬT BỀ MẶT
+              </div>
+              <h1>
+                Kiến tạo không gian
+                <br />
+                <em>đậm chất riêng.</em>
+              </h1>
+              <p>
+                AKACONS là đơn vị tư vấn và thi công sơn hiệu ứng thủ công, tạo
+                nên những bề mặt độc bản cho không gian sống.
+              </p>
+              <div className="aka-actions">
+                <button className="aka-primary" onClick={() => go("catalog")}>
+                  Khám phá bảng màu <ArrowRight size={18} />
+                </button>
+                <button className="aka-link" onClick={() => go("projects")}>
+                  Công trình tiêu biểu <span>↘</span>
+                </button>
+              </div>
+              <div className="aka-proof">
+                <div>
+                  <strong>218+</strong>
+                  <span>Mẫu & màu độc bản</span>
+                </div>
+                <div>
+                  <strong>04</strong>
+                  <span>Dòng hiệu ứng</span>
+                </div>
+                <div>
+                  <strong>100%</strong>
+                  <span>Hoàn thiện thủ công</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <strong>04</strong>
-              <span>Dòng hiệu ứng</span>
+            <div className="aka-hero-visual">
+              <div className="aka-map-reel">
+                {heroMaps.map((code, index) => {
+                  const paint = paints.find((item) => item.code === code)!;
+                  return (
+                    <Image
+                      key={code}
+                      src={paint.image}
+                      alt={`Mẫu màu ${paint.category} ${code}`}
+                      fill
+                      priority={index === 0}
+                      sizes="(max-width:900px) 100vw,48vw"
+                    />
+                  );
+                })}
+              </div>
+              <div className="aka-material-stack">
+                {heroMaps.map((code) => {
+                  const paint = paints.find((item) => item.code === code)!;
+                  return (
+                    <div className="aka-material" key={code}>
+                      <span>
+                        <Image src={paint.image} alt="" fill sizes="86px" />
+                      </span>
+                      <div>
+                        <small>MẪU ĐƯỢC YÊU THÍCH</small>
+                        <strong>
+                          {paint.code} · {paint.name}
+                        </strong>
+                        <p>{paint.category}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <b>Bề mặt thật · Sắc độ thật · Cảm xúc thật</b>
             </div>
-            <div>
-              <strong>100%</strong>
-              <span>Hoàn thiện thủ công</span>
+          </section>
+          <section
+            className="aka-manifesto aka-story-scene"
+            id="manifesto"
+            data-scene="1"
+          >
+            <p>SƠN HIỆU ỨNG</p>
+            <h2>
+              Dấu ấn <em>độc bản</em>
+              <br />
+              cho không gian sống đẳng cấp.
+            </h2>
+          </section>
+          <section
+            className="aka-section aka-story-scene"
+            id="collections"
+            data-scene="2"
+          >
+            <Heading
+              no="01"
+              eyebrow="BỘ SƯU TẬP TIÊU BIỂU"
+              title={
+                <>
+                  Chạm vào từng <em>sắc độ.</em>
+                </>
+              }
+              text="Mỗi bề mặt là một trải nghiệm thị giác khác biệt, được tạo nên từ kỹ thuật thủ công và sự thấu hiểu vật liệu."
+            />
+            <div className="aka-featured">
+              {featured.map(([code, label, note], i) => {
+                const p = paints.find((x) => x.code === code)!;
+                return (
+                  <button
+                    className={`aka-feature f${i + 1}`}
+                    key={code}
+                    onClick={() => setSelected(p)}
+                  >
+                    <span>
+                      <Image
+                        src={p.image}
+                        alt={`${p.category} ${p.code}`}
+                        fill
+                        sizes="(max-width:700px) 100vw,30vw"
+                      />
+                    </span>
+                    <i>0{i + 1}</i>
+                    <div>
+                      <small>{note}</small>
+                      <strong>{label}</strong>
+                      <b>
+                        {code} <ArrowRight size={16} />
+                      </b>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-          </div>
-        </div>
-        <div className="aka-hero-visual">
-          <div className="aka-map-reel">
-            {heroMaps.map((code, index) => {
-              const paint = paints.find((item) => item.code === code)!;
-              return (
-                <Image
-                  key={code}
-                  src={paint.image}
-                  alt={`Mẫu màu ${paint.category} ${code}`}
-                  fill
-                  priority={index === 0}
-                  sizes="(max-width:900px) 100vw,48vw"
+          </section>
+          <section
+            className="aka-process aka-section aka-story-scene"
+            id="process"
+            data-scene="3"
+          >
+            <div className="aka-process-title">
+              <span>02</span>
+              <p>QUY TRÌNH AKACONS</p>
+              <h2>
+                Đồng hành từ ý tưởng
+                <br />
+                <em>đến sau khi hoàn thiện.</em>
+              </h2>
+            </div>
+            <div className="aka-process-list">
+              {[
+                [
+                  "01",
+                  "Lắng nghe không gian",
+                  "Phong cách, ánh sáng và cảm xúc bạn muốn truyền tải.",
+                ],
+                [
+                  "02",
+                  "Chọn mẫu & lên phối cảnh",
+                  "Đối chiếu mẫu thật và tư vấn sắc độ phù hợp tại công trình.",
+                ],
+                [
+                  "03",
+                  "Thi công thủ công",
+                  "Nghệ nhân xử lý từng lớp để tạo chiều sâu riêng cho bề mặt.",
+                ],
+                [
+                  "04",
+                  "Nghiệm thu & bảo hành",
+                  "Bàn giao chỉn chu cùng hướng dẫn chăm sóc và bảo hành.",
+                ],
+              ].map(([n, t, d]) => (
+                <div key={n}>
+                  <span>{n}</span>
+                  <section>
+                    <h3>{t}</h3>
+                    <p>{d}</p>
+                  </section>
+                  <ArrowRight />
+                </div>
+              ))}
+            </div>
+          </section>
+          <section className="aka-tools-section aka-section" id="tools">
+            <Heading
+              no="04"
+              eyebrow="CÔNG CỤ NHÂN VIÊN"
+              title={
+                <>
+                  Hai công cụ.
+                  <br />
+                  <em>Một quy trình.</em>
+                </>
+              }
+              text="AI tạo phương án hình ảnh và Dự toán & Báo giá được tách riêng, mỗi công cụ đều lưu lịch sử theo mã nhân viên."
+            />
+            <div className="aka-tool-cards">
+              <Link href="/ai">
+                <span>
+                  <ImagePlus />
+                </span>
+                <small>01 · AI</small>
+                <h3>Tạo hình ảnh bằng AI</h3>
+                <p>
+                  Tải ảnh không gian, chọn mã sơn và lưu thông tin từng lần
+                  render theo mã nhân viên.
+                </p>
+                <b>
+                  Mở công cụ AI <ArrowRight />
+                </b>
+              </Link>
+              <Link href="/bao-gia">
+                <span>
+                  <Calculator />
+                </span>
+                <small>02 · DỰ TOÁN & BÁO GIÁ</small>
+                <h3>Tính và lưu báo giá công trình</h3>
+                <p>
+                  Tính vật tư, nhân công, VAT và xem lại lịch sử báo giá của
+                  từng nhân viên.
+                </p>
+                <b>
+                  Mở Dự toán & Báo giá <ArrowRight />
+                </b>
+              </Link>
+            </div>
+          </section>
+          <section
+            className="aka-catalog aka-section aka-story-scene"
+            id="catalog"
+            data-scene="4"
+          >
+            <Heading
+              no="03"
+              eyebrow="THƯ VIỆN VẬT LIỆU"
+              title={
+                <>
+                  Hơn 218 mẫu & màu độc bản
+                  <br />
+                  <em>cho mọi phong cách không gian.</em>
+                </>
+              }
+              text="Khám phá trọn bộ 218 mẫu bề mặt. Mỗi mã sơn đều đi kèm ảnh mẫu thực tế để bạn dễ hình dung chất liệu và sắc độ."
+            />
+            <div className="aka-tools">
+              <div className="aka-tabs">
+                {categories.map(([id, name, count]) => (
+                  <button
+                    key={id}
+                    className={category === id ? "active" : ""}
+                    onClick={() => {
+                      setCategory(id);
+                      setVisible(12);
+                    }}
+                  >
+                    {name}
+                    <sup>{count}</sup>
+                  </button>
+                ))}
+              </div>
+              <label>
+                <Search size={18} />
+                <input
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setVisible(12);
+                  }}
+                  placeholder="Tìm mã sơn, màu sắc..."
                 />
-              );
-            })}
-          </div>
-          <div className="aka-material-stack">
-            {heroMaps.map((code) => {
-              const paint = paints.find((item) => item.code === code)!;
-              return (
-                <div className="aka-material" key={code}>
+              </label>
+            </div>
+            <div className="aka-paints">
+              {filtered.slice(0, visible).map((p) => (
+                <button
+                  className="aka-paint"
+                  key={p.code}
+                  onClick={() => setSelected(p)}
+                >
                   <span>
-                    <Image src={paint.image} alt="" fill sizes="86px" />
+                    <Image
+                      src={p.image}
+                      alt={`Ảnh mẫu ${p.category} mã ${p.code}`}
+                      fill
+                      sizes="(max-width:560px) 50vw,(max-width:900px) 33vw,25vw"
+                    />
                   </span>
                   <div>
-                    <small>MẪU ĐƯỢC YÊU THÍCH</small>
-                    <strong>
-                      {paint.code} · {paint.name}
-                    </strong>
-                    <p>{paint.category}</p>
+                    <section>
+                      <small>{p.category}</small>
+                      <strong>{p.name}</strong>
+                    </section>
+                    <b>{p.code}</b>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-          <b>Bề mặt thật · Sắc độ thật · Cảm xúc thật</b>
-        </div>
-      </section>
-      <section className="aka-manifesto">
-        <p>SƠN HIỆU ỨNG</p>
-        <h2>
-          Dấu ấn <em>độc bản</em>
-          <br />
-          cho không gian sống đẳng cấp.
-        </h2>
-      </section>
-      <section className="aka-section" id="collections">
-        <Heading
-          no="01"
-          eyebrow="BỘ SƯU TẬP TIÊU BIỂU"
-          title={
-            <>
-              Chạm vào từng <em>sắc độ.</em>
-            </>
-          }
-          text="Mỗi bề mặt là một trải nghiệm thị giác khác biệt, được tạo nên từ kỹ thuật thủ công và sự thấu hiểu vật liệu."
-        />
-        <div className="aka-featured">
-          {featured.map(([code, label, note], i) => {
-            const p = paints.find((x) => x.code === code)!;
-            return (
-              <button
-                className={`aka-feature f${i + 1}`}
-                key={code}
-                onClick={() => setSelected(p)}
-              >
-                <span>
-                  <Image
-                    src={p.image}
-                    alt={`${p.category} ${p.code}`}
-                    fill
-                    sizes="(max-width:700px) 100vw,30vw"
-                  />
-                </span>
-                <i>0{i + 1}</i>
-                <div>
-                  <small>{note}</small>
-                  <strong>{label}</strong>
-                  <b>
-                    {code} <ArrowRight size={16} />
-                  </b>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </section>
-      <section className="aka-process aka-section" id="process">
-        <div className="aka-process-title">
-          <span>02</span>
-          <p>QUY TRÌNH AKACONS</p>
-          <h2>
-            Đồng hành từ ý tưởng
-            <br />
-            <em>đến sau khi hoàn thiện.</em>
-          </h2>
-        </div>
-        <div className="aka-process-list">
-          {[
-            [
-              "01",
-              "Lắng nghe không gian",
-              "Phong cách, ánh sáng và cảm xúc bạn muốn truyền tải.",
-            ],
-            [
-              "02",
-              "Chọn mẫu & lên phối cảnh",
-              "Đối chiếu mẫu thật và tư vấn sắc độ phù hợp tại công trình.",
-            ],
-            [
-              "03",
-              "Thi công thủ công",
-              "Nghệ nhân xử lý từng lớp để tạo chiều sâu riêng cho bề mặt.",
-            ],
-            [
-              "04",
-              "Nghiệm thu & bảo hành",
-              "Bàn giao chỉn chu cùng hướng dẫn chăm sóc và bảo hành.",
-            ],
-          ].map(([n, t, d]) => (
-            <div key={n}>
-              <span>{n}</span>
-              <section>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </section>
-              <ArrowRight />
+                  <i>
+                    Xem mẫu lớn <ArrowRight size={15} />
+                  </i>
+                </button>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-      <section className="aka-tools-section aka-section" id="tools">
-        <Heading
-          no="04"
-          eyebrow="CÔNG CỤ NHÂN VIÊN"
-          title={
-            <>
-              Hai công cụ.
-              <br />
-              <em>Một quy trình.</em>
-            </>
-          }
-          text="AI tạo phương án hình ảnh và Dự toán & Báo giá được tách riêng, mỗi công cụ đều lưu lịch sử theo mã nhân viên."
-        />
-        <div className="aka-tool-cards">
-          <Link href="/ai">
-            <span>
-              <ImagePlus />
-            </span>
-            <small>01 · AI</small>
-            <h3>Tạo hình ảnh bằng AI</h3>
-            <p>
-              Tải ảnh không gian, chọn mã sơn và lưu thông tin từng lần render
-              theo mã nhân viên.
-            </p>
-            <b>
-              Mở công cụ AI <ArrowRight />
-            </b>
-          </Link>
-          <Link href="/bao-gia">
-            <span>
-              <Calculator />
-            </span>
-            <small>02 · DỰ TOÁN & BÁO GIÁ</small>
-            <h3>Tính và lưu báo giá công trình</h3>
-            <p>
-              Tính vật tư, nhân công, VAT và xem lại lịch sử báo giá của từng
-              nhân viên.
-            </p>
-            <b>
-              Mở Dự toán & Báo giá <ArrowRight />
-            </b>
-          </Link>
-        </div>
-      </section>
-      <section className="aka-catalog aka-section" id="catalog">
-        <Heading
-          no="03"
-          eyebrow="THƯ VIỆN VẬT LIỆU"
-          title={
-            <>
-              Hơn 218 mẫu & màu độc bản
-              <br />
-              <em>cho mọi phong cách không gian.</em>
-            </>
-          }
-          text="Khám phá trọn bộ 218 mẫu bề mặt. Mỗi mã sơn đều đi kèm ảnh mẫu thực tế để bạn dễ hình dung chất liệu và sắc độ."
-        />
-        <div className="aka-tools">
-          <div className="aka-tabs">
-            {categories.map(([id, name, count]) => (
+            {!filtered.length && (
+              <div className="aka-empty">Không tìm thấy mã sơn phù hợp.</div>
+            )}
+            {visible < filtered.length && (
               <button
-                key={id}
-                className={category === id ? "active" : ""}
-                onClick={() => {
-                  setCategory(id);
-                  setVisible(12);
-                }}
+                className="aka-more"
+                onClick={() => setVisible(visible + 12)}
               >
-                {name}
-                <sup>{count}</sup>
+                Xem thêm mẫu sơn <ChevronDown size={18} />
               </button>
-            ))}
-          </div>
-          <label>
-            <Search size={18} />
-            <input
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setVisible(12);
-              }}
-              placeholder="Tìm mã sơn, màu sắc..."
+            )}
+            <p className="aka-note">
+              * Màu sắc trên màn hình có thể chênh lệch nhẹ so với mẫu thực tế.
+              AKACONS khuyến nghị xem mẫu trực tiếp tại công trình.
+            </p>
+          </section>
+          <section
+            className="aka-projects aka-section aka-story-scene"
+            id="projects"
+            data-scene="5"
+          >
+            <Heading
+              no="04"
+              eyebrow="CÔNG TRÌNH TIÊU BIỂU"
+              title={
+                <>
+                  <span>Dấu ấn riêng</span>
+                  <br />
+                  <em>trong từng không gian.</em>
+                </>
+              }
+              text="Các hướng ứng dụng tiêu biểu của sơn hiệu ứng AKACONS trong không gian sống, nghỉ dưỡng và nội thất."
             />
-          </label>
-        </div>
-        <div className="aka-paints">
-          {filtered.slice(0, visible).map((p) => (
-            <button
-              className="aka-paint"
-              key={p.code}
-              onClick={() => setSelected(p)}
-            >
-              <span>
-                <Image
-                  src={p.image}
-                  alt={`Ảnh mẫu ${p.category} mã ${p.code}`}
-                  fill
-                  sizes="(max-width:560px) 50vw,(max-width:900px) 33vw,25vw"
-                />
-              </span>
-              <div>
-                <section>
-                  <small>{p.category}</small>
-                  <strong>{p.name}</strong>
-                </section>
-                <b>{p.code}</b>
-              </div>
-              <i>
-                Xem mẫu lớn <ArrowRight size={15} />
-              </i>
-            </button>
-          ))}
-        </div>
-        {!filtered.length && (
-          <div className="aka-empty">Không tìm thấy mã sơn phù hợp.</div>
-        )}
-        {visible < filtered.length && (
-          <button className="aka-more" onClick={() => setVisible(visible + 12)}>
-            Xem thêm mẫu sơn <ChevronDown size={18} />
-          </button>
-        )}
-        <p className="aka-note">
-          * Màu sắc trên màn hình có thể chênh lệch nhẹ so với mẫu thực tế.
-          AKACONS khuyến nghị xem mẫu trực tiếp tại công trình.
-        </p>
-      </section>
-      <section className="aka-projects aka-section" id="projects">
-        <Heading
-          no="04"
-          eyebrow="CÔNG TRÌNH TIÊU BIỂU"
-          title={
-            <>
-              <span>Dấu ấn riêng</span>
+            <div className="aka-project-grid">
+              {projects.map(([code, title, type], index) => {
+                const paint = paints.find((item) => item.code === code)!;
+                return (
+                  <article className={index === 0 ? "featured" : ""} key={code}>
+                    <span>
+                      <Image
+                        src={paint.image}
+                        alt={`${title} – ${type}`}
+                        fill
+                        sizes="(max-width:700px) 100vw,40vw"
+                      />
+                    </span>
+                    <div>
+                      <small>
+                        0{index + 1} · {type}
+                      </small>
+                      <h3>{title}</h3>
+                      <Link href="/lien-he">
+                        Tư vấn cho công trình <ArrowRight size={16} />
+                      </Link>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+          <section
+            className="aka-contact aka-section aka-story-scene"
+            id="contact"
+            data-scene="6"
+          >
+            <div>
+              <Sparkles size={20} /> TƯ VẤN MẪU MIỄN PHÍ
+            </div>
+            <h2>
+              Làm mới không gian sống
               <br />
-              <em>trong từng không gian.</em>
-            </>
-          }
-          text="Các hướng ứng dụng tiêu biểu của sơn hiệu ứng AKACONS trong không gian sống, nghỉ dưỡng và nội thất."
-        />
-        <div className="aka-project-grid">
-          {projects.map(([code, title, type], index) => {
-            const paint = paints.find((item) => item.code === code)!;
-            return (
-              <article className={index === 0 ? "featured" : ""} key={code}>
-                <span>
-                  <Image
-                    src={paint.image}
-                    alt={`${title} – ${type}`}
-                    fill
-                    sizes="(max-width:700px) 100vw,40vw"
-                  />
-                </span>
-                <div>
-                  <small>
-                    0{index + 1} · {type}
-                  </small>
-                  <h3>{title}</h3>
-                  <Link href="/lien-he">
-                    Tư vấn cho công trình <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
+              bằng hiệu ứng <em>độc bản.</em>
+            </h2>
+            <p>
+              Chia sẻ với chúng tôi về không gian của bạn. Đội ngũ AKACONS sẽ tư
+              vấn màu sắc, hiệu ứng và gửi mẫu phù hợp.
+            </p>
+            <section>
+              <a className="aka-primary light" href="tel:0945555017">
+                <Phone size={18} /> Gọi tư vấn ngay
+              </a>
+              <a href="mailto:lienhe.aka@gmail.com">
+                Gửi yêu cầu tư vấn <ArrowRight size={18} />
+              </a>
+            </section>
+          </section>
         </div>
-      </section>
-      <section className="aka-contact aka-section" id="contact">
-        <div>
-          <Sparkles size={20} /> TƯ VẤN MẪU MIỄN PHÍ
-        </div>
-        <h2>
-          Làm mới không gian sống
-          <br />
-          bằng hiệu ứng <em>độc bản.</em>
-        </h2>
-        <p>
-          Chia sẻ với chúng tôi về không gian của bạn. Đội ngũ AKACONS sẽ tư vấn
-          màu sắc, hiệu ứng và gửi mẫu phù hợp.
-        </p>
-        <section>
-          <a className="aka-primary light" href="tel:0945555017">
-            <Phone size={18} /> Gọi tư vấn ngay
-          </a>
-          <a href="mailto:lienhe.aka@gmail.com">
-            Gửi yêu cầu tư vấn <ArrowRight size={18} />
-          </a>
-        </section>
-      </section>
+      </div>
       <footer className="aka-footer-new">
         <div className="aka-footer-contact">
           <h3>AKACONS Surface Studio</h3>

@@ -2087,3 +2087,189 @@
     background: linear-gradient(135deg, #079391, #087d86);
   }
 }
+
+/* Single sticky stage: all cinematic scenes share one viewport. */
+.aka-page-home .aka-story-track {
+  position: relative;
+  height: 700dvh;
+}
+.aka-page-home .aka-story-stage {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  height: 100dvh;
+  min-height: 620px;
+  overflow: hidden;
+}
+.aka-page-home .aka-story-scene {
+  position: absolute !important;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity, clip-path;
+}
+.aka-page-home .aka-story-scene:first-child {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+.aka-page-home .aka-story-stage .aka-section {
+  padding: clamp(112px, 12dvh, 150px) 7vw clamp(34px, 5dvh, 70px);
+}
+.aka-page-home .aka-story-stage .aka-manifesto {
+  padding: 96px 6vw 35px;
+}
+.aka-page-home .aka-story-stage #collections,
+.aka-page-home .aka-story-stage #catalog,
+.aka-page-home .aka-story-stage #projects {
+  grid-template-columns: minmax(270px, 0.68fr) minmax(0, 1.32fr);
+  gap: clamp(35px, 6vw, 96px);
+}
+.aka-page-home .aka-story-stage .aka-heading,
+.aka-page-home .aka-story-stage .aka-process-title {
+  position: static !important;
+  top: auto;
+  align-self: center;
+}
+.aka-page-home .aka-story-stage .aka-featured,
+.aka-page-home .aka-story-stage .aka-project-grid {
+  height: min(66dvh, 650px);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+.aka-page-home .aka-story-stage .aka-process {
+  align-items: center;
+  padding-top: clamp(105px, 12dvh, 145px);
+}
+.aka-page-home .aka-story-stage .aka-process-list > div {
+  padding-block: clamp(15px, 2.5dvh, 27px);
+}
+.aka-page-home .aka-story-stage #catalog > .aka-tools {
+  margin-bottom: 18px;
+}
+.aka-page-home .aka-story-stage #catalog > .aka-paints {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  height: min(57dvh, 560px);
+  gap: 12px;
+}
+.aka-page-home .aka-story-stage #catalog .aka-paint:nth-child(n + 5) {
+  display: none;
+}
+.aka-page-home .aka-story-stage #catalog .aka-more,
+.aka-page-home .aka-story-stage #catalog .aka-note {
+  display: none;
+}
+.aka-page-home .aka-story-stage .aka-paint > span {
+  min-height: 0;
+}
+.aka-page-home .aka-story-stage .aka-contact {
+  padding-top: 92px;
+}
+.aka-page-home .aka-footer-new {
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .aka-page-home .aka-story-track {
+    height: 560dvh;
+  }
+  .aka-page-home .aka-story-stage {
+    min-height: 540px;
+  }
+  .aka-page-home .aka-story-stage .aka-section {
+    padding: 96px 20px 28px;
+  }
+  .aka-page-home .aka-story-stage #collections,
+  .aka-page-home .aka-story-stage #catalog,
+  .aka-page-home .aka-story-stage #projects,
+  .aka-page-home .aka-story-stage .aka-process {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .aka-page-home .aka-story-stage .aka-heading,
+  .aka-page-home .aka-story-stage .aka-process-title {
+    margin: 0 0 12px;
+  }
+  .aka-page-home .aka-story-stage .aka-heading h2,
+  .aka-page-home .aka-story-stage .aka-process-title h2 {
+    margin-block: 12px;
+    font-size: clamp(30px, 9vw, 46px);
+  }
+  .aka-page-home .aka-story-stage .aka-heading > p {
+    display: none;
+  }
+  .aka-page-home .aka-story-stage .aka-featured,
+  .aka-page-home .aka-story-stage .aka-project-grid {
+    height: min(54dvh, 460px);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .aka-page-home .aka-story-stage .aka-feature:nth-child(n + 3),
+  .aka-page-home .aka-story-stage .aka-project-grid article:nth-child(n + 3) {
+    display: none;
+  }
+  .aka-page-home .aka-story-stage .aka-feature.f1,
+  .aka-page-home .aka-story-stage .aka-feature.f2,
+  .aka-page-home .aka-story-stage .aka-project-grid article.featured {
+    grid-area: auto;
+  }
+  .aka-page-home .aka-story-stage .aka-process-list > div:nth-child(n + 4) {
+    display: none;
+  }
+  .aka-page-home .aka-story-stage #catalog > .aka-tools {
+    display: none;
+  }
+  .aka-page-home .aka-story-stage #catalog > .aka-paints {
+    height: min(52dvh, 430px);
+  }
+  .aka-page-home .aka-story-stage #catalog .aka-paint:nth-child(n + 3) {
+    display: none;
+  }
+  .aka-page-home .aka-story-stage .aka-contact {
+    padding-inline: 22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aka-page-home .aka-story-track {
+    height: auto;
+  }
+  .aka-page-home .aka-story-stage {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .aka-page-home .aka-story-scene {
+    position: relative !important;
+    inset: auto;
+    min-height: auto !important;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    overflow: visible;
+  }
+  .aka-page-home .aka-story-stage #catalog .aka-paint:nth-child(n + 5) {
+    display: block;
+  }
+  .aka-page-home .aka-story-stage #catalog .aka-more,
+  .aka-page-home .aka-story-stage #catalog .aka-note {
+    display: flex;
+  }
+  .aka-page-home .aka-story-stage .aka-feature:nth-child(n + 3),
+  .aka-page-home .aka-story-stage .aka-project-grid article:nth-child(n + 3),
+  .aka-page-home .aka-story-stage .aka-process-list > div:nth-child(n + 4),
+  .aka-page-home .aka-story-stage #catalog .aka-paint:nth-child(n + 3) {
+    display: block;
+  }
+  .aka-page-home .aka-story-stage .aka-featured,
+  .aka-page-home .aka-story-stage .aka-project-grid,
+  .aka-page-home .aka-story-stage #catalog > .aka-paints {
+    height: auto;
+  }
+}

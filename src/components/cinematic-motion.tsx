@@ -266,6 +266,184 @@ function buildHomeMobileMaster(home: Element) {
   });
 }
 
+function buildSingleStage(home: Element, mobile: boolean) {
+  const track = home.querySelector<HTMLElement>(".aka-story-track");
+  const scenes = gsap.utils.toArray<HTMLElement>(".aka-story-scene");
+  const layers = gsap.utils.toArray<HTMLElement>(".aka-cinema-images > img");
+  const chapterEls = gsap.utils.toArray<HTMLElement>(".aka-cinema-chapter");
+  if (!track || !scenes.length) return;
+
+  gsap.set(scenes, {
+    autoAlpha: 0,
+    pointerEvents: "none",
+    yPercent: 10,
+    scale: 1.035,
+  });
+  gsap.set(scenes[0], {
+    autoAlpha: 1,
+    pointerEvents: "auto",
+    yPercent: 0,
+    scale: 1,
+  });
+  gsap.set(layers, { opacity: 0, scale: 1.08 });
+  gsap.set(layers[0], { opacity: mobile ? 0.07 : 0.18 });
+  gsap.set(chapterEls, { opacity: 0, yPercent: 80 });
+  gsap.set(chapterEls[0], { opacity: 1, yPercent: 0 });
+
+  const colors = [
+    "#f5f8f7",
+    "#e7efed",
+    "#edf3f1",
+    "#163756",
+    "#f1f5f4",
+    "#e5edeb",
+    "#078d8c",
+  ];
+  const activeLayers = [0, 0, 1, 2, 3, 0, 3];
+  const timeline = gsap.timeline({
+    defaults: { ease: "none" },
+    scrollTrigger: {
+      trigger: track,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: mobile ? 0.45 : 0.9,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        document.documentElement.style.setProperty(
+          "--story-progress",
+          self.progress.toFixed(4),
+        );
+      },
+    },
+  });
+
+  scenes.slice(1).forEach((next, index) => {
+    const previous = scenes[index];
+    const start = index * 0.92;
+    const duration = mobile ? 0.82 : 1.08;
+    const nextImage = activeLayers[index + 1];
+    timeline
+      .to(
+        previous,
+        {
+          autoAlpha: 0,
+          yPercent: -9,
+          scale: 0.95,
+          clipPath: "inset(7% 5% 7% 5%)",
+          duration: duration * 0.78,
+        },
+        start,
+      )
+      .fromTo(
+        next,
+        {
+          autoAlpha: 0,
+          yPercent: 12,
+          scale: 1.04,
+          clipPath: "inset(12% 7% 12% 7%)",
+        },
+        {
+          autoAlpha: 1,
+          yPercent: 0,
+          scale: 1,
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration,
+        },
+        start + duration * 0.18,
+      )
+      .set(previous, { pointerEvents: "none" }, start + duration * 0.55)
+      .set(next, { pointerEvents: "auto" }, start + duration * 0.42)
+      .to(
+        ".aka-cinema-canvas",
+        { backgroundColor: colors[index + 1], duration },
+        start + duration * 0.08,
+      )
+      .to(
+        ".aka-cinema-images",
+        {
+          xPercent: mobile ? 0 : index % 2 ? -8 : 7,
+          yPercent: mobile ? 0 : index % 3 === 0 ? 4 : -3,
+          scale: mobile ? 1.01 : index === 2 ? 0.72 : 1.03,
+          clipPath: mobile
+            ? "inset(0%)"
+            : index === 2
+              ? "inset(12% 8% 12% 48%)"
+              : "inset(0%)",
+          duration,
+        },
+        start,
+      )
+      .to(layers, { opacity: 0, duration: duration * 0.45 }, start)
+      .to(
+        layers[nextImage],
+        {
+          opacity: mobile ? 0.07 : index === 2 ? 0.22 : 0.16,
+          scale: 1.01,
+          duration: duration * 0.78,
+        },
+        start + duration * 0.2,
+      )
+      .to(
+        chapterEls[index],
+        { opacity: 0, yPercent: -85, duration: duration * 0.38 },
+        start + duration * 0.12,
+      )
+      .fromTo(
+        chapterEls[index + 1],
+        { opacity: 0, yPercent: 85 },
+        { opacity: 1, yPercent: 0, duration: duration * 0.48 },
+        start + duration * 0.38,
+      );
+
+    const revealTargets = next.querySelectorAll<HTMLElement>(
+      ".aka-heading, .aka-process-title, .aka-process-list>div, .aka-feature, .aka-paint, .aka-project-grid article, .aka-contact>*",
+    );
+    if (revealTargets.length) {
+      timeline.fromTo(
+        revealTargets,
+        { opacity: 0, y: mobile ? 22 : 42 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: mobile ? 0.015 : 0.025,
+          duration: duration * 0.62,
+        },
+        start + duration * 0.32,
+      );
+    }
+  });
+
+  const counterStart = { first: 0, second: 0, third: 0 };
+  const proof = document.querySelectorAll<HTMLElement>(".aka-proof strong");
+  timeline.to(
+    counterStart,
+    {
+      first: 218,
+      second: 4,
+      third: 100,
+      snap: { first: 1, second: 1, third: 1 },
+      duration: 0.55,
+      onUpdate: () => {
+        if (proof[0])
+          proof[0].textContent = `${Math.round(counterStart.first)}+`;
+        if (proof[1])
+          proof[1].textContent = String(
+            Math.round(counterStart.second),
+          ).padStart(2, "0");
+        if (proof[2])
+          proof[2].textContent = `${Math.round(counterStart.third)}%`;
+      },
+    },
+    0,
+  );
+  timeline.to(
+    ".aka-cinema-canvas",
+    { backgroundColor: "#112c4c", duration: 0.38 },
+    ">-0.08",
+  );
+}
+
 export default function CinematicMotion() {
   const pathname = usePathname();
   const curtainRef = useRef<HTMLDivElement>(null);
@@ -331,7 +509,7 @@ export default function CinematicMotion() {
       media.add("(min-width: 901px)", () => {
         const home = document.querySelector(".aka-page-home");
         if (home) {
-          buildHomeMaster(home);
+          buildSingleStage(home, false);
         }
         if (home && home.hasAttribute("data-legacy-motion")) {
           gsap
@@ -585,7 +763,7 @@ export default function CinematicMotion() {
 
       media.add("(max-width: 900px)", () => {
         const mobileHome = document.querySelector(".aka-page-home");
-        if (mobileHome) buildHomeMobileMaster(mobileHome);
+        if (mobileHome) buildSingleStage(mobileHome, true);
         gsap.utils
           .toArray<HTMLElement>(
             ".aka-heading, .aka-feature, .aka-process-list > div, .aka-paint, .aka-project-grid article, .public-site [data-reveal], .tool-page .tool-card",
