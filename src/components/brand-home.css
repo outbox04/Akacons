@@ -2114,6 +2114,42 @@ html:not(.cinematic-ready) .aka-page-home .aka-story-scene {
   pointer-events: auto;
   overflow: visible;
 }
+html:not(.cinematic-ready)
+  .aka-page-home
+  .aka-story-stage
+  .aka-feature:nth-child(n + 3),
+html:not(.cinematic-ready)
+  .aka-page-home
+  .aka-story-stage
+  .aka-project-grid
+  article:nth-child(n + 3),
+html:not(.cinematic-ready)
+  .aka-page-home
+  .aka-story-stage
+  .aka-process-list
+  > div:nth-child(n + 4),
+html:not(.cinematic-ready)
+  .aka-page-home
+  .aka-story-stage
+  #catalog
+  .aka-paint:nth-child(n + 3) {
+  display: block;
+}
+html:not(.cinematic-ready) .aka-page-home .aka-story-stage .aka-featured,
+html:not(.cinematic-ready) .aka-page-home .aka-story-stage .aka-project-grid,
+html:not(.cinematic-ready)
+  .aka-page-home
+  .aka-story-stage
+  #catalog
+  > .aka-paints {
+  height: auto;
+}
+html:not(.cinematic-ready) .aka-page-home .aka-story-stage #catalog .aka-more {
+  display: flex;
+}
+html:not(.cinematic-ready) .aka-page-home .aka-story-stage #catalog .aka-note {
+  display: block;
+}
 .aka-page-home .aka-story-stage {
   position: sticky;
   z-index: 2;

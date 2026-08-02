@@ -439,15 +439,15 @@ export default function CinematicMotion() {
   const curtainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const hasHome = Boolean(document.querySelector(".aka-page-home"));
     const canvasMode = window.matchMedia(
       "(prefers-reduced-motion: no-preference)",
     );
-    const syncCanvasMode = () =>
-      document.documentElement.classList.toggle(
+    const syncCanvasMode = () => {
+      document.documentElement.classList.remove(
         "cinematic-active",
-        hasHome && canvasMode.matches,
+        "cinematic-ready",
       );
+    };
     syncCanvasMode();
     canvasMode.addEventListener("change", syncCanvasMode);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -498,9 +498,8 @@ export default function CinematicMotion() {
       media = gsap.matchMedia();
       media.add("(min-width: 901px)", () => {
         const home = document.querySelector(".aka-page-home");
-        if (home) {
-          buildSingleStage(home, false);
-        }
+        // The homepage stays in its safe readable layout until the single-stage
+        // timeline is reintroduced with browser-level visual regression tests.
         if (home && home.hasAttribute("data-legacy-motion")) {
           gsap
             .timeline({
@@ -752,8 +751,6 @@ export default function CinematicMotion() {
       });
 
       media.add("(max-width: 900px)", () => {
-        const mobileHome = document.querySelector(".aka-page-home");
-        if (mobileHome) buildSingleStage(mobileHome, true);
         gsap.utils
           .toArray<HTMLElement>(
             ".aka-heading, .aka-feature, .aka-process-list > div, .aka-paint, .aka-project-grid article, .public-site [data-reveal], .tool-page .tool-card",
