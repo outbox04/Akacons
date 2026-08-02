@@ -4,6 +4,8 @@
 
 # next.js
 /.next/
+/.next-cinematic/
+/.next-stale-*/
 /out/
 
 # production
