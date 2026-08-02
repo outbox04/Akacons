@@ -2093,6 +2093,27 @@
   position: relative;
   height: 700dvh;
 }
+
+/* Safe fallback: content stays readable until the master timeline is mounted. */
+html:not(.cinematic-ready) .aka-page-home .aka-story-track {
+  height: auto;
+}
+html:not(.cinematic-ready) .aka-page-home .aka-story-stage {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+html:not(.cinematic-ready) .aka-page-home .aka-story-scene {
+  position: relative !important;
+  inset: auto;
+  height: auto;
+  min-height: auto !important;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  overflow: visible;
+}
 .aka-page-home .aka-story-stage {
   position: sticky;
   z-index: 2;

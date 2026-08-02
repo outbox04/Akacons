@@ -273,6 +273,8 @@ function buildSingleStage(home: Element, mobile: boolean) {
   const chapterEls = gsap.utils.toArray<HTMLElement>(".aka-cinema-chapter");
   if (!track || !scenes.length) return;
 
+  document.documentElement.classList.add("cinematic-ready");
+
   gsap.set(scenes, {
     autoAlpha: 0,
     pointerEvents: "none",
@@ -801,6 +803,7 @@ export default function CinematicMotion() {
       context.revert();
       canvasMode.removeEventListener("change", syncCanvasMode);
       document.documentElement.classList.remove("cinematic-active");
+      document.documentElement.classList.remove("cinematic-ready");
     };
   }, [pathname]);
 
