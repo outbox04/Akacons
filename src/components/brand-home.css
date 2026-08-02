@@ -46,3 +46,24 @@
 .aka-hero-copy>*:nth-child(5){animation-delay:.32s}
 .aka-hero-visual{animation:akaIntroImage 1s cubic-bezier(.16,1,.3,1) both}
 @media(prefers-reduced-motion:reduce){.aka-hero-copy>*,.aka-hero-visual{opacity:1;animation:none}}
+
+/* Homepage introduction and featured projects */
+.aka-header-right{display:flex;align-items:center;gap:clamp(24px,4vw,64px)}
+.aka-logo-image{width:142px}
+.aka-hero{min-height:720px}
+.aka-hero-copy{padding-top:86px;padding-bottom:40px}
+.aka-hero-visual{min-height:628px}
+.aka-projects{background:#fff}
+.aka-project-grid{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:repeat(2,260px);gap:18px}
+.aka-project-grid article{position:relative;overflow:hidden;background:#dbe2df}
+.aka-project-grid article.featured{grid-row:1/3}
+.aka-project-grid article>span{position:absolute;inset:0}
+.aka-project-grid article img{object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.aka-project-grid article:hover img{transform:scale(1.045)}
+.aka-project-grid article:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#102c4dcc,transparent 62%)}
+.aka-project-grid article>div{position:absolute;z-index:2;left:28px;right:28px;bottom:25px;color:#fff}
+.aka-project-grid small{font-size:8px;letter-spacing:.14em;text-transform:uppercase;opacity:.78}
+.aka-project-grid h3{font-size:clamp(22px,2.2vw,34px);font-weight:500;margin:7px 0 13px;line-height:1.1}
+.aka-project-grid a{color:#fff;display:inline-flex;align-items:center;gap:9px;font-size:10px;text-decoration:none;border-bottom:1px solid #ffffff80;padding-bottom:5px}
+@media(max-width:900px){.aka-header-right{gap:18px}.aka-logo-image{width:120px}.aka-hero{min-height:0}.aka-hero-visual{min-height:540px}}
+@media(max-width:600px){.aka-project-grid{grid-template-columns:1fr;grid-template-rows:repeat(3,330px)}.aka-project-grid article.featured{grid-row:auto}.aka-hero-copy{padding-top:62px}.aka-hero-visual{min-height:430px}}
