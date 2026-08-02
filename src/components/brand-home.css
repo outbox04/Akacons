@@ -1732,6 +1732,53 @@
   height: 0;
 }
 
+/* GSAP owns the cinematic entrance; legacy CSS entrances are disabled. */
+.aka-page-home .aka-hero-copy > *,
+.aka-page-home .aka-hero-visual {
+  opacity: 1;
+  animation: none;
+}
+.aka-scroll-progress {
+  width: 100%;
+  transform-origin: left center;
+  will-change: transform;
+}
+.aka-page-home .aka-hero,
+.aka-page-home .aka-manifesto,
+.aka-page-home #collections,
+.aka-page-home .aka-process,
+.aka-page-home #catalog,
+.aka-page-home #projects,
+.aka-page-home .aka-contact {
+  position: relative;
+  isolation: isolate;
+}
+.aka-page-home .aka-hero-visual,
+.aka-page-home .aka-feature,
+.aka-page-home .aka-paint,
+.aka-page-home .aka-project-grid article {
+  will-change: transform, opacity, clip-path;
+  backface-visibility: hidden;
+}
+.aka-page-home .aka-manifesto,
+.aka-page-home .aka-process,
+.aka-page-home .aka-contact {
+  min-height: min(1000px, 100svh);
+}
+@media (max-width: 900px) {
+  .aka-page-home .aka-manifesto,
+  .aka-page-home .aka-process,
+  .aka-page-home .aka-contact {
+    min-height: auto;
+  }
+  .aka-page-home .aka-hero-visual,
+  .aka-page-home .aka-feature,
+  .aka-page-home .aka-paint,
+  .aka-page-home .aka-project-grid article {
+    will-change: auto;
+  }
+}
+
 /* Scrollytelling chapters */
 .aka-story-rail {
   position: fixed;

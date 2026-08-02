@@ -75,27 +75,6 @@ export default function BrandHome({
     setMenu(false);
   };
   useEffect(() => {
-    const targets = document.querySelectorAll(
-      ".aka-manifesto,.aka-heading,.aka-project-grid>article,.aka-feature,.aka-process-title,.aka-process-list>div,.aka-tool-cards>a,.aka-paint,.aka-contact>*,footer>*",
-    );
-    targets.forEach((el, index) => {
-      el.classList.add("aka-reveal");
-      (el as HTMLElement).style.setProperty(
-        "--reveal-delay",
-        `${Math.min(index % 4, 3) * 70}ms`,
-      );
-    });
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        }),
-      { threshold: 0.12, rootMargin: "0px 0px -7% 0px" },
-    );
-    targets.forEach((el) => observer.observe(el));
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
@@ -107,7 +86,6 @@ export default function BrandHome({
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      observer.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
@@ -141,7 +119,7 @@ export default function BrandHome({
     <div className={`aka-site aka-page-${initialSection ?? "home"}`}>
       <div
         className="aka-scroll-progress"
-        style={{ width: `${scrollProgress}%` }}
+        style={{ transform: `scaleX(${scrollProgress / 100})` }}
       />
       <header className="aka-header">
         <Link className="aka-brand" href="/">
