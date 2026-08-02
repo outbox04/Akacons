@@ -274,6 +274,11 @@ function buildSingleStage(home: Element, mobile: boolean) {
   if (!track || !scenes.length) return;
 
   document.documentElement.classList.add("cinematic-ready");
+  scenes.forEach((scene) => {
+    gsap.set(scene.querySelectorAll("*"), {
+      clearProps: "opacity,visibility,transform,clipPath",
+    });
+  });
 
   gsap.set(scenes, {
     autoAlpha: 0,
@@ -397,23 +402,6 @@ function buildSingleStage(home: Element, mobile: boolean) {
         { opacity: 1, yPercent: 0, duration: duration * 0.48 },
         start + duration * 0.38,
       );
-
-    const revealTargets = next.querySelectorAll<HTMLElement>(
-      ".aka-heading, .aka-process-title, .aka-process-list>div, .aka-feature, .aka-paint, .aka-project-grid article, .aka-contact>*",
-    );
-    if (revealTargets.length) {
-      timeline.fromTo(
-        revealTargets,
-        { opacity: 0, y: mobile ? 22 : 42 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: mobile ? 0.015 : 0.025,
-          duration: duration * 0.62,
-        },
-        start + duration * 0.32,
-      );
-    }
   });
 
   const counterStart = { first: 0, second: 0, third: 0 };
