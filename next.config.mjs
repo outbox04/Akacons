@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // The previous .next directory is locked and contains an obsolete homepage bundle.
-  // Use a clean build directory so local preview cannot serve that stale UI.
-  distDir: '.next-cinematic',
   reactStrictMode: true,
   async redirects() {
     return [
