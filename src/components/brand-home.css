@@ -1189,7 +1189,10 @@
   background: #079391;
   z-index: 1000;
   box-shadow: 0 0 15px #079391;
-  transition: width 0.08s linear;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 .aka-reveal {
   opacity: 0;
@@ -1249,7 +1252,8 @@
 /* Interaction and accessibility fixes */
 .aka-site {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
+  touch-action: pan-y;
 }
 .aka-site button {
   font-family: inherit;

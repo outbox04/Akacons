@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Calculator,
@@ -50,7 +50,7 @@ export default function BrandHome({
     [visible, setVisible] = useState(12),
     [selected, setSelected] = useState<(typeof paints)[number] | null>(null),
     [menu, setMenu] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const scrollProgressRef = useRef<HTMLDivElement>(null);
   const filtered = useMemo(() => {
     const q = query.trim().toLocaleLowerCase("vi");
     return paints.filter(
@@ -87,19 +87,30 @@ export default function BrandHome({
       { threshold: 0.12, rootMargin: "0px 0px -7% 0px" },
     );
     targets.forEach((el) => observer.observe(el));
-    const onScroll = () => {
+    let animationFrame = 0;
+    const updateScrollEffects = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+      const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
+      if (scrollProgressRef.current) {
+        scrollProgressRef.current.style.transform = `scaleX(${progress / 100})`;
+      }
       document.documentElement.style.setProperty(
         "--aka-parallax",
         `${Math.min(window.scrollY * 0.08, 70)}px`,
       );
+      animationFrame = 0;
     };
-    onScroll();
+    const onScroll = () => {
+      if (!animationFrame) {
+        animationFrame = requestAnimationFrame(updateScrollEffects);
+      }
+    };
+    updateScrollEffects();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
+      if (animationFrame) cancelAnimationFrame(animationFrame);
     };
   }, []);
   useEffect(() => {
@@ -114,8 +125,8 @@ export default function BrandHome({
   return (
     <div className={`aka-site aka-page-${initialSection ?? "home"}`}>
       <div
+        ref={scrollProgressRef}
         className="aka-scroll-progress"
-        style={{ width: `${scrollProgress}%` }}
       />
       <header className="aka-header">
         <Link className="aka-brand" href="/">
