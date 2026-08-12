@@ -7,11 +7,11 @@ import { ArrowRight, Menu, Phone, X } from "lucide-react";
 import "./brand-home.css";
 
 const finishes = [
-  { name: "Ghi khoáng", image: "/paints/xt-01.png" },
-  { name: "Be tự nhiên", image: "/paints/xt-101.png" },
-  { name: "Đá sáng", image: "/paints/xt-301.jpg" },
-  { name: "Cát ấm", image: "/paints/xv-01.jpg" },
-  { name: "Xanh ngọc", image: "/paints/xv-180.jpg" },
+  { name: "Ghi khoáng", image: "/paints/xt-01.png", color: "#a8afb1" },
+  { name: "Be tự nhiên", image: "/paints/xt-101.png", color: "#d8cbb7" },
+  { name: "Đá sáng", image: "/paints/xt-301.jpg", color: "#c8c4b9" },
+  { name: "Cát ấm", image: "/paints/xv-01.jpg", color: "#d6b98b" },
+  { name: "Xanh ngọc", image: "/paints/xv-180.jpg", color: "#44aaa9" },
 ];
 
 const rooms = [
@@ -28,6 +28,26 @@ const library = [
   ["Sơn hiệu ứng gỉ sét", "/paints/xm-03.png"],
   ["Sơn vôi Limewash", "/paints/xv-180.jpg"],
 ] as const;
+
+function FacetedStar() {
+  return (
+    <svg className="faceted-star" viewBox="0 0 100 100" aria-label="5 sao">
+      <defs><filter id="star-shadow"><feDropShadow dx="5" dy="6" stdDeviation="3" floodColor="#087b85" floodOpacity=".35" /></filter></defs>
+      <g filter="url(#star-shadow)">
+        <polygon points="50,3 50,50 31,37" fill="#54d1ca" />
+        <polygon points="50,3 69,37 50,50" fill="#079c9b" />
+        <polygon points="69,37 97,39 50,50" fill="#75ded6" />
+        <polygon points="97,39 73,59 50,50" fill="#159995" />
+        <polygon points="73,59 80,94 50,50" fill="#73d8d0" />
+        <polygon points="80,94 50,74 50,50" fill="#087a83" />
+        <polygon points="50,74 20,94 50,50" fill="#46c6c1" />
+        <polygon points="20,94 27,59 50,50" fill="#0a8d91" />
+        <polygon points="27,59 3,39 50,50" fill="#64d8cf" />
+        <polygon points="3,39 31,37 50,50" fill="#07848b" />
+      </g>
+    </svg>
+  );
+}
 
 export default function BrandHome() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,13 +74,17 @@ export default function BrandHome() {
       </header>
 
       <section className="hero" id="about">
-        <Image className="hero-photo" src="/home/hero-townhouse.png" alt="Mặt tiền sơn hiệu ứng AKACONS" fill priority sizes="100vw" />
+        <div className="hero-surface" style={{ backgroundColor: finishes[finish].color, backgroundImage: `url(${finishes[finish].image})` }} />
         <div className="hero-copy">
           <p className="kicker">Nghệ thuật bề mặt</p>
-          <h1>Kiến tạo không gian<br /><em>đậm chất riêng</em></h1>
-          <h2>Bằng dịch vụ thi công tiêu chuẩn <b>5★</b></h2>
+          <h1><span>Kiến tạo không gian</span><span className="hero-line-two"><b>Đậm chất</b> <em>riêng</em></span></h1>
+          <h2>Bằng dịch vụ thi công <strong>tiêu chuẩn 5</strong><FacetedStar /></h2>
           <p>AKACONS tiên phong trong lĩnh vực tư vấn và thi công sơn hiệu ứng chuyên nghiệp.</p>
           <Link href="#library">Khám phá vật liệu <ArrowRight size={17} /></Link>
+        </div>
+        <div className="hero-house" style={{ "--finish-color": finishes[finish].color } as React.CSSProperties}>
+          <Image src="/home/hero-townhouse.png" alt="Mặt tiền sơn hiệu ứng AKACONS" fill priority sizes="(max-width:800px) 100vw, 58vw" />
+          <div className="house-finish" />
         </div>
         <div className="finish-picker" aria-label="Chọn màu hoàn thiện mặt tiền">
           {finishes.map((item, index) => (
@@ -69,7 +93,6 @@ export default function BrandHome() {
             </button>
           ))}
         </div>
-        <div className="hero-tint" style={{ backgroundImage: `url(${finishes[finish].image})` }} />
       </section>
 
       <section className="signature">
