@@ -45,8 +45,9 @@ export default function BrandHome() {
           <Link href="#about" onClick={() => setMenuOpen(false)}>Về AKACONS</Link>
           <Link href="#library" onClick={() => setMenuOpen(false)}>Bộ sưu tập</Link>
           <Link href="/ai" onClick={() => setMenuOpen(false)}>Thiết kế AI</Link>
-          <Link className="nav-cta" href="#contact" onClick={() => setMenuOpen(false)}>Nhận tư vấn</Link>
+          <Link className="mobile-consult" href="#contact" onClick={() => setMenuOpen(false)}>Nhận tư vấn</Link>
         </nav>
+        <Link className="nav-cta" href="#contact">Nhận tư vấn</Link>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Mở trình đơn">
           {menuOpen ? <X /> : <Menu />}
         </button>
