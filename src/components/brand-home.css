@@ -96,3 +96,12 @@
   .surface-nav nav{top:64px}
   .surface-logo img{width:112px}
 }
+
+/* Desktop: every chapter occupies at least one visible viewport below the header. */
+@media(min-width:821px){
+  .surface-home>section{min-height:calc(100vh - 80px);min-height:calc(100svh - 80px)}
+  .hero,.service{height:calc(100vh - 80px);height:calc(100svh - 80px)}
+  .signature{height:auto}
+  .material-library,.contact{display:flex;flex-direction:column;justify-content:center}
+  .contact>div{flex:none}
+}
