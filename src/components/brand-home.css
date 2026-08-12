@@ -45,3 +45,47 @@
   .contact h2{font-size:48px;line-height:1.08}
 }
 @media(min-width:1200px){.hero h1,.signature h2{white-space:nowrap}}
+
+/* Keep every desktop section on the same visual scale and gutter as the header. */
+@media(min-width:1100px){
+  .hero{height:500px}
+  .hero-copy{left:clamp(24px,4vw,58px);max-width:650px}
+  .hero h1{font-size:42px;line-height:1.04}
+  .hero h2{font-size:16px;margin:15px 0 20px}
+  .hero-copy>p:not(.kicker){max-width:470px;font-size:12px}
+  .hero-copy>a{padding:11px 17px;font-size:12px}
+  .finish-picker{right:clamp(24px,4vw,58px)}
+  .finish-picker button{width:48px;height:48px}
+
+  .signature{min-height:500px;grid-template-columns:52% 48%}
+  .signature-copy{padding:40px clamp(24px,4vw,58px)}
+  .signature h2{font-size:36px;line-height:1.06}
+  .signature-copy>p:nth-of-type(2){max-width:550px;font-size:12px}
+  .signature-visual{min-height:400px;margin:40px clamp(24px,4vw,58px) 40px 0}
+  .room-list{margin:20px 0 16px;gap:14px}
+  .room-list span{width:82px;height:53px}
+  .room-list button{font-size:11px}
+  .swatches{gap:11px}
+  .swatches button{width:42px;height:42px}
+  .ai-button{margin-top:16px;padding:10px 16px;font-size:10px}
+
+  .material-library{padding:48px clamp(24px,4vw,58px) 58px}
+  .material-library h2{font-size:39px;margin-bottom:28px}
+  .library-grid{max-width:1050px;gap:14px}
+  .library-grid a{height:165px}
+  .library-grid span{font-size:12px;left:17px;bottom:16px}
+  .library-grid svg{right:16px;bottom:14px;width:17px}
+
+  .service{height:510px}
+  .service>div{left:clamp(24px,4vw,58px);top:38px;max-width:590px}
+  .service h2{font-size:39px}
+  .service>div>p:nth-of-type(2){font-size:12px}
+  .service ol{max-width:520px}
+  .service li{font-size:14px;padding:7px 0}
+
+  .contact{min-height:330px;padding:44px 20px}
+  .contact h2{font-size:39px}
+  .contact>p:nth-of-type(2){font-size:12px}
+  .contact>div{margin-top:22px;gap:20px}
+  .contact a{width:190px;padding:10px;font-size:12px}
+}
