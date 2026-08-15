@@ -324,10 +324,11 @@
 }
 
 /* One consistent outlined-letter treatment for RIÊNG and ĐỘC BẢN. */
-.hero-line-two em,.signature-copy h2 em{color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:2.5px #009b9b;text-shadow:none!important;paint-order:stroke fill;filter:drop-shadow(5px 7px 0 #6bb7b1)}
+.hero-line-two em,.signature-copy h2 em{position:relative;isolation:isolate;display:inline-block;color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:2.5px #009b9b;text-shadow:none!important;paint-order:stroke fill;filter:none}
+.hero-line-two em:after,.signature-copy h2 em:after{content:attr(data-shadow);position:absolute;z-index:-1;left:5px;top:7px;color:#6bb7b1;-webkit-text-fill-color:#6bb7b1;-webkit-text-stroke:0 transparent;text-shadow:none;white-space:nowrap;pointer-events:none}
 .hero-copy h1,.signature-copy h2{row-gap:36px!important}
 .application-controls .ai-button{margin-top:40px!important}
-@media(max-width:1199px){.hero-line-two em,.signature-copy h2 em{-webkit-text-stroke-width:2px;text-shadow:none!important;filter:drop-shadow(4px 5px 0 #6bb7b1)}.hero-copy h1,.signature-copy h2{row-gap:27px!important}.application-controls .ai-button{margin-top:30px!important}}
+@media(max-width:1199px){.hero-line-two em,.signature-copy h2 em{-webkit-text-stroke-width:2px;text-shadow:none!important}.hero-line-two em:after,.signature-copy h2 em:after{left:4px;top:5px}.hero-copy h1,.signature-copy h2{row-gap:27px!important}.application-controls .ai-button{margin-top:30px!important}}
 
 /* Full-page section snapping, scoped to the public homepage only. */
 .surface-home{height:100vh;height:100svh;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scroll-behavior:smooth;scroll-snap-type:y mandatory;scroll-padding-top:80px}

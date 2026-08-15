@@ -79,7 +79,7 @@ export default function BrandHome() {
         </div>
         <div className="hero-copy">
           <p className="kicker">Nghệ thuật bề mặt</p>
-          <h1><span>Kiến tạo không gian</span><span className="hero-line-two"><b>Đậm chất</b> <em>riêng</em></span></h1>
+          <h1><span>Kiến tạo không gian</span><span className="hero-line-two"><b>Đậm chất</b> <em data-shadow="riêng">riêng</em></span></h1>
           <h2>Bằng dịch vụ thi công <strong>tiêu chuẩn 5</strong><FacetedStar /></h2>
           <p>AKACONS tiên phong trong lĩnh vực tư vấn và thi công sơn hiệu ứng chuyên nghiệp.</p>
         </div>
@@ -101,7 +101,7 @@ export default function BrandHome() {
         </div>
         <div className="signature-copy">
           <p className="kicker">Không gian ứng dụng</p>
-          <h2><span>Dấu ấn <em>độc bản</em></span><span>cho không gian đẳng cấp</span></h2>
+          <h2><span>Dấu ấn <em data-shadow="độc bản">độc bản</em></span><span>cho không gian đẳng cấp</span></h2>
           <p>Sơn hiệu ứng được ứng dụng linh hoạt trong nhà ở, nhà hàng, khách sạn và villa — nâng tầm trải nghiệm bằng chiều sâu vật liệu.</p>
           <div className="room-list">
             {rooms.map((item, index) => (
