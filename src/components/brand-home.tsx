@@ -130,12 +130,12 @@ export default function BrandHome() {
 
       <section className="material-library" id="library">
         <p className="kicker">Thư viện vật liệu</p>
-        <h2>Bề mặt tạo nên <em>bản sắc</em> không gian</h2>
+        <h2>Bề mặt tạo nên <em data-shadow="bản sắc">bản sắc</em> không gian</h2>
         <div className="library-grid">
           {library.map(([name, image]) => (
             <Link href="/bo-suu-tap" key={name}>
               <Image src={image} alt={name} fill sizes="(max-width:700px) 50vw, 32vw" />
-              <span>{name}</span><ArrowRight />
+              <span>{name}</span>
             </Link>
           ))}
         </div>
