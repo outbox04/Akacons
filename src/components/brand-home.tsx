@@ -32,11 +32,16 @@ const library = [
 function FacetedStar() {
   return (
     <svg className="faceted-star" viewBox="0 0 100 100" aria-label="5 sao">
-      <polygon points="50,3 61,37 50,50 39,37" fill="#66d9d2" />
-      <polygon points="61,37 97,38 67,59 50,50" fill="#1fb5b1" />
-      <polygon points="67,59 79,94 50,72 50,50" fill="#07908f" />
-      <polygon points="50,72 21,94 33,59 50,50" fill="#47c8c2" />
-      <polygon points="33,59 3,38 39,37 50,50" fill="#0a7f86" />
+      <polygon points="50,2 50,50 38,36" fill="#07898d" />
+      <polygon points="50,2 62,36 50,50" fill="#62ddd5" />
+      <polygon points="62,36 98,38 50,50" fill="#92ebe4" />
+      <polygon points="98,38 69,60 50,50" fill="#22b8b5" />
+      <polygon points="69,60 80,96 50,50" fill="#76dfd8" />
+      <polygon points="80,96 50,74 50,50" fill="#08797f" />
+      <polygon points="50,74 20,96 50,50" fill="#32bcb8" />
+      <polygon points="20,96 31,60 50,50" fill="#075f69" />
+      <polygon points="31,60 2,38 50,50" fill="#0b8388" />
+      <polygon points="2,38 38,36 50,50" fill="#67d8d1" />
     </svg>
   );
 }
@@ -74,7 +79,6 @@ export default function BrandHome() {
           <h1><span>Kiến tạo không gian</span><span className="hero-line-two"><b>Đậm chất</b> <em>riêng</em></span></h1>
           <h2>Bằng dịch vụ thi công <strong>tiêu chuẩn 5</strong><FacetedStar /></h2>
           <p>AKACONS tiên phong trong lĩnh vực tư vấn và thi công sơn hiệu ứng chuyên nghiệp.</p>
-          <Link href="#library">Khám phá vật liệu <ArrowRight size={17} /></Link>
         </div>
         <div className="hero-house">
           {finishes.map((item, index) => <Image key={item.house} className={finish === index ? "active" : ""} src={item.house} alt={finish === index ? `Mặt tiền ${item.name}` : ""} fill priority={index === 1} sizes="(max-width:800px) 100vw, 58vw" />)}

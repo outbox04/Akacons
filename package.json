@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "test": "tsc --noEmit --pretty false",
+    "test:clean": "tsc --noEmit --pretty false --incremental false",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
