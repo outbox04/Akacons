@@ -324,7 +324,7 @@
 }
 
 /* One consistent outlined-letter treatment for RIÊNG and ĐỘC BẢN. */
-.hero-line-two em,.signature-copy h2 em{color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:2.5px #009b9b;text-shadow:none!important;paint-order:stroke fill;filter:drop-shadow(5px 6px 0 rgba(0,151,151,.42))}
+.hero-line-two em,.signature-copy h2 em{color:#f3eee2!important;-webkit-text-fill-color:#f3eee2;-webkit-text-stroke:2.5px #009b9b;text-shadow:none!important;paint-order:stroke fill;filter:drop-shadow(5px 6px 0 rgba(0,151,151,.42))}
 .hero-copy h1,.signature-copy h2{row-gap:36px!important}
 .application-controls .ai-button{margin-top:40px!important}
 @media(max-width:1199px){.hero-line-two em,.signature-copy h2 em{-webkit-text-stroke-width:2px;text-shadow:none!important;filter:drop-shadow(4px 5px 0 rgba(0,151,151,.4))}.hero-copy h1,.signature-copy h2{row-gap:27px!important}.application-controls .ai-button{margin-top:30px!important}}
@@ -397,4 +397,24 @@
   .signature{height:auto}
   .material-library,.contact{display:flex;flex-direction:column;justify-content:center}
   .contact>div{flex:none}
+}
+
+/* Keep the application chapter inside the first snapped viewport. */
+@media(min-width:821px){
+  .signature{
+    box-sizing:border-box;
+    height:calc(100vh - 80px)!important;
+    height:calc(100dvh - 80px)!important;
+    min-height:0!important;
+    overflow:hidden;
+  }
+  .signature-visual{
+    box-sizing:border-box;
+    height:calc(100vh - 120px)!important;
+    height:calc(100dvh - 120px)!important;
+    min-height:0!important;
+    margin-top:20px!important;
+    margin-bottom:20px!important;
+  }
+  .signature-visual img.scene{inset:0 0 12px!important}
 }
