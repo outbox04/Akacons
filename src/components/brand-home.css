@@ -324,10 +324,10 @@
 }
 
 /* One consistent outlined-letter treatment for RIÊNG and ĐỘC BẢN. */
-.hero-line-two em,.signature-copy h2 em{color:#f3eee2!important;-webkit-text-fill-color:#f3eee2;-webkit-text-stroke:2.5px #009b9b;text-shadow:none!important;paint-order:stroke fill;filter:drop-shadow(5px 6px 0 rgba(0,151,151,.42))}
+.hero-line-two em,.signature-copy h2 em{color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:2.5px #009b9b;text-shadow:none!important;paint-order:stroke fill;filter:drop-shadow(5px 7px 0 #6bb7b1)}
 .hero-copy h1,.signature-copy h2{row-gap:36px!important}
 .application-controls .ai-button{margin-top:40px!important}
-@media(max-width:1199px){.hero-line-two em,.signature-copy h2 em{-webkit-text-stroke-width:2px;text-shadow:none!important;filter:drop-shadow(4px 5px 0 rgba(0,151,151,.4))}.hero-copy h1,.signature-copy h2{row-gap:27px!important}.application-controls .ai-button{margin-top:30px!important}}
+@media(max-width:1199px){.hero-line-two em,.signature-copy h2 em{-webkit-text-stroke-width:2px;text-shadow:none!important;filter:drop-shadow(4px 5px 0 #6bb7b1)}.hero-copy h1,.signature-copy h2{row-gap:27px!important}.application-controls .ai-button{margin-top:30px!important}}
 
 /* Full-page section snapping, scoped to the public homepage only. */
 .surface-home{height:100vh;height:100svh;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scroll-behavior:smooth;scroll-snap-type:y mandatory;scroll-padding-top:80px}
