@@ -248,6 +248,19 @@
   .application-controls .ai-button{margin:24px 0 0;border-radius:6px;font-size:14px}
   .signature-surfaces:after{background:rgba(242,245,244,.55);backdrop-filter:blur(1px)}
 }
+
+/* Fluid application typography — intentionally last to defeat legacy breakpoints. */
+@media(min-width:821px){
+  .signature{grid-template-columns:60% 40%}
+  .signature-copy{padding-left:max(40px,calc((100vw - 1440px)/2 + 68px));padding-right:24px}
+  .signature-copy .kicker{font-size:clamp(23px,1.7vw,29px)!important;margin-bottom:clamp(28px,2.5vw,38px)}
+  .signature-copy h2{font-size:clamp(52px,4.15vw,76px)!important;gap:clamp(20px,2vw,30px)!important;line-height:1!important}
+  .signature-copy h2>span:first-child{gap:clamp(14px,1.5vw,24px)}
+  .signature-copy h2 em{font-size:1.46em!important;line-height:.78!important}
+  .signature-copy>p:nth-of-type(2){max-width:900px;font-size:clamp(20px,1.4vw,25px)!important;line-height:1.55;margin-top:clamp(25px,2.2vw,34px)}
+  .room-list button{font-size:clamp(17px,1.15vw,19px)!important}
+  .application-controls .ai-button{min-width:clamp(220px,16vw,260px);padding:15px 25px!important;font-size:clamp(16px,1.15vw,18px)!important}
+}
 @media(min-width:1200px){.hero h1,.signature h2{white-space:nowrap}}
 
 /* Keep every desktop section on the same visual scale and gutter as the header. */
