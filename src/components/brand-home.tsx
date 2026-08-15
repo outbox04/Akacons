@@ -19,6 +19,7 @@ const rooms = [
   { name: "Phòng khách", image: "/home/rooms/living-room.png" },
   { name: "Phòng làm việc", image: "/home/rooms/office.png" },
 ];
+const applicationFinishOrder = [4, 1, 2, 0, 3] as const;
 
 const library = [
   ["Sơn đá", "/paints/xt-301.jpg"],
@@ -49,7 +50,7 @@ function FacetedStar() {
 export default function BrandHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [finish, setFinish] = useState(1);
-  const [applicationFinish, setApplicationFinish] = useState(0);
+  const [applicationFinish, setApplicationFinish] = useState(4);
   const [room, setRoom] = useState(1);
 
   return (
@@ -109,7 +110,7 @@ export default function BrandHome() {
             ))}
           </div>
           <div className="swatches">
-            {finishes.map((item, index) => <button key={item.name} onClick={() => setApplicationFinish(index)} className={applicationFinish === index ? "active" : ""}><Image src={item.image} alt={item.name} fill sizes="60px" /></button>)}
+            {applicationFinishOrder.map((index) => { const item = finishes[index]; return <button key={item.name} onClick={() => setApplicationFinish(index)} className={applicationFinish === index ? "active" : ""}><Image src={item.image} alt={item.name} fill sizes="80px" /></button>; })}
           </div>
           <Link href="/ai" className="ai-button">Trợ lý chọn màu <ArrowRight size={16} /></Link>
         </div>
