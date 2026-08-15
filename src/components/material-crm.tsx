@@ -55,8 +55,27 @@ export default function MaterialCrm() {
 
   const chooseFolder = (event: ChangeEvent<HTMLInputElement>) => {
     const next = foldersToDrafts(Array.from(event.target.files || []));
-    setDrafts(next);
-    setStatus(next.length ? `Đã nhận diện ${next.length} mã và ${next.reduce((sum, item) => sum + item.files.length, 0)} ảnh màu.` : 'Không tìm thấy ảnh hợp lệ trong thư mục.');
+    if (!next.length) {
+      setStatus('Không tìm thấy ảnh hợp lệ trong thư mục.');
+      event.target.value = '';
+      return;
+    }
+    setDrafts(current => {
+      const merged = [...current];
+      next.forEach(incoming => {
+        const existingIndex = merged.findIndex(item => item.code.toLocaleLowerCase('vi') === incoming.code.toLocaleLowerCase('vi'));
+        if (existingIndex < 0) {
+          merged.push(incoming);
+          return;
+        }
+        const existing = merged[existingIndex];
+        const knownFiles = new Set(existing.files.map(file => `${file.webkitRelativePath || file.name}:${file.size}:${file.lastModified}`));
+        const additionalFiles = incoming.files.filter(file => !knownFiles.has(`${file.webkitRelativePath || file.name}:${file.size}:${file.lastModified}`));
+        merged[existingIndex] = { ...existing, files: [...existing.files, ...additionalFiles] };
+      });
+      return merged;
+    });
+    setStatus(`Đã thêm ${next.length} mã từ thư mục vừa chọn. Bạn có thể tiếp tục chọn thêm thư mục khác.`);
     event.target.value = '';
   };
 
@@ -106,7 +125,7 @@ export default function MaterialCrm() {
   return <div className="material-crm">
     <section className="crm-intro">
       <div><small>CRM VẬT LIỆU</small><h1>Nhập thư viện sản phẩm</h1><p>Upload một mã hoặc toàn bộ thư mục sản phẩm. Hệ thống tự nhận mã từ tên thư mục và màu từ tên từng ảnh.</p></div>
-      <label className="folder-upload"><FolderUp/><strong>Upload thư mục</strong><span>Chọn thư mục mã hoặc thư mục tổng</span><input type="file" accept="image/*" multiple onChange={chooseFolder} {...({ webkitdirectory: '', directory: '' } as Record<string, string>)} /></label>
+      <label className="folder-upload"><FolderUp/><strong>Upload nhiều thư mục</strong><span>Chọn lần lượt các thư mục; dữ liệu sẽ được cộng dồn</span><input type="file" accept="image/*" multiple onChange={chooseFolder} {...({ webkitdirectory: '', directory: '' } as Record<string, string>)} /></label>
     </section>
 
     <section className="taxonomy-panel">
