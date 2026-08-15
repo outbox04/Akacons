@@ -324,10 +324,10 @@
 }
 
 /* One consistent outlined-letter treatment for RIÊNG and ĐỘC BẢN. */
-.hero-line-two em,.signature-copy h2 em{color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:2.5px #009b9b;text-shadow:5px 6px 0 rgba(54,132,132,.48)!important;paint-order:stroke fill;filter:none}
+.hero-line-two em,.signature-copy h2 em{color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:2.5px #009b9b;text-shadow:none!important;paint-order:stroke fill;filter:drop-shadow(5px 6px 0 rgba(0,151,151,.42))}
 .hero-copy h1,.signature-copy h2{row-gap:36px!important}
 .application-controls .ai-button{margin-top:40px!important}
-@media(max-width:1199px){.hero-line-two em,.signature-copy h2 em{-webkit-text-stroke-width:2px;text-shadow:4px 5px 0 rgba(54,132,132,.45)!important}.hero-copy h1,.signature-copy h2{row-gap:27px!important}.application-controls .ai-button{margin-top:30px!important}}
+@media(max-width:1199px){.hero-line-two em,.signature-copy h2 em{-webkit-text-stroke-width:2px;text-shadow:none!important;filter:drop-shadow(4px 5px 0 rgba(0,151,151,.4))}.hero-copy h1,.signature-copy h2{row-gap:27px!important}.application-controls .ai-button{margin-top:30px!important}}
 @media(min-width:1200px){.hero h1,.signature h2{white-space:nowrap}}
 
 /* Keep every desktop section on the same visual scale and gutter as the header. */
