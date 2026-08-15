@@ -15,10 +15,11 @@ const finishes = [
 ];
 
 const rooms = [
-  { name: "Phòng ngủ", image: "/home/rooms/bedroom.png" },
-  { name: "Phòng khách", image: "/home/rooms/living-room.png" },
-  { name: "Phòng làm việc", image: "/home/rooms/office.png" },
+  { name: "Phòng ngủ", slug: "bedroom", image: "/home/rooms/bedroom.png" },
+  { name: "Phòng khách", slug: "living-room", image: "/home/rooms/living-room.png" },
+  { name: "Phòng làm việc", slug: "office", image: "/home/rooms/office.png" },
 ];
+const finishSlugs = ["rust", "stone", "granite", "limewash", "concrete"] as const;
 const applicationFinishOrder = [4, 1, 2, 0, 3] as const;
 
 const library = [
@@ -51,7 +52,7 @@ export default function BrandHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [finish, setFinish] = useState(1);
   const [applicationFinish, setApplicationFinish] = useState(4);
-  const [room, setRoom] = useState(1);
+  const [room, setRoom] = useState<number | null>(null);
 
   return (
     <main className="surface-home">
@@ -104,7 +105,7 @@ export default function BrandHome() {
           <p>Sơn hiệu ứng được ứng dụng linh hoạt trong nhà ở, nhà hàng, khách sạn và villa — nâng tầm trải nghiệm bằng chiều sâu vật liệu.</p>
           <div className="room-list">
             {rooms.map((item, index) => (
-              <button key={item.name} className={room === index ? "active" : ""} onClick={() => setRoom(index)}>
+              <button key={item.name} className={room === index ? "active" : ""} onClick={() => setRoom(room === index ? null : index)}>
                 <span><Image src={item.image} alt={item.name} fill sizes="130px" /></span>{item.name}
               </button>
             ))}
@@ -117,8 +118,13 @@ export default function BrandHome() {
           </div>
         </div>
         <div className="signature-visual">
-          {finishes.map((item, index) => <Image key={item.house} className={applicationFinish === index ? "active" : ""} src={item.house} alt={applicationFinish === index ? `Mặt tiền ${item.name}` : ""} fill sizes="(max-width: 800px) 100vw, 45vw" />)}
-          <span>{rooms[room].name} · {finishes[applicationFinish].name}</span>
+          {finishes.map((item, index) => <Image key={item.house} className={`scene house-scene ${room === null && applicationFinish === index ? "active" : ""}`} src={item.house} alt={room === null && applicationFinish === index ? `Mặt tiền ${item.name}` : ""} fill sizes="(max-width: 800px) 100vw, 40vw" />)}
+          {finishes.flatMap((item, finishIndex) => rooms.map((roomItem, roomIndex) => {
+            const src = `/home/room-finishes/${finishSlugs[finishIndex]}-${roomItem.slug}.png`;
+            const active = room === roomIndex && applicationFinish === finishIndex;
+            return <Image key={src} className={`scene room-scene ${active ? "active" : ""}`} src={src} alt={active ? `${roomItem.name} · ${item.name}` : ""} fill sizes="(max-width: 800px) 100vw, 40vw" />;
+          }))}
+          <span>{room === null ? "Mặt tiền" : rooms[room].name} · {finishes[applicationFinish].name}</span>
         </div>
       </section>
 
