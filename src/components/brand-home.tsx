@@ -114,7 +114,7 @@ export default function BrandHome() {
             <div className="swatches">
               {applicationFinishOrder.map((index) => { const item = finishes[index]; return <button key={item.name} onClick={() => setApplicationFinish(index)} className={applicationFinish === index ? "active" : ""}><Image src={item.image} alt={item.name} fill sizes="80px" /></button>; })}
             </div>
-            <Link href="/ai" className="ai-button">Trợ lý chọn mẫu <ArrowRight size={19} /></Link>
+            <Link href="/ai" className="ai-button">Trợ lý chọn mẫu</Link>
           </div>
         </div>
         <div className="signature-visual">
