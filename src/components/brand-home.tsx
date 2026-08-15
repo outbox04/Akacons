@@ -15,9 +15,9 @@ const finishes = [
 ];
 
 const rooms = [
-  { name: "Phòng ngủ", image: "/paints/xv-180.jpg" },
-  { name: "Phòng khách", image: "/paints/xt-301.jpg" },
-  { name: "Phòng làm việc", image: "/paints/mp-06.webp" },
+  { name: "Phòng ngủ", image: "/home/rooms/bedroom.png" },
+  { name: "Phòng khách", image: "/home/rooms/living-room.png" },
+  { name: "Phòng làm việc", image: "/home/rooms/office.png" },
 ];
 
 const library = [
@@ -49,6 +49,7 @@ function FacetedStar() {
 export default function BrandHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [finish, setFinish] = useState(1);
+  const [applicationFinish, setApplicationFinish] = useState(0);
   const [room, setRoom] = useState(1);
 
   return (
@@ -93,9 +94,12 @@ export default function BrandHome() {
       </section>
 
       <section className="signature">
+        <div className="signature-surfaces" aria-hidden="true">
+          {finishes.map((item, index) => <div key={item.name} className={applicationFinish === index ? "active" : ""} style={{ backgroundImage: `url(${item.image})` }} />)}
+        </div>
         <div className="signature-copy">
           <p className="kicker">Không gian ứng dụng</p>
-          <h2>Dấu ấn <em>độc bản</em><br />cho không gian đẳng cấp</h2>
+          <h2><span>Dấu ấn <em>độc bản</em></span><span>cho không gian đẳng cấp</span></h2>
           <p>Sơn hiệu ứng được ứng dụng linh hoạt trong nhà ở, nhà hàng, khách sạn và villa — nâng tầm trải nghiệm bằng chiều sâu vật liệu.</p>
           <div className="room-list">
             {rooms.map((item, index) => (
@@ -105,13 +109,13 @@ export default function BrandHome() {
             ))}
           </div>
           <div className="swatches">
-            {finishes.map((item, index) => <button key={item.name} onClick={() => setFinish(index)} className={finish === index ? "active" : ""}><Image src={item.image} alt={item.name} fill sizes="60px" /></button>)}
+            {finishes.map((item, index) => <button key={item.name} onClick={() => setApplicationFinish(index)} className={applicationFinish === index ? "active" : ""}><Image src={item.image} alt={item.name} fill sizes="60px" /></button>)}
           </div>
           <Link href="/ai" className="ai-button">Trợ lý chọn màu <ArrowRight size={16} /></Link>
         </div>
         <div className="signature-visual">
-          <Image src="/home/hero-townhouse.png" alt={`Phối cảnh ${rooms[room].name}`} fill sizes="(max-width: 800px) 100vw, 45vw" />
-          <span>{rooms[room].name} · {finishes[finish].name}</span>
+          {finishes.map((item, index) => <Image key={item.house} className={applicationFinish === index ? "active" : ""} src={item.house} alt={applicationFinish === index ? `Mặt tiền ${item.name}` : ""} fill sizes="(max-width: 800px) 100vw, 45vw" />)}
+          <span>{rooms[room].name} · {finishes[applicationFinish].name}</span>
         </div>
       </section>
 
