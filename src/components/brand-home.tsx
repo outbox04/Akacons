@@ -109,10 +109,12 @@ export default function BrandHome() {
               </button>
             ))}
           </div>
-          <div className="swatches">
-            {applicationFinishOrder.map((index) => { const item = finishes[index]; return <button key={item.name} onClick={() => setApplicationFinish(index)} className={applicationFinish === index ? "active" : ""}><Image src={item.image} alt={item.name} fill sizes="80px" /></button>; })}
+          <div className="application-controls">
+            <div className="swatches">
+              {applicationFinishOrder.map((index) => { const item = finishes[index]; return <button key={item.name} onClick={() => setApplicationFinish(index)} className={applicationFinish === index ? "active" : ""}><Image src={item.image} alt={item.name} fill sizes="80px" /></button>; })}
+            </div>
+            <Link href="/ai" className="ai-button">Trợ lý chọn mẫu <ArrowRight size={19} /></Link>
           </div>
-          <Link href="/ai" className="ai-button">Trợ lý chọn màu <ArrowRight size={16} /></Link>
         </div>
         <div className="signature-visual">
           {finishes.map((item, index) => <Image key={item.house} className={applicationFinish === index ? "active" : ""} src={item.house} alt={applicationFinish === index ? `Mặt tiền ${item.name}` : ""} fill sizes="(max-width: 800px) 100vw, 45vw" />)}

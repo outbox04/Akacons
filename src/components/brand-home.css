@@ -224,6 +224,30 @@
   .signature-visual img{object-position:center bottom;filter:drop-shadow(0 28px 17px rgba(26,38,36,.28))}
   .signature-visual span{display:none}
 }
+
+/* Application section: stronger copy hierarchy and readable material backdrop. */
+@media(min-width:1200px){
+  .signature{grid-template-columns:60% 40%}
+  .signature-surfaces:after{background:linear-gradient(to bottom,rgba(244,247,246,.76) 0%,rgba(244,247,246,.56) 25%,rgba(244,247,246,.42) 100%);backdrop-filter:blur(1.2px)}
+  .signature-copy{padding-right:30px}
+  .signature-copy .kicker{font-size:clamp(25px,1.65vw,29px);margin-bottom:35px}
+  .signature-copy .kicker:after{width:190px}
+  .signature-copy h2{font-size:clamp(56px,4.05vw,76px);gap:28px;letter-spacing:-.04em}
+  .signature-copy h2>span:first-child{gap:22px}
+  .signature-copy h2 em{font-size:1.42em}
+  .signature-copy>p:nth-of-type(2){max-width:930px;margin-top:31px;font-size:clamp(21px,1.42vw,25px);line-height:1.55}
+  .room-list{margin-top:38px;margin-bottom:34px}
+  .room-list button{font-size:19px}
+  .application-controls{display:flex;flex-direction:column;align-items:center;width:max-content;max-width:100%}
+  .application-controls .swatches{width:max-content;max-width:100%}
+  .application-controls .ai-button{display:flex;justify-content:center;min-width:245px;margin:34px 0 0;padding:15px 26px;border-radius:6px;font-size:17px;font-weight:600}
+  .signature-visual{grid-column:2;margin-left:-8%}
+}
+@media(min-width:821px) and (max-width:1199px){
+  .application-controls{display:flex;flex-direction:column;align-items:center;width:max-content;max-width:100%}
+  .application-controls .ai-button{margin:24px 0 0;border-radius:6px;font-size:14px}
+  .signature-surfaces:after{background:rgba(242,245,244,.55);backdrop-filter:blur(1px)}
+}
 @media(min-width:1200px){.hero h1,.signature h2{white-space:nowrap}}
 
 /* Keep every desktop section on the same visual scale and gutter as the header. */
