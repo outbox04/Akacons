@@ -2,8 +2,8 @@ export type RoleName = 'super_admin' | 'admin' | 'manager' | 'technician' | 'sal
 
 export const PERMISSION_MATRIX: Record<RoleName, string[]> = {
   super_admin: ['*'],
-  admin: ['dashboard', 'customers', 'projects', 'studio', 'pricing', 'quotes', 'admin'],
-  manager: ['dashboard', 'customers', 'projects', 'studio', 'pricing', 'quotes', 'admin'],
+  admin: ['dashboard', 'customers', 'projects', 'studio', 'pricing', 'quotes', 'materials', 'admin'],
+  manager: ['dashboard', 'customers', 'projects', 'studio', 'pricing', 'quotes', 'materials', 'admin'],
   technician: ['dashboard', 'projects', 'studio'],
   sale: ['dashboard', 'customers', 'projects', 'studio', 'pricing', 'quotes'],
   customer: ['portal'],

@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { key: 'studio', href: '/studio', label: 'Studio Render AI', icon: '✦', group: 'Sản xuất' },
   { key: 'pricing', href: '/pricing', label: 'Dự toán & Bảng giá', icon: '฿', group: 'Kinh doanh' },
   { key: 'quotes', href: '/quotes', label: 'Báo giá', icon: '▤', group: 'Kinh doanh' },
+  { key: 'materials', href: '/admin/materials', label: 'CRM vật liệu', icon: '◩', group: 'Hệ thống' },
   { key: 'admin', href: '/admin', label: 'Quản trị hệ thống', icon: '⚙', group: 'Hệ thống' },
 ];
 
