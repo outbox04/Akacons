@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 import { FolderUp, Plus, Save, Trash2 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import './material-crm.css';
@@ -27,6 +27,17 @@ const imagePattern = /\.(avif|gif|jpe?g|png|webp)$/i;
 const codePattern = /^[a-z]{1,8}[\s_-]*\d{1,6}$/i;
 const slugify = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/đ/g, 'd').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const fileLabel = (file: File) => file.name.replace(/\.[^.]+$/, '');
+const PREVIEW_LIMIT = 18;
+
+const ColorThumbnail = memo(function ColorThumbnail({ file }: { file: File }) {
+  const [source, setSource] = useState('');
+  useEffect(() => {
+    const objectUrl = URL.createObjectURL(file);
+    setSource(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [file]);
+  return <figure><div>{source && <img src={source} alt={fileLabel(file)} loading="lazy" decoding="async"/>}</div><figcaption>{fileLabel(file)}</figcaption></figure>;
+});
 
 function foldersToDrafts(files: File[]): Draft[] {
   const groups = new Map<string, File[]>();
@@ -149,7 +160,7 @@ export default function MaterialCrm() {
           <label className="full">Mô tả chi tiết sản phẩm<textarea rows={5} value={draft.detailedDescription} onChange={e => update(index, { detailedDescription: e.target.value })}/></label>
           <label className="full">SEO description<textarea rows={2} value={draft.seoDescription} onChange={e => update(index, { seoDescription: e.target.value })}/></label>
         </div>
-        <div className="color-preview"><h3>Màu sắc từ tên ảnh <small>{draft.files.length} màu</small></h3><div>{draft.files.map((file, colorIndex) => <figure key={`${file.name}-${colorIndex}`}><img src={URL.createObjectURL(file)} alt={fileLabel(file)}/><figcaption>{fileLabel(file)}</figcaption></figure>)}</div></div>
+        <div className="color-preview"><h3>Màu sắc từ tên ảnh <small>{draft.files.length} màu</small></h3><div>{draft.files.slice(0, PREVIEW_LIMIT).map((file, colorIndex) => <ColorThumbnail file={file} key={`${file.webkitRelativePath || file.name}-${file.size}-${file.lastModified}-${colorIndex}`}/>)}{draft.files.length > PREVIEW_LIMIT && <aside className="remaining-colors"><strong>+{draft.files.length - PREVIEW_LIMIT}</strong><span>màu khác vẫn sẽ được upload</span></aside>}</div></div>
       </article>)}
     </section>
     {!!drafts.length && <footer className="crm-save"><p className={status.startsWith('Lỗi') ? 'error' : ''}>{status}</p><button disabled={saving} onClick={save}><Save/>{saving ? 'Đang upload…' : `Lưu ${drafts.length} sản phẩm lên Supabase`}</button></footer>}
